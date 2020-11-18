@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.JlHsdUserMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.JlHsdUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="sex_code" jdbcType="INTEGER" property="sexCode" />
+    <result column="birth_date" jdbcType="DATE" property="birthDate" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="login_count" jdbcType="INTEGER" property="loginCount" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="hospital" jdbcType="VARCHAR" property="hospital" />
+    <result column="in_office_time" jdbcType="VARCHAR" property="inOfficeTime" />
+    <result column="outpatient" jdbcType="INTEGER" property="outpatient" />
+    <result column="subscribe" jdbcType="INTEGER" property="subscribe" />
+  </resultMap>
+</mapper>
