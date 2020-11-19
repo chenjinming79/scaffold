@@ -3,15 +3,14 @@ import ${basePackage}.core.Result;
 import ${basePackage}.core.ResultGenerator;
 import ${basePackage}.model.${modelNameUpperCamel};
 import ${basePackage}.service.${modelNameUpperCamel}Service;
+import ${basePackage}.core.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Date;
 
 /**
 * Created by ${author} on ${date}.
@@ -23,33 +22,51 @@ public class ${modelNameUpperCamel}Controller {
     private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
 
     @PostMapping("/add")
-    public Result add(${modelNameUpperCamel} ${modelNameLowerCamel}) {
+    public Result add(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
+        Date date=new Date();
+        ${modelNameLowerCamel}.setCreateTime(date);
+        ${modelNameLowerCamel}.setUpdateTime(date);
+        ${modelNameLowerCamel}.setIsDelete(false);
         ${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
-        return ResultGenerator.genSuccessResult();
+        Result result=ResultGenerator.genSuccessResult();
+        result.setData(${modelNameLowerCamel});
+        return result;
     }
 
     @PostMapping("/delete")
-    public Result delete(@RequestParam Integer id) {
-        ${modelNameLowerCamel}Service.deleteById(id);
-        return ResultGenerator.genSuccessResult();
-    }
-
-    @PostMapping("/update")
-    public Result update(${modelNameUpperCamel} ${modelNameLowerCamel}) {
+    public Result delete(@RequestParam Long id) {
+        ${modelNameUpperCamel} ${modelNameLowerCamel}=new ${modelNameUpperCamel}();
+        ${modelNameLowerCamel}.setId(id);
+        ${modelNameLowerCamel}.setIsDelete(true);
         ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
         return ResultGenerator.genSuccessResult();
     }
 
-    @PostMapping("/detail")
-    public Result detail(@RequestParam Integer id) {
+    @PostMapping("/update")
+    public Result update(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
+        ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
+        Result result=ResultGenerator.genSuccessResult();
+        result.setData(${modelNameLowerCamel});
+        return result;
+    }
+
+    @GetMapping("/detail")
+    public Result detail(@RequestParam Long id) {
         ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
         return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
     }
 
     @PostMapping("/list")
-    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+    public Result list(@RequestBody Page<${modelNameUpperCamel}> page) {
+        PageHelper.startPage(page.getPage(), page.getSize());
+        List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findValidDeleteAll(page);
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
+    }
+    @PostMapping("/findByModal")
+    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) ${modelNameUpperCamel} ${modelNameLowerCamel}) {
         PageHelper.startPage(page, size);
-        List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findAll();
+        List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findByModel(${modelNameLowerCamel});
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }

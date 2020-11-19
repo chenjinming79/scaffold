@@ -28,11 +28,11 @@ public class SwaggerConfig {
         tokenPar.name("name").description("需要令牌通过(登录接口生成)").modelRef(new ModelRef("string")).parameterType
                 ("header")
                 .required
-                (false).build();
+                        (false).build();
         pars.add(tokenPar.build());
         // 创建API基本信息
         return new Docket(DocumentationType.SWAGGER_2)
-        		.enable(true)
+                .enable(true)
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.company.project.web"))// 扫描该包下的所有需要在Swagger中展示的API，@ApiIgnore注解标注的除外
@@ -46,7 +46,7 @@ public class SwaggerConfig {
                 .title("Spring Boot中使用Swagger2构建RESTful APIs")// API 标题
                 .description("xingchong系统提供的RESTful APIs")// API描述
                 .version("1.0")
-                .contact(new Contact("88888888@qq.com",null,null))// 联系人// 版本号
+                .contact(new Contact("88888888@qq.com", null, null))// 联系人// 版本号
                 .build();
     }
 

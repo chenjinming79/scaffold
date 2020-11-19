@@ -8,24 +8,21 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
 @RequestMapping("/xc/user")
-@Api(tags = {"/xc/user"},description="用户管理模块")
+@Api(tags = {"/xc/user"}, description = "用户管理模块")
 public class XcUserController {
     @Resource
     private XcUserService xcUserService;
 
     @PostMapping("/add")
     @ApiOperation(value = "新增用户", notes = "新增用户")
-    public Result add(XcUser xcUser) {
+    public Result add(@RequestBody XcUser xcUser) {
         xcUserService.save(xcUser);
         return ResultGenerator.genSuccessResult();
     }
@@ -42,7 +39,7 @@ public class XcUserController {
 
     @PostMapping("/update")
     @ApiOperation(value = "修改用户", notes = "修改用户")
-    public Result update(XcUser xcUser) {
+    public Result update(@RequestBody XcUser xcUser) {
         xcUserService.update(xcUser);
         return ResultGenerator.genSuccessResult();
     }
