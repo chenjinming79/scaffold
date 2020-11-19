@@ -46,7 +46,7 @@ public class XcUserController {
 
     @PostMapping("/detail")
     @ApiOperation(value = "获取用户详情", notes = "获取用户详情")
-    public Result detail(@RequestParam Integer id) {
+    public Result detail(@RequestParam Long id) {
         XcUser xcUser = xcUserService.findById(id);
         return ResultGenerator.genSuccessResult(xcUser);
     }
