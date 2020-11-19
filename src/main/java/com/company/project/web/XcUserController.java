@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -23,6 +24,9 @@ public class XcUserController {
     @PostMapping("/add")
     @ApiOperation(value = "新增用户", notes = "新增用户")
     public Result add(@RequestBody XcUser xcUser) {
+        xcUser.setCreateTime(new Date());
+        xcUser.setStatus(1);
+        xcUser.setRegisterTime(new Date());
         xcUserService.save(xcUser);
         return ResultGenerator.genSuccessResult();
     }
