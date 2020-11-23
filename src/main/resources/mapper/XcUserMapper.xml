@@ -23,4 +23,12 @@
         <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp"/>
         <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
     </resultMap>
+
+    <select id="findUserByPhone" resultMap="BaseResultMap">
+        select id,status,user_name,password,remark_name,phone,register_time,register_ip,last_login_time,last_login_ip,avatar
+        from t_user
+        where is_delete = 0
+        and phone = #{phone}
+    </select>
+
 </mapper>

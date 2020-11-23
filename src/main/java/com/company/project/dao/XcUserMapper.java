@@ -4,4 +4,7 @@ import com.company.project.core.Mapper;
 import com.company.project.model.XcUser;
 
 public interface XcUserMapper extends Mapper<XcUser> {
+
+    XcUser findUserByPhone(String phone);
+
 }
