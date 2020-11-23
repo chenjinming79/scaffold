@@ -4,15 +4,21 @@ import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcUser;
 import com.company.project.service.XcUserService;
+import com.company.project.utils.RedisService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.wf.captcha.GifCaptcha;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/xc/user")
@@ -20,6 +26,23 @@ import java.util.List;
 public class XcUserController {
     @Resource
     private XcUserService xcUserService;
+
+    @Autowired
+    private RedisService redisService;
+
+    @ApiOperation(value = "生成验证码", notes = "生成验证码")
+    @RequestMapping(value = "/captcha", method = RequestMethod.POST)
+    public Result captcha(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        GifCaptcha specCaptcha = new GifCaptcha(130, 48, 5);
+        String verCode = specCaptcha.text().toLowerCase();
+        String key = UUID.randomUUID().toString();
+        // 存入redis并设置过期时间为30分钟
+        redisService.setWithExpire(key,verCode,2505600000L);
+        System.out.println(specCaptcha.toBase64());
+        // 将key和base64返回给前端
+        return ResultGenerator.genSuccessResult(specCaptcha.toBase64());
+    }
+
 
     @PostMapping("/add")
     @ApiOperation(value = "会员注册", notes = "会员注册")
