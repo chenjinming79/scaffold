@@ -4,7 +4,9 @@ import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcUser;
 import com.company.project.service.XcUserService;
+import com.company.project.utils.Logger;
 import com.company.project.utils.RedisService;
+import com.company.project.vo.LoginVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wf.captcha.GifCaptcha;
@@ -30,6 +32,19 @@ public class XcUserController {
     @Autowired
     private RedisService redisService;
 
+    /**
+     * 用户登录
+     *
+     * @param vo
+     * @return
+     */
+    @ApiOperation(value = "用户登录", notes = "用户登录")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public Result login(@RequestBody LoginVo vo, HttpServletRequest request) {
+        Logger.info(this, "/xc/user/delete 用户登录接口入参 :" + vo);
+        return xcUserService.login(vo);
+    }
+
     @ApiOperation(value = "生成验证码", notes = "生成验证码")
     @RequestMapping(value = "/captcha", method = RequestMethod.POST)
     public Result captcha(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -42,7 +57,6 @@ public class XcUserController {
         // 将key和base64返回给前端
         return ResultGenerator.genSuccessResult(specCaptcha.toBase64());
     }
-
 
     @PostMapping("/add")
     @ApiOperation(value = "会员注册", notes = "会员注册")
