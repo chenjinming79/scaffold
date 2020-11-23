@@ -37,7 +37,7 @@ public class XcUserController {
         String verCode = specCaptcha.text().toLowerCase();
         String key = UUID.randomUUID().toString();
         // 存入redis并设置过期时间为30分钟
-        redisService.setWithExpire(key,verCode,2505600000L);
+        //redisService.setWithExpire(key,verCode,2505600000L);
         System.out.println(specCaptcha.toBase64());
         // 将key和base64返回给前端
         return ResultGenerator.genSuccessResult(specCaptcha.toBase64());
