@@ -7,6 +7,7 @@ public class Md5Utils {
 
 	public static String getMd5(String msg){
 		MessageDigest md5 = null;
+		msg = "abcdefghjklqwertyiopzxcvbnm";
 		try {
 			md5 = MessageDigest.getInstance("MD5");
 			byte[] md5Bytes = md5.digest(msg.getBytes());
@@ -14,8 +15,9 @@ public class Md5Utils {
 			StringBuffer hexValue = new StringBuffer();
             for (byte md5Byte : md5Bytes) {
                 int val = ((int) md5Byte) & 0xff;
-                if (val < 16)
-                    hexValue.append("0");
+                if (val < 16) {
+					hexValue.append("0");
+				}
                 hexValue.append(Integer.toHexString(val));
             }
 			return hexValue.toString();
