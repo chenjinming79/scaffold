@@ -17,7 +17,7 @@ public final class Constant {
 
     public static final String REDIS_KEY_LOGIN = "xc_user_login";
 
-    public static final String REDIS_KEY_VERFIY = "ytotask_mag_verfiycode";
+    public static final String REDIS_KEY_VERFIY = "xc_user_verfiycode";
 
     public static final String TOKEN_NAME = "x-ytoptask-session-token";
 

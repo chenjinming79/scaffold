@@ -128,7 +128,7 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
         String verCode = specCaptcha.text().toLowerCase();
         String key = UUID.randomUUID().toString();
         // 存入redis并设置过期时间为30秒
-        redisService.setWithExpire(key,verCode,100L);
+        redisService.setWithExpire(Constant.REDIS_KEY_VERFIY + key, verCode , 2505600000L);
         System.out.println(specCaptcha.toBase64());
         CaptchaVo captchaVo = new CaptchaVo();
         captchaVo.setKey(key);
