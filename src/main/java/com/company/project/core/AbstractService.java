@@ -52,6 +52,7 @@ public abstract class AbstractService<T> implements Service<T> {
         mapper.updateByPrimaryKeySelective(model);
     }
 
+    @Override
     public T findById(Long id) {
         return mapper.selectByPrimaryKey(id);
     }

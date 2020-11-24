@@ -47,3 +47,10 @@ taskmagprops:
   checkLoginUrl: /jl/modal/add;/jl/modal/update;/jl/modal/delete;/jl/modal/list;/jl/user/getTokenUser
   filedir: api-mag/
   fileBasePath: upload/
+
+logging:
+  level:
+    com:
+      company:
+        project:
+          dao: DEBUG

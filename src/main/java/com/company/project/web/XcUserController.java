@@ -6,14 +6,12 @@ import com.company.project.model.XcUser;
 import com.company.project.service.XcUserService;
 import com.company.project.utils.Logger;
 import com.company.project.utils.Md5Utils;
-import com.company.project.utils.RedisService;
 import com.company.project.vo.LoginVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wf.captcha.GifCaptcha;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -30,19 +28,10 @@ public class XcUserController {
     @Resource
     private XcUserService xcUserService;
 
-    @Autowired
-    private RedisService redisService;
-
-    /**
-     * 用户登录
-     *
-     * @param vo
-     * @return
-     */
     @ApiOperation(value = "用户登录", notes = "用户登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result login(@RequestBody LoginVo vo, HttpServletRequest request) {
-        Logger.info(this, "/xc/user/delete 用户登录接口入参 :" + vo);
+        Logger.info(this, "/xc/user/login 用户登录接口入参 :" + vo);
         return xcUserService.login(vo);
     }
 
