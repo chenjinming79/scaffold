@@ -12,4 +12,6 @@ import com.company.project.vo.LoginVo;
 public interface XcUserService extends Service<XcUser> {
 
     Result login(LoginVo vo);
+
+    Result captcha();
 }

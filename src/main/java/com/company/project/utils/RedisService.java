@@ -101,5 +101,4 @@ public interface RedisService {
     public boolean getLock(LockVo lock, long timeout, long tryInterval, long lockExpireTime);
 
     public void releaseLock(LockVo lock);
-
 }

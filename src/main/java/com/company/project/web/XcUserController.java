@@ -6,12 +6,14 @@ import com.company.project.model.XcUser;
 import com.company.project.service.XcUserService;
 import com.company.project.utils.Logger;
 import com.company.project.utils.Md5Utils;
+import com.company.project.utils.RedisService;
 import com.company.project.vo.LoginVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wf.captcha.GifCaptcha;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -27,6 +29,13 @@ import java.util.UUID;
 public class XcUserController {
     @Resource
     private XcUserService xcUserService;
+
+    /*@ApiOperation(value = "用户退出", notes = "用户退出")
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public Result logout() {
+        // Logger.info(this,"/sysUser/logout 接口入参 : "+token);
+        return xcUserService.logout(super.getUserId());
+    }*/
 
     @ApiOperation(value = "用户登录", notes = "用户登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -49,14 +58,7 @@ public class XcUserController {
     @ApiOperation(value = "生成验证码", notes = "生成验证码")
     @RequestMapping(value = "/captcha", method = RequestMethod.POST)
     public Result captcha(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        GifCaptcha specCaptcha = new GifCaptcha(130, 48, 5);
-        String verCode = specCaptcha.text().toLowerCase();
-        String key = UUID.randomUUID().toString();
-        // 存入redis并设置过期时间为30分钟
-        //redisService.setWithExpire(key,verCode,2505600000L);
-        System.out.println(specCaptcha.toBase64());
-        // 将key和base64返回给前端
-        return ResultGenerator.genSuccessResult(specCaptcha.toBase64());
+        return xcUserService.captcha();
     }
 
     @PostMapping("/delete")

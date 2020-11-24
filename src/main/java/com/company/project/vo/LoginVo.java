@@ -2,6 +2,8 @@ package com.company.project.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @ClassName LoginVo
  * @Description //TODO
@@ -11,14 +13,21 @@ import io.swagger.annotations.ApiModelProperty;
  **/
 public class LoginVo {
 
+    @NotNull(message = "手机号不可为空")
     @ApiModelProperty(value = "手机号")
     private String phone;
 
+    @NotNull(message = "密码不可为空")
     @ApiModelProperty(value = "密码")
     private String password;
 
-    @ApiModelProperty(value = "渠道号")
-    private String channel;
+    @NotNull(message = "验证码key不可为空")
+    @ApiModelProperty(value = "验证码key")
+    private String verifyKey;
+
+    @NotNull(message = "登录验证码不可为空")
+    @ApiModelProperty(value = "登录验证码")
+    private String verifyCode;
 
     public String getPhone() {
         return phone;
@@ -36,11 +45,19 @@ public class LoginVo {
         this.password = password;
     }
 
-    public String getChannel() {
-        return channel;
+    public String getVerifyKey() {
+        return verifyKey;
     }
 
-    public void setChannel(String channel) {
-        this.channel = channel;
+    public void setVerifyKey(String verifyKey) {
+        this.verifyKey = verifyKey;
+    }
+
+    public String getVerifyCode() {
+        return verifyCode;
+    }
+
+    public void setVerifyCode(String verifyCode) {
+        this.verifyCode = verifyCode;
     }
 }

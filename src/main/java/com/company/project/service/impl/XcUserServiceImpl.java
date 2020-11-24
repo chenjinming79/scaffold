@@ -8,14 +8,17 @@ import com.company.project.dao.XcUserMapper;
 import com.company.project.model.XcUser;
 import com.company.project.service.XcUserService;
 import com.company.project.utils.*;
+import com.company.project.vo.CaptchaVo;
 import com.company.project.vo.LoginVo;
 import com.company.project.vo.UserVo;
+import com.wf.captcha.GifCaptcha;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.UUID;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 
@@ -37,6 +40,25 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
     public Result login(LoginVo vo) {
 
         readWriteLock.writeLock().lock();
+
+        String code = (String) redisService.get(vo.getVerifyKey());
+        if(null == code){
+            return ResultGenerator.genFailResult(ResultCode.VERFIY_TOKEN_ERROR,"图形验证码token不存在");
+        }
+
+        if(!vo.getVerifyCode().toLowerCase().equals(code.toLowerCase())){
+            return ResultGenerator.genFailResult(ResultCode.VERFIY_CODE_ERROR,"验证码输入错误");
+        }
+
+        long curTime = System.currentTimeMillis();
+
+        if (curTime >  redisService.expire(code)) {
+            Logger.info(this, "curTime is " + curTime + " validTime is " + redisService.expire(code));
+            redisService.delete(code);
+            return ResultGenerator.genFailResult(ResultCode.VERFIY_CODE_TIME_ERROR,"验证码已经过期");
+        }
+
+        redisService.delete(code);
 
         UserVo userVo = new UserVo();
 
@@ -93,7 +115,25 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
                 readWriteLock.writeLock().unlock();
             }
         }
-
         return ResultGenerator.genSuccessResult(userVo);
+    }
+
+    /**
+     * 生成验证码
+     * @return
+     */
+    @Override
+    public Result captcha() {
+        GifCaptcha specCaptcha = new GifCaptcha(130, 48, 5);
+        String verCode = specCaptcha.text().toLowerCase();
+        String key = UUID.randomUUID().toString();
+        // 存入redis并设置过期时间为30秒
+        redisService.setWithExpire(key,verCode,100L);
+        System.out.println(specCaptcha.toBase64());
+        CaptchaVo captchaVo = new CaptchaVo();
+        captchaVo.setKey(key);
+        captchaVo.setData(specCaptcha.toBase64());
+        // 将key和base64返回给前端
+        return ResultGenerator.genSuccessResult(captchaVo);
     }
 }
