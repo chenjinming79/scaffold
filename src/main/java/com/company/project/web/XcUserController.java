@@ -35,6 +35,7 @@ public class XcUserController {
 
     @PostMapping("/login")
     @ApiOperation(value = "用户登录", notes = "用户登录")
+    @RequestMapping(value = "/selectBlogType", method = {RequestMethod.POST,RequestMethod.GET})
     public Result login(@RequestBody LoginVo vo, HttpServletRequest request) {
         Logger.info(this, "/xc/user/login 用户登录接口入参 :" + vo);
         return xcUserService.login(vo);
@@ -52,7 +53,7 @@ public class XcUserController {
     }
 
     @ApiOperation(value = "生成验证码", notes = "生成验证码")
-    @RequestMapping(value = "/captcha", method = RequestMethod.POST)
+    @RequestMapping(value = "/captcha", method = {RequestMethod.POST,RequestMethod.GET})
     public Result captcha(HttpServletRequest request, HttpServletResponse response) throws Exception {
         return xcUserService.captcha();
     }
