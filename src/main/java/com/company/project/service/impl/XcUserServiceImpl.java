@@ -101,21 +101,41 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
                 Logger.info(this,"登录token存入redis产生异常："+e.getMessage());
                 throw new RuntimeException("存入redis异常");
             }
-        }/*catch (VerfiyTokenException e) {
-            Logger.error(this, "图形验证码token不存在：", e);
-            throw new VerfiyTokenException(loginParam.getVerifyToken());
-        }catch(VerfiyCodeException e){
-            Logger.error(this, "图形验证不存在:", e);
-            throw new VerfiyCodeException(loginParam.getVerifyCode());
-        }catch(OutTimeTokenException e){
-            Logger.error(this, "token过期:", e);
-            throw new OutTimeTokenException();
-        }*/ finally{
+        } finally{
             if(readWriteLock.isWriteLocked()){
                 readWriteLock.writeLock().unlock();
             }
         }
         return ResultGenerator.genSuccessResult(userVo);
+    }
+
+    /**
+     * 用户退出
+     * @param userId
+     * @return
+     */
+    @Override
+    public Result logout(Long userId) {
+
+
+        UserVo userVo = null;
+        String token=(String)redisService.get(userId+"USERID");
+        try {
+            userVo = (UserVo)redisService.get(Constant.REDIS_KEY_LOGIN + token);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new RuntimeException("redis异常");
+        }
+
+        redisService.delete(userId+"USERID");
+
+        if (userVo != null){
+            redisService.delete(Constant.REDIS_KEY_LOGIN + token);
+
+            return ResultGenerator.genSuccessResult();
+        }
+
+        return ResultGenerator.genFailResult(ResultCode.NOT_LOGIN_EXCEPTION,"用户未登录,请重新登录");
     }
 
     /**

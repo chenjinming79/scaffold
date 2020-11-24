@@ -30,12 +30,12 @@ public class XcUserController {
     @Resource
     private XcUserService xcUserService;
 
-    /*@ApiOperation(value = "用户退出", notes = "用户退出")
+    @ApiOperation(value = "用户退出", notes = "用户退出")
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public Result logout() {
-        // Logger.info(this,"/sysUser/logout 接口入参 : "+token);
-        return xcUserService.logout(super.getUserId());
-    }*/
+    public Result logout(@RequestParam Long userId) {
+        Logger.info(this,"/xc/user/logout 用户退出接口入参 : " + userId);
+        return xcUserService.logout(userId);
+    }
 
     @ApiOperation(value = "用户登录", notes = "用户登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)

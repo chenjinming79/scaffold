@@ -9,6 +9,7 @@ public enum ResultCode {
     UNAUTHORIZED(401),//未认证（签名错误）
     NOT_FOUND(404),//接口不存在
     INTERNAL_SERVER_ERROR(500),//服务器内部错误
+    NOT_LOGIN_EXCEPTION(800005),//用户未登录,请重新登录
     VERFIY_CODE_TIME_ERROR(800004),//验证码已经过期
     VERFIY_CODE_ERROR(800003),//验证码输入错误
     VERFIY_TOKEN_ERROR(800002),//图形验证码token不存在
