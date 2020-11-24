@@ -6,14 +6,11 @@ import com.company.project.model.XcUser;
 import com.company.project.service.XcUserService;
 import com.company.project.utils.Logger;
 import com.company.project.utils.Md5Utils;
-import com.company.project.utils.RedisService;
 import com.company.project.vo.LoginVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.wf.captcha.GifCaptcha;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -21,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/xc/user")
@@ -30,15 +26,15 @@ public class XcUserController {
     @Resource
     private XcUserService xcUserService;
 
+    @GetMapping("/logout")
     @ApiOperation(value = "用户退出", notes = "用户退出")
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public Result logout(@RequestParam Long userId) {
         Logger.info(this,"/xc/user/logout 用户退出接口入参 : " + userId);
         return xcUserService.logout(userId);
     }
 
+    @PostMapping("/login")
     @ApiOperation(value = "用户登录", notes = "用户登录")
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result login(@RequestBody LoginVo vo, HttpServletRequest request) {
         Logger.info(this, "/xc/user/login 用户登录接口入参 :" + vo);
         return xcUserService.login(vo);

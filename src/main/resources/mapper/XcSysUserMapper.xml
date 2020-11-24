@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.XcSysUserMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.XcSysUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="remark_name" jdbcType="VARCHAR" property="remarkName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+    <result column="register_ip" jdbcType="VARCHAR" property="registerIp" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+  </resultMap>
+</mapper>
