@@ -67,6 +67,13 @@ public interface RedisService {
      */
     public Long expire(String key);
 
+    /**
+     * 获取key得过期时间 秒计算
+     * @param key
+     * @return
+     */
+    public Long expireMillisecond(String key);
+
     void expire(String key, long minute);
     /**
      * 获取二级key-value中存在于Collection中的key的value

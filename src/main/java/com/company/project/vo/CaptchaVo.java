@@ -9,16 +9,16 @@ package com.company.project.vo;
  **/
 public class CaptchaVo {
 
-    private String key;
+    private String verifyToken;
 
     private String data;
 
-    public String getKey() {
-        return key;
+    public String getVerifyToken() {
+        return verifyToken;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setVerifyToken(String verifyToken) {
+        this.verifyToken = verifyToken;
     }
 
     public String getData() {

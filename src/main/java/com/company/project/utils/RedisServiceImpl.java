@@ -137,10 +137,14 @@ public class RedisServiceImpl implements RedisService {
 
 	}
 
-	//获取key的过期时间 秒计算
 	@Override
 	public Long expire(String key) {
 		return redisTemplate.getExpire(key,TimeUnit.SECONDS);
+	}
+
+	@Override
+	public Long expireMillisecond(String key) {
+		return redisTemplate.getExpire(key,TimeUnit.MILLISECONDS);
 	}
 
 	@Override
