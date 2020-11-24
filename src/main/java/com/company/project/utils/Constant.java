@@ -15,7 +15,7 @@ public final class Constant {
 
     public static final String OPTIONS_METHOD = "OPTIONS";
 
-    public static final String REDIS_KEY_LOGIN = "ytotask_mag_login";
+    public static final String REDIS_KEY_LOGIN = "xc_user_login";
 
     public static final String REDIS_KEY_VERFIY = "ytotask_mag_verfiycode";
 

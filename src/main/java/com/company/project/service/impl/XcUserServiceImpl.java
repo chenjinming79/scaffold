@@ -9,6 +9,7 @@ import com.company.project.model.XcUser;
 import com.company.project.service.XcUserService;
 import com.company.project.utils.*;
 import com.company.project.vo.LoginVo;
+import com.company.project.vo.UserVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,8 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
 
         readWriteLock.writeLock().lock();
 
+        UserVo userVo = new UserVo();
+
         try {
 
             XcUser xcUser = tUserMapper.findUserByPhone(vo.getPhone());
@@ -64,13 +67,17 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
             token = TokenUtil.getToken();
 
             try {
-                xcUser.setExpireTime(2505600000L);
+                userVo.setUserId(xcUser.getId());
+                userVo.setPhone(xcUser.getPhone());
+                userVo.setToken(token);
+                userVo.setExpireTime(2505600000L);
                 //redisService.put(Constant.REDIS_KEY_LOGIN, token, new RedisModel(su.getId(), System.currentTimeMillis() + magConfig.getExpireTime()), magConfig.getExpireTime());
-                redisService.setWithExpire(Constant.REDIS_KEY_LOGIN + token, xcUser, 2505600000L);
+                redisService.setWithExpire(Constant.REDIS_KEY_LOGIN + token, userVo , 2505600000L);
                 redisService.set(xcUser.getId()+"USERID",token);
             }catch (Exception e){
+                e.printStackTrace();
                 Logger.info(this,"登录token存入redis产生异常："+e.getMessage());
-                throw new RuntimeException();
+                throw new RuntimeException("存入redis异常");
             }
         }/*catch (VerfiyTokenException e) {
             Logger.error(this, "图形验证码token不存在：", e);
@@ -87,6 +94,6 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
             }
         }
 
-        return null;
+        return ResultGenerator.genSuccessResult(userVo);
     }
 }

@@ -1,7 +1,7 @@
 package com.company.project.model;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "t_user")
 public class XcUser {
@@ -102,9 +102,6 @@ public class XcUser {
      * 头像
      */
     private String avatar;
-
-    @Transient
-    private Long expireTime;
 
     /**
      * 获取记录ID
@@ -410,13 +407,5 @@ public class XcUser {
      */
     public void setAvatar(String avatar) {
         this.avatar = avatar;
-    }
-
-    public Long getExpireTime() {
-        return expireTime;
-    }
-
-    public void setExpireTime(Long expireTime) {
-        this.expireTime = expireTime;
     }
 }

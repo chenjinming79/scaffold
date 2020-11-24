@@ -35,6 +35,17 @@ public class XcUserController {
         return xcUserService.login(vo);
     }
 
+    @PostMapping("/add")
+    @ApiOperation(value = "会员注册", notes = "会员注册")
+    public Result add(@RequestBody XcUser xcUser) {
+        xcUser.setCreateTime(new Date());
+        xcUser.setStatus(1);
+        xcUser.setRegisterTime(new Date());
+        xcUser.setPassword(Md5Utils.getMd5(xcUser.getPassword()));
+        xcUserService.save(xcUser);
+        return ResultGenerator.genSuccessResult();
+    }
+
     @ApiOperation(value = "生成验证码", notes = "生成验证码")
     @RequestMapping(value = "/captcha", method = RequestMethod.POST)
     public Result captcha(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -46,17 +57,6 @@ public class XcUserController {
         System.out.println(specCaptcha.toBase64());
         // 将key和base64返回给前端
         return ResultGenerator.genSuccessResult(specCaptcha.toBase64());
-    }
-
-    @PostMapping("/add")
-    @ApiOperation(value = "会员注册", notes = "会员注册")
-    public Result add(@RequestBody XcUser xcUser) {
-        xcUser.setCreateTime(new Date());
-        xcUser.setStatus(1);
-        xcUser.setRegisterTime(new Date());
-        xcUser.setPassword(Md5Utils.getMd5(xcUser.getPassword()));
-        xcUserService.save(xcUser);
-        return ResultGenerator.genSuccessResult();
     }
 
     @PostMapping("/delete")
