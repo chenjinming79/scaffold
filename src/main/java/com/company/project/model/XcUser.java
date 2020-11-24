@@ -103,6 +103,9 @@ public class XcUser {
      */
     private String avatar;
 
+    @Transient
+    private Long expireTime;
+
     /**
      * 获取记录ID
      *
@@ -407,5 +410,13 @@ public class XcUser {
      */
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public Long getExpireTime() {
+        return expireTime;
+    }
+
+    public void setExpireTime(Long expireTime) {
+        this.expireTime = expireTime;
     }
 }

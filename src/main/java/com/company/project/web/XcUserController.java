@@ -5,6 +5,7 @@ import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcUser;
 import com.company.project.service.XcUserService;
 import com.company.project.utils.Logger;
+import com.company.project.utils.Md5Utils;
 import com.company.project.utils.RedisService;
 import com.company.project.vo.LoginVo;
 import com.github.pagehelper.PageHelper;
@@ -64,6 +65,7 @@ public class XcUserController {
         xcUser.setCreateTime(new Date());
         xcUser.setStatus(1);
         xcUser.setRegisterTime(new Date());
+        xcUser.setPassword(Md5Utils.getMd5(xcUser.getPassword()));
         xcUserService.save(xcUser);
         return ResultGenerator.genSuccessResult();
     }

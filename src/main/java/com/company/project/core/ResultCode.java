@@ -8,7 +8,10 @@ public enum ResultCode {
     FAIL(400),//失败
     UNAUTHORIZED(401),//未认证（签名错误）
     NOT_FOUND(404),//接口不存在
-    INTERNAL_SERVER_ERROR(500);//服务器内部错误
+    INTERNAL_SERVER_ERROR(500),//服务器内部错误
+    USER_NOT_EXIST(800000),//用户信息不存在[账号可能被停用或删除]
+    PASSWORD_ERROR(800001)//密码输入错误，请重新输入
+    ;
 
     private final int code;
 
