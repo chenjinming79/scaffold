@@ -29,6 +29,10 @@ public class LoginVo {
     @ApiModelProperty(value = "登录验证码")
     private String verifyCode;
 
+    @NotNull(message = "渠道号不可为空")
+    @ApiModelProperty(value = "1代表用户登录2代表后台用户登录")
+    private String channel;
+
     public String getPhone() {
         return phone;
     }
@@ -59,5 +63,13 @@ public class LoginVo {
 
     public void setVerifyCode(String verifyCode) {
         this.verifyCode = verifyCode;
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
     }
 }

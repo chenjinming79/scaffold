@@ -1,9 +1,6 @@
 package com.company.project.vo;
 
-import javax.persistence.Column;
-import javax.persistence.Transient;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @ClassName UserVo
@@ -12,7 +9,7 @@ import java.util.Date;
  * @Date 2020/11/24 15:30
  * @Version 1.0
  **/
-public class UserVo implements Serializable {
+public class SysUserVo implements Serializable {
 
     private Long userId;
 
@@ -22,7 +19,22 @@ public class UserVo implements Serializable {
 
     private Long expireTime;
 
+    private String roleId;
+
     private String channel;
+
+    public SysUserVo() {
+        super();
+    }
+
+    public SysUserVo(Long userId, String phone, String token, Long expireTime, String roleId, String channel) {
+        this.userId = userId;
+        this.phone = phone;
+        this.token = token;
+        this.expireTime = expireTime;
+        this.roleId = roleId;
+        this.channel = channel;
+    }
 
     public Long getUserId() {
         return userId;
@@ -56,23 +68,19 @@ public class UserVo implements Serializable {
         this.expireTime = expireTime;
     }
 
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
+
     public String getChannel() {
         return channel;
     }
 
     public void setChannel(String channel) {
-        this.channel = channel;
-    }
-
-    public UserVo() {
-        super();
-    }
-
-    public UserVo(Long userId, String phone, String token, Long expireTime, String channel) {
-        this.userId = userId;
-        this.phone = phone;
-        this.token = token;
-        this.expireTime = expireTime;
         this.channel = channel;
     }
 }

@@ -24,4 +24,12 @@
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
     <result column="role_id" jdbcType="VARCHAR" property="roleId" />
   </resultMap>
+
+  <select id="findSysUserByPhone" resultMap="BaseResultMap">
+      select id,status,user_name,password,remark_name,phone,register_time,register_ip,last_login_time,last_login_ip,avatar,role_id
+        from t_sys_user
+        where is_delete = 0
+        and phone = #{phone}
+  </select>
+
 </mapper>
