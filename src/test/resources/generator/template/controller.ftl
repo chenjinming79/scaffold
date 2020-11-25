@@ -21,7 +21,7 @@ public class ${modelNameUpperCamel}Controller {
     @Resource
     private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
 
-    @PostMapping("/add")
+    @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
     public Result add(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
         Date date=new Date();
         ${modelNameLowerCamel}.setCreateTime(date);
@@ -33,7 +33,7 @@ public class ${modelNameUpperCamel}Controller {
         return result;
     }
 
-    @PostMapping("/delete")
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST,RequestMethod.GET})
     public Result delete(@RequestParam Long id) {
         ${modelNameUpperCamel} ${modelNameLowerCamel}=new ${modelNameUpperCamel}();
         ${modelNameLowerCamel}.setId(id);
@@ -42,7 +42,7 @@ public class ${modelNameUpperCamel}Controller {
         return ResultGenerator.genSuccessResult();
     }
 
-    @PostMapping("/update")
+    @RequestMapping(value = "/update", method = {RequestMethod.POST,RequestMethod.GET})
     public Result update(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
         ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
         Result result=ResultGenerator.genSuccessResult();
@@ -50,13 +50,13 @@ public class ${modelNameUpperCamel}Controller {
         return result;
     }
 
-    @GetMapping("/detail")
+    @RequestMapping(value = "/detail", method = {RequestMethod.POST,RequestMethod.GET})
     public Result detail(@RequestParam Long id) {
         ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
         return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
     }
 
-    @PostMapping("/findAllByLike")
+    @RequestMapping(value = "/findAllByLike", method = {RequestMethod.POST,RequestMethod.GET})
     public Result findAllByLike(@RequestBody Page<${modelNameUpperCamel}> page) {
     PageHelper.startPage(page.getPage(), page.getSize());
     List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findValidDeleteAll(page);
