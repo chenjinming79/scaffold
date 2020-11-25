@@ -25,8 +25,8 @@ public class XcSysUserController {
     @Resource
     private XcSysUserService xcSysUserService;
 
-    @PostMapping("/add")
     @ApiOperation(value = "新增后台用户", notes = "新增后台用户")
+    @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
     public Result add(@RequestBody XcSysUser xcSysUser) {
         Date date=new Date();
         xcSysUser.setCreateTime(date);
@@ -38,8 +38,8 @@ public class XcSysUserController {
         return result;
     }
 
-    @PostMapping("/delete")
     @ApiOperation(value = "逻辑删除后台用户", notes = "逻辑删除后台用户")
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST,RequestMethod.GET})
     public Result delete(@RequestParam Long id) {
         XcSysUser xcSysUser=new XcSysUser();
         xcSysUser.setId(id);
@@ -48,8 +48,8 @@ public class XcSysUserController {
         return ResultGenerator.genSuccessResult();
     }
 
-    @PostMapping("/update")
     @ApiOperation(value = "修改后台用户", notes = "修改后台用户")
+    @RequestMapping(value = "/update", method = {RequestMethod.POST,RequestMethod.GET})
     public Result update(@RequestBody XcSysUser xcSysUser) {
         xcSysUserService.update(xcSysUser);
         Result result=ResultGenerator.genSuccessResult();
@@ -57,15 +57,15 @@ public class XcSysUserController {
         return result;
     }
 
-    @GetMapping("/detail")
     @ApiOperation(value = "获取后台用户详情", notes = "获取后台用户详情")
+    @RequestMapping(value = "/detail", method = {RequestMethod.POST,RequestMethod.GET})
     public Result detail(@RequestParam Long id) {
         XcSysUser xcSysUser = xcSysUserService.findById(id);
         return ResultGenerator.genSuccessResult(xcSysUser);
     }
 
-    @PostMapping("/findByModal")
     @ApiOperation(value = "分页查询后台用户", notes = "分页查询后台用户")
+    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
     public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcSysUser xcSysUser) {
         PageHelper.startPage(page, size);
         xcSysUser.setIsDelete(false);

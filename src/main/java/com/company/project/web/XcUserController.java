@@ -26,23 +26,22 @@ public class XcUserController {
     @Resource
     private XcUserService xcUserService;
 
-    @GetMapping("/logout")
     @ApiOperation(value = "用户退出", notes = "用户退出")
+    @RequestMapping(value = "/logout", method = {RequestMethod.POST,RequestMethod.GET})
     public Result logout(@RequestParam Long userId) {
         Logger.info(this,"/xc/user/logout 用户退出接口入参 : " + userId);
         return xcUserService.logout(userId);
     }
 
-    @PostMapping("/login")
     @ApiOperation(value = "用户登录", notes = "用户登录")
-    @RequestMapping(value = "/selectBlogType", method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/login", method = {RequestMethod.POST,RequestMethod.GET})
     public Result login(@RequestBody LoginVo vo, HttpServletRequest request) {
         Logger.info(this, "/xc/user/login 用户登录接口入参 :" + vo);
         return xcUserService.login(vo);
     }
 
-    @PostMapping("/add")
     @ApiOperation(value = "会员注册", notes = "会员注册")
+    @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
     public Result add(@RequestBody XcUser xcUser) {
         xcUser.setCreateTime(new Date());
         xcUser.setStatus(1);
@@ -58,8 +57,8 @@ public class XcUserController {
         return xcUserService.captcha();
     }
 
-    @PostMapping("/delete")
     @ApiOperation(value = "逻辑删除会员", notes = "逻辑删除会员")
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST,RequestMethod.GET})
     public Result delete(@RequestParam Long id) {
         XcUser xcUser = new XcUser();
         xcUser.setId(id);
@@ -68,22 +67,22 @@ public class XcUserController {
         return ResultGenerator.genSuccessResult();
     }
 
-    @PostMapping("/update")
     @ApiOperation(value = "修改会员", notes = "修改会员")
+    @RequestMapping(value = "/update", method = {RequestMethod.POST,RequestMethod.GET})
     public Result update(@RequestBody XcUser xcUser) {
         xcUserService.update(xcUser);
         return ResultGenerator.genSuccessResult();
     }
 
-    @PostMapping("/detail")
     @ApiOperation(value = "获取会员详情", notes = "获取会员详情")
+    @RequestMapping(value = "/detail", method = {RequestMethod.POST,RequestMethod.GET})
     public Result detail(@RequestParam Long id) {
         XcUser xcUser = xcUserService.findById(id);
         return ResultGenerator.genSuccessResult(xcUser);
     }
 
-    @PostMapping("/findByModal")
     @ApiOperation(value = "分页查询会员", notes = "分页查询会员")
+    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
     public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcUser xcUser) {
         PageHelper.startPage(page, size);
         xcUser.setIsDelete(false);

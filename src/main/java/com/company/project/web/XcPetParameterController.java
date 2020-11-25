@@ -24,8 +24,8 @@ public class XcPetParameterController {
     @Resource
     private XcPetParameterService xcPetParameterService;
 
-    @PostMapping("/add")
     @ApiOperation(value = "新增星宠参数", notes = "新增星宠参数")
+    @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
     public Result add(@RequestBody XcPetParameter xcPetParameter) {
         Date date=new Date();
         xcPetParameter.setCreateTime(date);
@@ -37,8 +37,8 @@ public class XcPetParameterController {
         return result;
     }
 
-    @PostMapping("/delete")
     @ApiOperation(value = "逻辑删除星宠参数", notes = "逻辑删除星宠参数")
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST,RequestMethod.GET})
     public Result delete(@RequestParam Long id) {
         XcPetParameter xcPetParameter=new XcPetParameter();
         xcPetParameter.setId(id);
@@ -47,8 +47,8 @@ public class XcPetParameterController {
         return ResultGenerator.genSuccessResult();
     }
 
-    @PostMapping("/update")
     @ApiOperation(value = "修改星宠参数", notes = "修改星宠参数")
+    @RequestMapping(value = "/update", method = {RequestMethod.POST,RequestMethod.GET})
     public Result update(@RequestBody XcPetParameter xcPetParameter) {
         xcPetParameterService.update(xcPetParameter);
         Result result=ResultGenerator.genSuccessResult();
@@ -56,15 +56,15 @@ public class XcPetParameterController {
         return result;
     }
 
-    @GetMapping("/detail")
     @ApiOperation(value = "获取单个星宠参数详情", notes = "获取单个星宠参数详情")
+    @RequestMapping(value = "/detail", method = {RequestMethod.POST,RequestMethod.GET})
     public Result detail(@RequestParam Long id) {
         XcPetParameter xcPetParameter = xcPetParameterService.findById(id);
         return ResultGenerator.genSuccessResult(xcPetParameter);
     }
 
-    @PostMapping("/findByModal")
     @ApiOperation(value = "分页查询星宠参数", notes = "分页查询星宠参数")
+    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
     public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcPetParameter xcPetParameter) {
         PageHelper.startPage(page, size);
         xcPetParameter.setIsDelete(false);

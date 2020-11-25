@@ -24,8 +24,8 @@ public class XcWithdrawController {
     @Resource
     private XcWithdrawService xcWithdrawService;
 
-    @PostMapping("/add")
     @ApiOperation(value = "新增提现申请", notes = "新增提现申请")
+    @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
     public Result add(@RequestBody XcWithdraw xcWithdraw) {
         Date date=new Date();
         xcWithdraw.setCreateTime(date);
@@ -37,8 +37,8 @@ public class XcWithdrawController {
         return result;
     }
 
-    @PostMapping("/delete")
     @ApiOperation(value = "删除提现记录", notes = "删除提现记录")
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST,RequestMethod.GET})
     public Result delete(@RequestParam Long id) {
         XcWithdraw xcWithdraw=new XcWithdraw();
         xcWithdraw.setId(id);
@@ -47,8 +47,8 @@ public class XcWithdrawController {
         return ResultGenerator.genSuccessResult();
     }
 
-    @PostMapping("/update")
     @ApiOperation(value = "审核提现", notes = "审核提现")
+    @RequestMapping(value = "/update", method = {RequestMethod.POST,RequestMethod.GET})
     public Result update(@RequestBody XcWithdraw xcWithdraw) {
         xcWithdrawService.update(xcWithdraw);
         Result result=ResultGenerator.genSuccessResult();
@@ -56,15 +56,15 @@ public class XcWithdrawController {
         return result;
     }
 
-    @GetMapping("/detail")
     @ApiOperation(value = "获取提现详情", notes = "获取提现详情")
+    @RequestMapping(value = "/detail", method = {RequestMethod.POST,RequestMethod.GET})
     public Result detail(@RequestParam Long id) {
         XcWithdraw xcWithdraw = xcWithdrawService.findById(id);
         return ResultGenerator.genSuccessResult(xcWithdraw);
     }
 
-    @PostMapping("/findByModal")
     @ApiOperation(value = "分页查询提现详情", notes = "分页查询提现详情")
+    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
     public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcWithdraw xcWithdraw) {
         PageHelper.startPage(page, size);
         xcWithdraw.setIsDelete(false);

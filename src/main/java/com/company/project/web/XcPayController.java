@@ -24,8 +24,8 @@ public class XcPayController {
     @Resource
     private XcPayService xcPayService;
 
-    @PostMapping("/add")
     @ApiOperation(value = "新增充值记录", notes = "新增充值记录")
+    @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
     public Result add(@RequestBody XcPay xcPay) {
         Date date=new Date();
         xcPay.setCreateTime(date);
@@ -37,8 +37,8 @@ public class XcPayController {
         return result;
     }
 
-    @PostMapping("/delete")
     @ApiOperation(value = "逻辑删除充值记录", notes = "逻辑删除充值记录")
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST,RequestMethod.GET})
     public Result delete(@RequestParam Long id) {
         XcPay xcPay=new XcPay();
         xcPay.setId(id);
@@ -47,8 +47,8 @@ public class XcPayController {
         return ResultGenerator.genSuccessResult();
     }
 
-    @PostMapping("/update")
     @ApiOperation(value = "审批充值记录", notes = "审批充值记录")
+    @RequestMapping(value = "/update", method = {RequestMethod.POST,RequestMethod.GET})
     public Result update(@RequestBody XcPay xcPay) {
         xcPayService.update(xcPay);
         Result result=ResultGenerator.genSuccessResult();
@@ -56,15 +56,15 @@ public class XcPayController {
         return result;
     }
 
-    @GetMapping("/detail")
     @ApiOperation(value = "获取详情", notes = "获取详情")
+    @RequestMapping(value = "/detail", method = {RequestMethod.POST,RequestMethod.GET})
     public Result detail(@RequestParam Long id) {
         XcPay xcPay = xcPayService.findById(id);
         return ResultGenerator.genSuccessResult(xcPay);
     }
 
-    @PostMapping("/findByModal")
     @ApiOperation(value = "分页查询充值记录", notes = "分页查询充值记录")
+    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
     public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcPay xcPay) {
         PageHelper.startPage(page, size);
         xcPay.setIsDelete(false);

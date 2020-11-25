@@ -24,8 +24,8 @@ public class XcAnnounCementController {
     @Resource
     private XcAnnounCementService xcAnnounCementService;
 
-    @PostMapping("/add")
     @ApiOperation(value = "新增公告", notes = "新增公告")
+    @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
     public Result add(@RequestBody XcAnnounCement xcAnnounCement) {
         Date date=new Date();
         xcAnnounCement.setCreateTime(date);
@@ -37,8 +37,8 @@ public class XcAnnounCementController {
         return result;
     }
 
-    @PostMapping("/delete")
     @ApiOperation(value = "逻辑删除公告", notes = "逻辑删除公告")
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST,RequestMethod.GET})
     public Result delete(@RequestParam Long id) {
         XcAnnounCement xcAnnounCement=new XcAnnounCement();
         xcAnnounCement.setId(id);
@@ -47,8 +47,8 @@ public class XcAnnounCementController {
         return ResultGenerator.genSuccessResult();
     }
 
-    @PostMapping("/update")
     @ApiOperation(value = "修改公告", notes = "修改公告")
+    @RequestMapping(value = "/update", method = {RequestMethod.POST,RequestMethod.GET})
     public Result update(@RequestBody XcAnnounCement xcAnnounCement) {
         xcAnnounCementService.update(xcAnnounCement);
         Result result=ResultGenerator.genSuccessResult();
@@ -56,15 +56,15 @@ public class XcAnnounCementController {
         return result;
     }
 
-    @GetMapping("/detail")
     @ApiOperation(value = "获取公告详情", notes = "获取公告详情")
+    @RequestMapping(value = "/detail", method = {RequestMethod.POST,RequestMethod.GET})
     public Result detail(@RequestParam Long id) {
         XcAnnounCement xcAnnounCement = xcAnnounCementService.findById(id);
         return ResultGenerator.genSuccessResult(xcAnnounCement);
     }
 
-    @PostMapping("/findByModal")
     @ApiOperation(value = "分页查询公告", notes = "分页查询公告")
+    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
     public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcAnnounCement xcAnnounCement) {
         PageHelper.startPage(page, size);
         xcAnnounCement.setIsDelete(false);
