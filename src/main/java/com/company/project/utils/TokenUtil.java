@@ -20,7 +20,7 @@ public class TokenUtil {
 	 */
 	public static String getToken() {
 		UUID uuid = UUID.randomUUID();
-		return Md5Utils.getMd5(uuid.toString());
+		return Md5Utils.getToken(uuid.toString());
 	}
 
 	public static String getNoSplitUniqueId() {

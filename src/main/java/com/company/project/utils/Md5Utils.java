@@ -27,6 +27,26 @@ public class Md5Utils {
 		}
 	}
 
+	public static String getToken(String msg){
+		MessageDigest md5 = null;
+		try {
+			md5 = MessageDigest.getInstance("MD5");
+			byte[] md5Bytes = md5.digest(msg.getBytes());
+
+			StringBuffer hexValue = new StringBuffer();
+			for (byte md5Byte : md5Bytes) {
+				int val = ((int) md5Byte) & 0xff;
+				if (val < 16) {
+					hexValue.append("0");
+				}
+				hexValue.append(Integer.toHexString(val));
+			}
+			return hexValue.toString();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return msg;
+		}
+	}
 
 	/**
 	 * 参数Md5加密
