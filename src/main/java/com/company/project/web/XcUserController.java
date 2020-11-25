@@ -48,7 +48,7 @@ public class XcUserController {
         xcUser.setRegisterTime(new Date());
         xcUser.setPassword(Md5Utils.getMd5(xcUser.getPassword()));
         xcUserService.save(xcUser);
-        return ResultGenerator.genSuccessResult();
+        return ResultGenerator.genSuccessResult(xcUser);
     }
 
     @ApiOperation(value = "生成验证码", notes = "生成验证码")
@@ -71,7 +71,7 @@ public class XcUserController {
     @RequestMapping(value = "/update", method = {RequestMethod.POST,RequestMethod.GET})
     public Result update(@RequestBody XcUser xcUser) {
         xcUserService.update(xcUser);
-        return ResultGenerator.genSuccessResult();
+        return ResultGenerator.genSuccessResult(xcUser);
     }
 
     @ApiOperation(value = "获取会员详情", notes = "获取会员详情")
