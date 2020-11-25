@@ -1,5 +1,6 @@
 package com.company.project.web;
 
+import com.company.project.core.Page;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcUser;
@@ -79,6 +80,15 @@ public class XcUserController {
     public Result detail(@RequestParam Long id) {
         XcUser xcUser = xcUserService.findById(id);
         return ResultGenerator.genSuccessResult(xcUser);
+    }
+
+    @ApiOperation(value = "分页模糊查询会员", notes = "分页模糊查询会员")
+    @RequestMapping(value = "/findAllByLike", method = {RequestMethod.POST,RequestMethod.GET})
+    public Result findAllByLike(@RequestBody Page<XcUser> page) {
+        PageHelper.startPage(page.getPage(), page.getSize());
+        List<XcUser> list = xcUserService.findValidDeleteAll(page);
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
     }
 
     @ApiOperation(value = "分页查询会员", notes = "分页查询会员")
