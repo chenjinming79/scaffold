@@ -23,9 +23,7 @@ public class ${modelNameUpperCamel}Controller {
 
     @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
     public Result add(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
-        Date date=new Date();
-        ${modelNameLowerCamel}.setCreateTime(date);
-        ${modelNameLowerCamel}.setUpdateTime(date);
+        ${modelNameLowerCamel}.setCreateTime(new Date());
         ${modelNameLowerCamel}.setIsDelete(false);
         ${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
         Result result=ResultGenerator.genSuccessResult();
@@ -44,6 +42,7 @@ public class ${modelNameUpperCamel}Controller {
 
     @RequestMapping(value = "/update", method = {RequestMethod.POST,RequestMethod.GET})
     public Result update(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
+        ${modelNameLowerCamel}.setUpdateTime(new Date());
         ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
         Result result=ResultGenerator.genSuccessResult();
         result.setData(${modelNameLowerCamel});
