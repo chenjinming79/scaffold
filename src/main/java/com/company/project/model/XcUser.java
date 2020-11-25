@@ -64,6 +64,12 @@ public class XcUser {
     private String password;
 
     /**
+     * 交易密码
+     */
+    @Column(name = "trade_password")
+    private String tradePassword;
+
+    /**
      * 备注名
      */
     @Column(name = "remark_name")
@@ -407,5 +413,13 @@ public class XcUser {
      */
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getTradePassword() {
+        return tradePassword;
+    }
+
+    public void setTradePassword(String tradePassword) {
+        this.tradePassword = tradePassword;
     }
 }
