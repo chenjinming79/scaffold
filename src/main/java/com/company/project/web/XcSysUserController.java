@@ -4,6 +4,7 @@ import com.company.project.core.Page;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcSysUser;
+import com.company.project.model.XcUser;
 import com.company.project.service.XcSysUserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -62,5 +63,15 @@ public class XcSysUserController {
     public Result detail(@RequestParam Long id) {
         XcSysUser xcSysUser = xcSysUserService.findById(id);
         return ResultGenerator.genSuccessResult(xcSysUser);
+    }
+
+    @ApiOperation(value = "分页模糊查询查询会员", notes = "分页模糊查询查询会员")
+    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
+    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcSysUser xcSysUser) {
+        PageHelper.startPage(page, size);
+        xcSysUser.setIsDelete(false);
+        List<XcSysUser> list = xcSysUserService.findByModel(xcSysUser);
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
     }
 }

@@ -56,11 +56,11 @@ public class ${modelNameUpperCamel}Controller {
         return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
     }
 
-    @RequestMapping(value = "/findAllByLike", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result findAllByLike(@RequestBody Page<${modelNameUpperCamel}> page) {
-    PageHelper.startPage(page.getPage(), page.getSize());
-    List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findValidDeleteAll(page);
+    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
+    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) ${modelNameUpperCamel} ${modelNameLowerCamel}) {
+    PageHelper.startPage(page, size);
+    ${modelNameLowerCamel}.setIsDelete(false);
+    List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findByModel(${modelNameLowerCamel});
     PageInfo pageInfo = new PageInfo(list);
     return ResultGenerator.genSuccessResult(pageInfo);
-    }
 }

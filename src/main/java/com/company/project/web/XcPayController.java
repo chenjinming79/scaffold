@@ -2,6 +2,7 @@ package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcPay;
+import com.company.project.model.XcUser;
 import com.company.project.service.XcPayService;
 import com.company.project.core.Page;
 import com.github.pagehelper.PageHelper;
@@ -61,5 +62,15 @@ public class XcPayController {
     public Result detail(@RequestParam Long id) {
         XcPay xcPay = xcPayService.findById(id);
         return ResultGenerator.genSuccessResult(xcPay);
+    }
+
+    @ApiOperation(value = "分页模糊查询查询会员", notes = "分页模糊查询查询会员")
+    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
+    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcPay xcPay) {
+        PageHelper.startPage(page, size);
+        xcPay.setIsDelete(false);
+        List<XcPay> list = xcPayService.findByModel(xcPay);
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
     }
 }

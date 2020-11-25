@@ -82,16 +82,7 @@ public class XcUserController {
         return ResultGenerator.genSuccessResult(xcUser);
     }
 
-    @ApiOperation(value = "分页模糊查询会员", notes = "分页模糊查询会员")
-    @RequestMapping(value = "/findAllByLike", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result findAllByLike(@RequestBody Page<XcUser> page) {
-        PageHelper.startPage(page.getPage(), page.getSize());
-        List<XcUser> list = xcUserService.findValidDeleteAll(page);
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
-    }
-
-    @ApiOperation(value = "分页查询会员", notes = "分页查询会员")
+    @ApiOperation(value = "分页模糊查询查询会员", notes = "分页模糊查询查询会员")
     @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
     public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcUser xcUser) {
         PageHelper.startPage(page, size);

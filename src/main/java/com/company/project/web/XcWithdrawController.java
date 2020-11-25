@@ -2,6 +2,7 @@ package com.company.project.web;
 
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
+import com.company.project.model.XcUser;
 import com.company.project.model.XcWithdraw;
 import com.company.project.service.XcWithdrawService;
 import com.github.pagehelper.PageHelper;
@@ -61,5 +62,15 @@ public class XcWithdrawController {
     public Result detail(@RequestParam Long id) {
         XcWithdraw xcWithdraw = xcWithdrawService.findById(id);
         return ResultGenerator.genSuccessResult(xcWithdraw);
+    }
+
+    @ApiOperation(value = "分页模糊查询查询会员", notes = "分页模糊查询查询会员")
+    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
+    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcWithdraw xcWithdraw) {
+        PageHelper.startPage(page, size);
+        xcWithdraw.setIsDelete(false);
+        List<XcWithdraw> list = xcWithdrawService.findByModel(xcWithdraw);
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
     }
 }

@@ -2,6 +2,7 @@ package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcAnnounCement;
+import com.company.project.model.XcUser;
 import com.company.project.service.XcAnnounCementService;
 import com.company.project.core.Page;
 import com.github.pagehelper.PageHelper;
@@ -61,5 +62,15 @@ public class XcAnnounCementController {
     public Result detail(@RequestParam Long id) {
         XcAnnounCement xcAnnounCement = xcAnnounCementService.findById(id);
         return ResultGenerator.genSuccessResult(xcAnnounCement);
+    }
+
+    @ApiOperation(value = "分页模糊查询查询会员", notes = "分页模糊查询查询会员")
+    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
+    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcAnnounCement xcAnnounCement) {
+        PageHelper.startPage(page, size);
+        xcAnnounCement.setIsDelete(false);
+        List<XcAnnounCement> list = xcAnnounCementService.findByModel(xcAnnounCement);
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
     }
 }

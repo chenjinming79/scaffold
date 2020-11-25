@@ -2,6 +2,7 @@ package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcPetParameter;
+import com.company.project.model.XcUser;
 import com.company.project.service.XcPetParameterService;
 import com.company.project.core.Page;
 import com.github.pagehelper.PageHelper;
@@ -61,6 +62,16 @@ public class XcPetParameterController {
     public Result detail(@RequestParam Long id) {
         XcPetParameter xcPetParameter = xcPetParameterService.findById(id);
         return ResultGenerator.genSuccessResult(xcPetParameter);
+    }
+
+    @ApiOperation(value = "分页模糊查询查询会员", notes = "分页模糊查询查询会员")
+    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
+    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcPetParameter xcPetParameter) {
+        PageHelper.startPage(page, size);
+        xcPetParameter.setIsDelete(false);
+        List<XcPetParameter> list = xcPetParameterService.findByModel(xcPetParameter);
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
     }
 
 }

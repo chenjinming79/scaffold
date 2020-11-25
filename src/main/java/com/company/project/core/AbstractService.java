@@ -87,7 +87,43 @@ public abstract class AbstractService<T> implements Service<T> {
 
     @Override
     public List<T> findByModel(T model) throws TooManyResultsException {
-        return mapper.select(model);
+        try {
+            Condition condition = new Condition(modelClass);
+            Example.Criteria criteria = condition.createCriteria();
+            boolean isDelete=false;
+            if (model != null) {
+                Field[] fields = modelClass.getDeclaredFields();
+                for (Field field : fields) {
+                    field.setAccessible(true);
+                    if ("isDelete".equals(field.getName())) {
+                        isDelete=true;
+                        continue;
+                    }
+                    if(field.get(model)!=null){
+                        if (field.getType() == String.class){
+                            String fieldValue = (String) field.get(model);
+                            if (StringUtils.isNotBlank(fieldValue)) {
+                                if (fieldValue.contains("%")) {
+                                    criteria.andLike(field.getName(), fieldValue);
+                                } else {
+                                    criteria.andEqualTo(field.getName(), fieldValue);
+                                }
+                            }
+                        }else{
+                            criteria.andEqualTo(field.getName(), field.get(model));
+                        }
+                    }
+                }
+            }else{
+                isDelete=true;
+            }
+            if(isDelete){
+                criteria.andEqualTo("isDelete", false);
+            }
+            return mapper.selectByCondition(condition);
+        } catch (ReflectiveOperationException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
     }
 
     @Override
