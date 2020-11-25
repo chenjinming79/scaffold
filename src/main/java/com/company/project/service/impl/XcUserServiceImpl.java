@@ -226,7 +226,6 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
         String verifyToken = TokenUtil.getToken();
         // 存入redis并设置过期时间为30秒
         redisService.setWithExpire(Constant.REDIS_KEY_VERFIY + verifyToken, new VerfiyCodeVo(verCode,System.currentTimeMillis() + Constant.verifyCodeForTempValidTime)  , Constant.verifyCodeForTempValidTime);
-        System.out.println(specCaptcha.toBase64());
         CaptchaVo captchaVo = new CaptchaVo();
         captchaVo.setVerifyToken(verifyToken);
         captchaVo.setData(specCaptcha.toBase64());
