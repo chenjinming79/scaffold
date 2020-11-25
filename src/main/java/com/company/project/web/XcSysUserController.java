@@ -63,14 +63,4 @@ public class XcSysUserController {
         XcSysUser xcSysUser = xcSysUserService.findById(id);
         return ResultGenerator.genSuccessResult(xcSysUser);
     }
-
-    @ApiOperation(value = "分页查询后台用户", notes = "分页查询后台用户")
-    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcSysUser xcSysUser) {
-        PageHelper.startPage(page, size);
-        xcSysUser.setIsDelete(false);
-        List<XcSysUser> list = xcSysUserService.findByModel(xcSysUser);
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
-    }
 }

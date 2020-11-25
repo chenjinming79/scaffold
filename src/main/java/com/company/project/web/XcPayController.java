@@ -62,14 +62,4 @@ public class XcPayController {
         XcPay xcPay = xcPayService.findById(id);
         return ResultGenerator.genSuccessResult(xcPay);
     }
-
-    @ApiOperation(value = "分页查询充值记录", notes = "分页查询充值记录")
-    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcPay xcPay) {
-        PageHelper.startPage(page, size);
-        xcPay.setIsDelete(false);
-        List<XcPay> list = xcPayService.findByModel(xcPay);
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
-    }
 }

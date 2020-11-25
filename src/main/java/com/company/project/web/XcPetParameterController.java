@@ -63,13 +63,4 @@ public class XcPetParameterController {
         return ResultGenerator.genSuccessResult(xcPetParameter);
     }
 
-    @ApiOperation(value = "分页查询星宠参数", notes = "分页查询星宠参数")
-    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcPetParameter xcPetParameter) {
-        PageHelper.startPage(page, size);
-        xcPetParameter.setIsDelete(false);
-        List<XcPetParameter> list = xcPetParameterService.findByModel(xcPetParameter);
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
-    }
 }

@@ -62,14 +62,4 @@ public class XcWithdrawController {
         XcWithdraw xcWithdraw = xcWithdrawService.findById(id);
         return ResultGenerator.genSuccessResult(xcWithdraw);
     }
-
-    @ApiOperation(value = "分页查询提现详情", notes = "分页查询提现详情")
-    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcWithdraw xcWithdraw) {
-        PageHelper.startPage(page, size);
-        xcWithdraw.setIsDelete(false);
-        List<XcWithdraw> list = xcWithdrawService.findByModel(xcWithdraw);
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
-    }
 }
