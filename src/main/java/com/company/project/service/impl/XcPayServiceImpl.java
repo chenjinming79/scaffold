@@ -27,7 +27,6 @@ private XcPayMapper tPayMapper;
     @Override
     public Result list(Integer page,Integer size,XcPay xcPay) {
         PageHelper.startPage(page, size);
-        xcPay.setIsDelete(false);
         List<XcPay> list = tPayMapper.list(xcPay);
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);

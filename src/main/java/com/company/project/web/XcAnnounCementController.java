@@ -64,7 +64,7 @@ public class XcAnnounCementController {
         return ResultGenerator.genSuccessResult(xcAnnounCement);
     }
 
-    @ApiOperation(value = "分页模糊查询查询会员", notes = "分页模糊查询查询会员")
+    @ApiOperation(value = "分页模糊查询分页", notes = "分页模糊查询分页")
     @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
     public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcAnnounCement xcAnnounCement) {
         PageHelper.startPage(page, size);

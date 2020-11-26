@@ -27,7 +27,6 @@ private XcWithdrawMapper xcWithdrawMapper;
     @Override
     public Result list(Integer page, Integer size, XcWithdraw xcWithdraw) {
         PageHelper.startPage(page, size);
-        xcWithdraw.setIsDelete(false);
         List<XcWithdraw> list = xcWithdrawMapper.list(xcWithdraw);
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
