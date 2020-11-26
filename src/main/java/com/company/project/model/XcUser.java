@@ -110,6 +110,18 @@ public class XcUser {
     private String avatar;
 
     /**
+     * 区号
+     */
+    @Column(name = "area_code")
+    private String areaCode;
+
+    /**
+     * 国籍
+     */
+    @Column(name = "nationality")
+    private String nationality;
+
+    /**
      * 获取记录ID
      *
      * @return id - 记录ID
@@ -421,5 +433,21 @@ public class XcUser {
 
     public void setTradePassword(String tradePassword) {
         this.tradePassword = tradePassword;
+    }
+
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
     }
 }
