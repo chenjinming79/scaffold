@@ -20,7 +20,7 @@ import java.util.List;
 */
 @RestController
 @RequestMapping("/xc/withdraw")
-@Api(tags = {"/xc/withdraw"}, description = "体现管理模块")
+@Api(tags = {"/xc/withdraw"}, description = "体现记录管理模块")
 public class XcWithdrawController {
     @Resource
     private XcWithdrawService xcWithdrawService;
@@ -66,11 +66,9 @@ public class XcWithdrawController {
 
     @ApiOperation(value = "分页模糊查询查询会员", notes = "分页模糊查询查询会员")
     @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcWithdraw xcWithdraw) {
-        PageHelper.startPage(page, size);
-        xcWithdraw.setIsDelete(false);
-        List<XcWithdraw> list = xcWithdrawService.findByModel(xcWithdraw);
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,
+                       @RequestParam(defaultValue="20",required=false) Integer size,
+                       @RequestBody(required =false) XcWithdraw xcWithdraw) {
+        return xcWithdrawService.list(page,size,xcWithdraw);
     }
 }

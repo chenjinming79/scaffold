@@ -83,6 +83,24 @@ public class XcWithdraw {
     private BigDecimal withdrawNumber;
 
     /**
+     * 手机号
+     */
+    @Transient
+    private String phone;
+
+    /**
+     * 开始时间
+     */
+    @Transient
+    private Date startTime;
+
+    /**
+     * 结束时间
+     */
+    @Transient
+    private Date endTime;
+
+    /**
      * 获取记录ID
      *
      * @return id - 记录ID
@@ -314,5 +332,29 @@ public class XcWithdraw {
      */
     public void setWithdrawNumber(BigDecimal withdrawNumber) {
         this.withdrawNumber = withdrawNumber;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 }

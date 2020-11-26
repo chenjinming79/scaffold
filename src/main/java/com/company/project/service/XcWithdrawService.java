@@ -1,4 +1,5 @@
 package com.company.project.service;
+import com.company.project.core.Result;
 import com.company.project.model.XcWithdraw;
 import com.company.project.core.Service;
 
@@ -8,4 +9,5 @@ import com.company.project.core.Service;
 */
 public interface XcWithdrawService extends Service<XcWithdraw> {
 
+    Result list(Integer page, Integer size, XcWithdraw xcWithdraw);
 }

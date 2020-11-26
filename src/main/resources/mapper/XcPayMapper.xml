@@ -24,7 +24,7 @@
       select p.id as id,p.create_time as createTime,p.create_user_id as createUserId,p.status as status,p.top_up_way as topUpWay,
               p.top_up_money as topUpMoney,p.account_money as accountMoney,p.currency_name as currencyName,
               p.message as message,u.phone as phone
-      from t_pay p inner join t_user u p.create_user_id = u.id
+      from t_pay p inner join t_user u on p.create_user_id = u.id
       where
       p.is_delete = 0
       and u.is_delete = 0
@@ -32,7 +32,7 @@
           and u.phone LIKE concat(concat('%',#{phone}),'%')
       </if>
       <if test="startTime != null and startTime != '' and endTime != null and endTime != '' ">
-          and DATE_FORMAT(create_time,'%Y-%m-%d') BETWEEN #{startTime} AND #{endTime}
+          and DATE_FORMAT(p.create_time,'%Y-%m-%d') BETWEEN #{startTime} AND #{endTime}
       </if>
   </select>
 

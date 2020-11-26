@@ -21,7 +21,7 @@ import java.util.Date;
 */
 @RestController
 @RequestMapping("/xc/pay")
-@Api(tags = {"/xc/pay"}, description = "充值管理模块")
+@Api(tags = {"/xc/pay"}, description = "充值记录管理模块")
 public class XcPayController {
     @Resource
     private XcPayService xcPayService;

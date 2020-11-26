@@ -100,7 +100,6 @@ public class XcPay {
     @Transient
     private Date endTime;
 
-
     /**
      * 获取记录ID
      *
