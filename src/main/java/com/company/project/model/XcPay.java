@@ -83,6 +83,12 @@ public class XcPay {
     private String message;
 
     /**
+     * 手机号
+     */
+    @Transient
+    private String phone;
+
+    /**
      * 获取记录ID
      *
      * @return id - 记录ID
@@ -314,5 +320,13 @@ public class XcPay {
      */
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

@@ -31,7 +31,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 @Transactional
 public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUserService {
     @Resource
-    private XcUserMapper tUserMapper;
+    private XcUserMapper xcUserMapper;
 
     @Resource
     private XcSysUserMapper sysUserMapper;
@@ -145,7 +145,7 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
 
         UserVo userVo = new UserVo();
 
-        XcUser xcUser = tUserMapper.findUserByPhone(vo.getPhone());
+        XcUser xcUser = xcUserMapper.findUserByPhone(vo.getPhone());
         if (null == xcUser){
             return ResultGenerator.genFailResult(ResultCode.USER_NOT_EXIST,"用户信息不存在[账号可能被停用或删除]");
         }
@@ -213,6 +213,11 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
         }
 
         return ResultGenerator.genFailResult(ResultCode.NOT_LOGIN_EXCEPTION,"用户未登录,请重新登录");
+    }
+
+    @Override
+    public String getUserPhoneById(String createUserId) {
+        return xcUserMapper.getUserPhoneById(createUserId);
     }
 
     /**

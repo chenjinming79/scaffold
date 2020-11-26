@@ -16,4 +16,6 @@ public interface XcUserService extends Service<XcUser> {
     Result captcha();
 
     Result logout(Long userId);
+
+    String getUserPhoneById(String createUserId);
 }

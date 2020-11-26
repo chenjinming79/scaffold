@@ -5,6 +5,7 @@ import com.company.project.model.XcPay;
 import com.company.project.model.XcUser;
 import com.company.project.service.XcPayService;
 import com.company.project.core.Page;
+import com.company.project.service.XcUserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
@@ -24,6 +25,9 @@ import java.util.Date;
 public class XcPayController {
     @Resource
     private XcPayService xcPayService;
+
+    @Resource
+    private XcUserService xcUserService;
 
     @ApiOperation(value = "新增充值记录", notes = "新增充值记录")
     @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
@@ -70,6 +74,9 @@ public class XcPayController {
         PageHelper.startPage(page, size);
         xcPay.setIsDelete(false);
         List<XcPay> list = xcPayService.findByModel(xcPay);
+        for (XcPay d:list) {
+            d.setPhone(xcUserService.getUserPhoneById(d.getCreateUserId()));
+        }
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }
