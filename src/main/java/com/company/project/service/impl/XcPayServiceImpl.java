@@ -1,13 +1,18 @@
 package com.company.project.service.impl;
 
+import com.company.project.core.Result;
+import com.company.project.core.ResultGenerator;
 import com.company.project.dao.XcPayMapper;
 import com.company.project.model.XcPay;
 import com.company.project.service.XcPayService;
 import com.company.project.core.AbstractService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -19,4 +24,12 @@ public class XcPayServiceImpl extends AbstractService<XcPay> implements XcPaySer
 @Resource
 private XcPayMapper tPayMapper;
 
+    @Override
+    public Result list(Integer page,Integer size,XcPay xcPay) {
+        PageHelper.startPage(page, size);
+        xcPay.setIsDelete(false);
+        List<XcPay> list = tPayMapper.list(xcPay);
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
+    }
 }

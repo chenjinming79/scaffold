@@ -68,16 +68,11 @@ public class XcPayController {
         return ResultGenerator.genSuccessResult(xcPay);
     }
 
-    @ApiOperation(value = "分页模糊查询查询会员", notes = "分页模糊查询查询会员")
+    @ApiOperation(value = "分页模糊查询充值记录", notes = "分页模糊查询充值记录")
     @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcPay xcPay) {
-        PageHelper.startPage(page, size);
-        xcPay.setIsDelete(false);
-        List<XcPay> list = xcPayService.findByModel(xcPay);
-        for (XcPay d:list) {
-            d.setPhone(xcUserService.getUserPhoneById(d.getCreateUserId()));
-        }
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required = false) Integer size,
+                       @RequestBody(required = false) XcPay xcPay) {
+        return xcPayService.list(page,size,xcPay);
+
     }
 }
