@@ -13,14 +13,16 @@
     <result column="is_delete" jdbcType="BIT" property="isDelete" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="pet_img" jdbcType="VARCHAR" property="petImg" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="pet_name" jdbcType="VARCHAR" property="petName" />
     <result column="buying_price" jdbcType="VARCHAR" property="buyingPrice" />
-    <result column="period" jdbcType="VARCHAR" property="period" />
-    <result column="earnings" jdbcType="VARCHAR" property="earnings" />
     <result column="curing_energy_stone" jdbcType="VARCHAR" property="curingEnergyStone" />
-    <result column="quantity" jdbcType="VARCHAR" property="quantity" />
-    <result column="energy_scale" jdbcType="VARCHAR" property="energyScale" />
-    <result column="seed_quantity_exchange_energy_stone" jdbcType="VARCHAR" property="seedQuantityExchangeEnergyStone" />
-    <result column="usdt_exchange_energy_stone" jdbcType="VARCHAR" property="usdtExchangeEnergyStone" />
+    <result column="earnings" jdbcType="VARCHAR" property="earnings" />
+    <result column="contract_revenue" jdbcType="VARCHAR" property="contractRevenue" />
+    <result column="snap_up_quantity" jdbcType="VARCHAR" property="snapUpQuantity" />
+    <result column="quantity_in_cultivation" jdbcType="VARCHAR" property="quantityInCultivation" />
+    <result column="start_to_snap_up" jdbcType="TIMESTAMP" property="startToSnapUp" />
+    <result column="end_to_snap_up" jdbcType="TIMESTAMP" property="endToSnapUp" />
   </resultMap>
 </mapper>

@@ -4,7 +4,7 @@ import com.company.project.core.Service;
 
 
 /**
-* Created by CodeGenerator on 2020/11/24.
+* Created by CodeGenerator on 2020/11/26.
 */
 public interface XcPetParameterService extends Service<XcPetParameter> {
 

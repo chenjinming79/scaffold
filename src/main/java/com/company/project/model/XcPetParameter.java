@@ -48,9 +48,20 @@ public class XcPetParameter {
     private Integer version;
 
     /**
-     * 业务状态(1启用:2封禁)
+     * 业务状态(1显示:2不显示)
      */
     private Integer status;
+
+    /**
+     * 宠物图片
+     */
+    @Column(name = "pet_img")
+    private String petImg;
+
+    /**
+     * 排序
+     */
+    private Integer sort;
 
     /**
      * 宠物名称
@@ -65,43 +76,45 @@ public class XcPetParameter {
     private String buyingPrice;
 
     /**
-     * 周期
-     */
-    private String period;
-
-    /**
-     * 收益
-     */
-    private String earnings;
-
-    /**
-     * 养护能量石
+     * 每天消耗能量石
      */
     @Column(name = "curing_energy_stone")
     private String curingEnergyStone;
 
     /**
-     * 数量
+     * 收益时长(天)
      */
-    private String quantity;
+    private String earnings;
 
     /**
-     * 能量池
+     * 合约收益
      */
-    @Column(name = "energy_scale")
-    private String energyScale;
+    @Column(name = "contract_revenue")
+    private String contractRevenue;
 
     /**
-     * 种子数量兑换能量石
+     * 可抢购数量
      */
-    @Column(name = "seed_quantity_exchange_energy_stone")
-    private String seedQuantityExchangeEnergyStone;
+    @Column(name = "snap_up_quantity")
+    private String snapUpQuantity;
 
     /**
-     * USDT兑换能量石
+     * 在养殖数量
      */
-    @Column(name = "usdt_exchange_energy_stone")
-    private String usdtExchangeEnergyStone;
+    @Column(name = "quantity_in_cultivation")
+    private String quantityInCultivation;
+
+    /**
+     * 即抢开枪时间
+     */
+    @Column(name = "start_to_snap_up")
+    private Date startToSnapUp;
+
+    /**
+     * 即抢结束时间
+     */
+    @Column(name = "end_to_snap_up")
+    private Date endToSnapUp;
 
     /**
      * 获取记录ID
@@ -230,21 +243,57 @@ public class XcPetParameter {
     }
 
     /**
-     * 获取业务状态(1启用:2封禁)
+     * 获取业务状态(1显示:2不显示)
      *
-     * @return status - 业务状态(1启用:2封禁)
+     * @return status - 业务状态(1显示:2不显示)
      */
     public Integer getStatus() {
         return status;
     }
 
     /**
-     * 设置业务状态(1启用:2封禁)
+     * 设置业务状态(1显示:2不显示)
      *
-     * @param status 业务状态(1启用:2封禁)
+     * @param status 业务状态(1显示:2不显示)
      */
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    /**
+     * 获取宠物图片
+     *
+     * @return pet_img - 宠物图片
+     */
+    public String getPetImg() {
+        return petImg;
+    }
+
+    /**
+     * 设置宠物图片
+     *
+     * @param petImg 宠物图片
+     */
+    public void setPetImg(String petImg) {
+        this.petImg = petImg;
+    }
+
+    /**
+     * 获取排序
+     *
+     * @return sort - 排序
+     */
+    public Integer getSort() {
+        return sort;
+    }
+
+    /**
+     * 设置排序
+     *
+     * @param sort 排序
+     */
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     /**
@@ -284,128 +333,128 @@ public class XcPetParameter {
     }
 
     /**
-     * 获取周期
+     * 获取每天消耗能量石
      *
-     * @return period - 周期
-     */
-    public String getPeriod() {
-        return period;
-    }
-
-    /**
-     * 设置周期
-     *
-     * @param period 周期
-     */
-    public void setPeriod(String period) {
-        this.period = period;
-    }
-
-    /**
-     * 获取收益
-     *
-     * @return earnings - 收益
-     */
-    public String getEarnings() {
-        return earnings;
-    }
-
-    /**
-     * 设置收益
-     *
-     * @param earnings 收益
-     */
-    public void setEarnings(String earnings) {
-        this.earnings = earnings;
-    }
-
-    /**
-     * 获取养护能量石
-     *
-     * @return curing_energy_stone - 养护能量石
+     * @return curing_energy_stone - 每天消耗能量石
      */
     public String getCuringEnergyStone() {
         return curingEnergyStone;
     }
 
     /**
-     * 设置养护能量石
+     * 设置每天消耗能量石
      *
-     * @param curingEnergyStone 养护能量石
+     * @param curingEnergyStone 每天消耗能量石
      */
     public void setCuringEnergyStone(String curingEnergyStone) {
         this.curingEnergyStone = curingEnergyStone;
     }
 
     /**
-     * 获取数量
+     * 获取收益时长(天)
      *
-     * @return quantity - 数量
+     * @return earnings - 收益时长(天)
      */
-    public String getQuantity() {
-        return quantity;
+    public String getEarnings() {
+        return earnings;
     }
 
     /**
-     * 设置数量
+     * 设置收益时长(天)
      *
-     * @param quantity 数量
+     * @param earnings 收益时长(天)
      */
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
+    public void setEarnings(String earnings) {
+        this.earnings = earnings;
     }
 
     /**
-     * 获取能量池
+     * 获取合约收益
      *
-     * @return energy_scale - 能量池
+     * @return contract_revenue - 合约收益
      */
-    public String getEnergyScale() {
-        return energyScale;
+    public String getContractRevenue() {
+        return contractRevenue;
     }
 
     /**
-     * 设置能量池
+     * 设置合约收益
      *
-     * @param energyScale 能量池
+     * @param contractRevenue 合约收益
      */
-    public void setEnergyScale(String energyScale) {
-        this.energyScale = energyScale;
+    public void setContractRevenue(String contractRevenue) {
+        this.contractRevenue = contractRevenue;
     }
 
     /**
-     * 获取种子数量兑换能量石
+     * 获取可抢购数量
      *
-     * @return seed_quantity_exchange_energy_stone - 种子数量兑换能量石
+     * @return snap_up_quantity - 可抢购数量
      */
-    public String getSeedQuantityExchangeEnergyStone() {
-        return seedQuantityExchangeEnergyStone;
+    public String getSnapUpQuantity() {
+        return snapUpQuantity;
     }
 
     /**
-     * 设置种子数量兑换能量石
+     * 设置可抢购数量
      *
-     * @param seedQuantityExchangeEnergyStone 种子数量兑换能量石
+     * @param snapUpQuantity 可抢购数量
      */
-    public void setSeedQuantityExchangeEnergyStone(String seedQuantityExchangeEnergyStone) {
-        this.seedQuantityExchangeEnergyStone = seedQuantityExchangeEnergyStone;
+    public void setSnapUpQuantity(String snapUpQuantity) {
+        this.snapUpQuantity = snapUpQuantity;
     }
 
     /**
-     * 获取USDT兑换能量石
+     * 获取在养殖数量
      *
-     * @return usdt_exchange_energy_stone - USDT兑换能量石
+     * @return quantity_in_cultivation - 在养殖数量
      */
-    public String getUsdtExchangeEnergyStone() {
-        return usdtExchangeEnergyStone;
+    public String getQuantityInCultivation() {
+        return quantityInCultivation;
     }
 
     /**
-     * 设置USDT兑换能量石
+     * 设置在养殖数量
      *
-     * @param usdtExchangeEnergyStone USDT兑换能量石
+     * @param quantityInCultivation 在养殖数量
      */
-    public void setUsdtExchangeEnergyStone(String usdtExchangeEnergyStone) {
-        this.usdtExchangeEnergyStone = usdtExchangeEnergyStone;
+    public void setQuantityInCultivation(String quantityInCultivation) {
+        this.quantityInCultivation = quantityInCultivation;
+    }
+
+    /**
+     * 获取即抢开枪时间
+     *
+     * @return start_to_snap_up - 即抢开枪时间
+     */
+    public Date getStartToSnapUp() {
+        return startToSnapUp;
+    }
+
+    /**
+     * 设置即抢开枪时间
+     *
+     * @param startToSnapUp 即抢开枪时间
+     */
+    public void setStartToSnapUp(Date startToSnapUp) {
+        this.startToSnapUp = startToSnapUp;
+    }
+
+    /**
+     * 获取即抢结束时间
+     *
+     * @return end_to_snap_up - 即抢结束时间
+     */
+    public Date getEndToSnapUp() {
+        return endToSnapUp;
+    }
+
+    /**
+     * 设置即抢结束时间
+     *
+     * @param endToSnapUp 即抢结束时间
+     */
+    public void setEndToSnapUp(Date endToSnapUp) {
+        this.endToSnapUp = endToSnapUp;
     }
 }

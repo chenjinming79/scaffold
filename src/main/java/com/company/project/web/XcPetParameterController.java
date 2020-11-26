@@ -2,7 +2,6 @@ package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcPetParameter;
-import com.company.project.model.XcUser;
 import com.company.project.service.XcPetParameterService;
 import com.company.project.core.Page;
 import com.github.pagehelper.PageHelper;
@@ -16,7 +15,7 @@ import java.util.List;
 import java.util.Date;
 
 /**
-* Created by CodeGenerator on 2020/11/24.
+* Created by CodeGenerator on 2020/11/26.
 */
 @RestController
 @RequestMapping("/xc/pet/parameter")
@@ -28,9 +27,7 @@ public class XcPetParameterController {
     @ApiOperation(value = "新增星宠参数", notes = "新增星宠参数")
     @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
     public Result add(@RequestBody XcPetParameter xcPetParameter) {
-        Date date=new Date();
-        xcPetParameter.setCreateTime(date);
-        xcPetParameter.setUpdateTime(date);
+        xcPetParameter.setCreateTime(new Date());
         xcPetParameter.setIsDelete(false);
         xcPetParameterService.save(xcPetParameter);
         Result result=ResultGenerator.genSuccessResult();
@@ -51,6 +48,7 @@ public class XcPetParameterController {
     @ApiOperation(value = "修改星宠参数", notes = "修改星宠参数")
     @RequestMapping(value = "/update", method = {RequestMethod.POST,RequestMethod.GET})
     public Result update(@RequestBody XcPetParameter xcPetParameter) {
+        xcPetParameter.setUpdateTime(new Date());
         xcPetParameterService.update(xcPetParameter);
         Result result=ResultGenerator.genSuccessResult();
         result.setData(xcPetParameter);
