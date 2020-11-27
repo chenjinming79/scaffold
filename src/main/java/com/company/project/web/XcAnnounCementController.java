@@ -68,7 +68,6 @@ public class XcAnnounCementController {
     @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
     public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcAnnounCement xcAnnounCement) {
         PageHelper.startPage(page, size);
-        xcAnnounCement.setIsDelete(false);
         List<XcAnnounCement> list = xcAnnounCementService.findByModel(xcAnnounCement);
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
