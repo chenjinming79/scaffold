@@ -9,6 +9,9 @@ public enum ResultCode {
     UNAUTHORIZED(401),//未认证（签名错误）
     NOT_FOUND(404),//接口不存在
     INTERNAL_SERVER_ERROR(500),//服务器内部错误
+
+    FILE_BULL_ERROR(800008),//文件不能为空
+    FILEUPLOAD_ERROR(800007),//上传文件失败
     USER_LOGIN_CHANNEL_ERROR(800006),//登录渠道不存在，请重新登录
     NOT_LOGIN_EXCEPTION(800005),//用户未登录,请重新登录
     VERFIY_CODE_TIME_ERROR(800004),//验证码已经过期
