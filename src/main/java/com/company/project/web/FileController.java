@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,9 +36,40 @@ public class FileController {
     private FileService fileService;
 
     @ApiOperation(value = "上传单个图片", notes = "上传单个图片")
-    @RequestMapping(value = "/uploadSingle",method = RequestMethod.POST)
+    @RequestMapping(value = "/uploadSingle", method = {RequestMethod.POST,RequestMethod.GET})
     public Result uploadSingle(MultipartFile file){
         return fileService.uploadSingle(file);
     }
+
+    @ApiOperation(value = "文件下载", notes = "文件下载")
+    @RequestMapping(value = "/downloadImage", method = {RequestMethod.POST,RequestMethod.GET})
+    public Result downloadImage(String imageName, HttpServletRequest request, HttpServletResponse response){
+        return fileService.downloadImage(imageName,request,response);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
