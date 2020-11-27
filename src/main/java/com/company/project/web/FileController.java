@@ -28,8 +28,8 @@ import java.util.Map;
  * @Version 1.0
  **/
 @RestController
-@RequestMapping("/file")
-@Api(tags = {"file"},description="文件上传模块")
+@RequestMapping("/xc/file")
+@Api(tags = {"/xc/file"},description="文件上传模块")
 public class FileController {
 
     @Autowired
@@ -43,7 +43,7 @@ public class FileController {
 
     @ApiOperation(value = "文件下载", notes = "文件下载")
     @RequestMapping(value = "/downloadImage", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result downloadImage(String imageName, HttpServletRequest request, HttpServletResponse response){
+    public Result downloadImage(@RequestParam String imageName, HttpServletRequest request, HttpServletResponse response){
         return fileService.downloadImage(imageName,request,response);
     }
 
