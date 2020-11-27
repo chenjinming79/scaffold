@@ -35,13 +35,13 @@ public class FileController {
     @Autowired
     private FileService fileService;
 
-    @ApiOperation(value = "上传单个图片", notes = "上传单个图片")
+    @ApiOperation(value = "上传单个文件", notes = "上传单个文件")
     @RequestMapping(value = "/uploadSingle", method = {RequestMethod.POST,RequestMethod.GET})
     public Result uploadSingle(MultipartFile file){
         return fileService.uploadSingle(file);
     }
 
-    @ApiOperation(value = "文件下载", notes = "文件下载")
+    @ApiOperation(value = "单个文件下载", notes = "单个文件下载")
     @RequestMapping(value = "/downloadImage", method = {RequestMethod.POST,RequestMethod.GET})
     public Result downloadImage(@RequestParam String imageName, HttpServletRequest request, HttpServletResponse response){
         return fileService.downloadImage(imageName,request,response);
