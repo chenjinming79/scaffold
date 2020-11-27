@@ -27,6 +27,7 @@ import java.util.Map;
  **/
 @RestController
 @RequestMapping("/file")
+@Api(tags = {"file"},description="文件上传模块")
 public class FileController {
 
     @Autowired
