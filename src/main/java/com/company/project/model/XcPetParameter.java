@@ -108,13 +108,13 @@ public class XcPetParameter {
      * 即抢开枪时间
      */
     @Column(name = "start_to_snap_up")
-    private Date startToSnapUp;
+    private String startToSnapUp;
 
     /**
      * 即抢结束时间
      */
     @Column(name = "end_to_snap_up")
-    private Date endToSnapUp;
+    private String endToSnapUp;
 
     /**
      * 获取记录ID
@@ -422,39 +422,19 @@ public class XcPetParameter {
         this.quantityInCultivation = quantityInCultivation;
     }
 
-    /**
-     * 获取即抢开枪时间
-     *
-     * @return start_to_snap_up - 即抢开枪时间
-     */
-    public Date getStartToSnapUp() {
+    public String getStartToSnapUp() {
         return startToSnapUp;
     }
 
-    /**
-     * 设置即抢开枪时间
-     *
-     * @param startToSnapUp 即抢开枪时间
-     */
-    public void setStartToSnapUp(Date startToSnapUp) {
+    public void setStartToSnapUp(String startToSnapUp) {
         this.startToSnapUp = startToSnapUp;
     }
 
-    /**
-     * 获取即抢结束时间
-     *
-     * @return end_to_snap_up - 即抢结束时间
-     */
-    public Date getEndToSnapUp() {
+    public String getEndToSnapUp() {
         return endToSnapUp;
     }
 
-    /**
-     * 设置即抢结束时间
-     *
-     * @param endToSnapUp 即抢结束时间
-     */
-    public void setEndToSnapUp(Date endToSnapUp) {
+    public void setEndToSnapUp(String endToSnapUp) {
         this.endToSnapUp = endToSnapUp;
     }
 }
