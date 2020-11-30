@@ -32,6 +32,7 @@ public class XcAnnounCementController extends BaseController {
         xcAnnounCement.setCreateTime(new Date());
         xcAnnounCement.setIsDelete(false);
         xcAnnounCement.setCreateUserId(String.valueOf(super.getUserId()));
+        xcAnnounCement.setCreateUserName(getUser().getUserName());
         xcAnnounCementService.save(xcAnnounCement);
         Result result=ResultGenerator.genSuccessResult();
         result.setData(xcAnnounCement);

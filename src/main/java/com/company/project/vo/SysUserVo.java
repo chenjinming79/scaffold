@@ -23,17 +23,20 @@ public class SysUserVo implements Serializable {
 
     private String channel;
 
+    private String userName;
+
     public SysUserVo() {
         super();
     }
 
-    public SysUserVo(Long userId, String phone, String token, Long expireTime, String roleId, String channel) {
+    public SysUserVo(Long userId, String phone, String token, Long expireTime, String roleId, String channel, String userName) {
         this.userId = userId;
         this.phone = phone;
         this.token = token;
         this.expireTime = expireTime;
         this.roleId = roleId;
         this.channel = channel;
+        this.userName = userName;
     }
 
     public Long getUserId() {
@@ -82,5 +85,13 @@ public class SysUserVo implements Serializable {
 
     public void setChannel(String channel) {
         this.channel = channel;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

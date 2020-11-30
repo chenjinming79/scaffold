@@ -29,4 +29,20 @@ public class BaseController {
         }
         return sysUserVo.getUserId();
     }
+
+    public SysUserVo getUser() {
+        String token = request.getHeader(Constant.TOKEN_NAME);
+        SysUserVo sysUserVo;
+        try {
+            sysUserVo = (SysUserVo)redisService.get(Constant.REDIS_KEY_LOGIN + token);
+        }catch (Exception e){
+            return null;
+            //throw new RedisException();
+        }
+        if (null == sysUserVo) {
+            return null;
+        }
+        return sysUserVo;
+    }
+
 }

@@ -125,6 +125,7 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
             sysUserVo.setExpireTime(2505600000L);
             sysUserVo.setRoleId(xcSysUser.getRoleId());
             sysUserVo.setChannel(vo.getChannel());
+            sysUserVo.setUserName(xcSysUser.getUserName());
             //redisService.put(Constant.REDIS_KEY_LOGIN, token, new RedisModel(su.getId(), System.currentTimeMillis() + magConfig.getExpireTime()), magConfig.getExpireTime());
             redisService.setWithExpire(Constant.REDIS_KEY_LOGIN + token, sysUserVo , 2505600000L);
             redisService.set(xcSysUser.getId() + vo.getChannel() + "USERID",token);
@@ -175,6 +176,7 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
             sysUserVo.setToken(token);
             sysUserVo.setExpireTime(2505600000L);
             sysUserVo.setChannel(vo.getChannel());
+            sysUserVo.setUserName(xcUser.getUserName());
             //redisService.put(Constant.REDIS_KEY_LOGIN, token, new RedisModel(su.getId(), System.currentTimeMillis() + magConfig.getExpireTime()), magConfig.getExpireTime());
             redisService.setWithExpire(Constant.REDIS_KEY_LOGIN + token, sysUserVo , 2505600000L);
             redisService.set(xcUser.getId()+"USERID",token);
