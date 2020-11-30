@@ -19,7 +19,7 @@ public final class Constant {
 
     public static final String REDIS_KEY_VERFIY = "xc_user_verfiycode";
 
-    public static final String TOKEN_NAME = "x-ytoptask-session-token";
+    public static final String TOKEN_NAME = "accessToken";
 
     public static final long verifyCodeForTempValidTime = 5 * 60 * 1000;
 

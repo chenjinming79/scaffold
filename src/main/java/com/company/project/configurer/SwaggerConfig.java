@@ -1,5 +1,6 @@
 package com.company.project.configurer;
 
+import com.company.project.utils.Constant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -25,7 +26,7 @@ public class SwaggerConfig {
     public Docket createRestApi() {
         ParameterBuilder tokenPar = new ParameterBuilder();
         List<Parameter> pars = new ArrayList<Parameter>();
-        tokenPar.name("name").description("需要令牌通过(登录接口生成)").modelRef(new ModelRef("string")).parameterType
+        tokenPar.name(Constant.TOKEN_NAME).description("需要令牌通过(登录接口生成)").modelRef(new ModelRef("string")).parameterType
                 ("header")
                 .required
                         (false).build();

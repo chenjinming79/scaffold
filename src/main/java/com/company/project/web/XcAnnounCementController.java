@@ -1,4 +1,5 @@
 package com.company.project.web;
+import com.company.project.common.BaseController;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcAnnounCement;
@@ -21,17 +22,16 @@ import java.util.Date;
 @RestController
 @RequestMapping("/xc/announ/cement")
 @Api(tags = {"/xc/announ/cement"}, description = "公告管理模块")
-public class XcAnnounCementController {
+public class XcAnnounCementController extends BaseController {
     @Resource
     private XcAnnounCementService xcAnnounCementService;
 
     @ApiOperation(value = "新增公告", notes = "新增公告")
     @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
     public Result add(@RequestBody XcAnnounCement xcAnnounCement) {
-        Date date=new Date();
-        xcAnnounCement.setCreateTime(date);
-        xcAnnounCement.setUpdateTime(date);
+        xcAnnounCement.setCreateTime(new Date());
         xcAnnounCement.setIsDelete(false);
+        xcAnnounCement.setCreateUserId(String.valueOf(super.getUserId()));
         xcAnnounCementService.save(xcAnnounCement);
         Result result=ResultGenerator.genSuccessResult();
         result.setData(xcAnnounCement);
