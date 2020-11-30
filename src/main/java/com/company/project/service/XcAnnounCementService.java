@@ -1,4 +1,5 @@
 package com.company.project.service;
+import com.company.project.core.Result;
 import com.company.project.model.XcAnnounCement;
 import com.company.project.core.Service;
 
@@ -8,4 +9,5 @@ import com.company.project.core.Service;
 */
 public interface XcAnnounCementService extends Service<XcAnnounCement> {
 
+    Result list(Integer page, Integer size, XcAnnounCement xcAnnounCement);
 }

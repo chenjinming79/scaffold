@@ -18,4 +18,14 @@
     <result column="select_role" jdbcType="VARCHAR" property="selectRole" />
     <result column="message" jdbcType="LONGVARCHAR" property="message" />
   </resultMap>
+
+    <select id="list" resultType="com.company.project.model.XcAnnounCement">
+        select tac.id as id,tac.create_time as createTime,tac.create_user_id as createUserId,tac.status as status,tac.title as title,
+               tac.type as type,tac.select_role as selectRole,tac.message as message,
+               tsu.user_name as createUserName
+        from t_announ_cement tac inner join t_sys_user tsu on tac.create_user_id = tsu.id
+        where tac.is_delete = 0
+        and tsu.is_delete = 0
+    </select>
+
 </mapper>

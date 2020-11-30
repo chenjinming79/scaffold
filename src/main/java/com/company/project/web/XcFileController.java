@@ -30,7 +30,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/xc/file")
 @Api(tags = {"/xc/file"},description="文件上传模块")
-public class FileController {
+public class XcFileController {
 
     @Autowired
     private FileService fileService;
