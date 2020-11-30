@@ -73,6 +73,9 @@ public class XcAnnounCement {
      */
     private String message;
 
+    @Transient
+    private String createUserName;
+
     /**
      * 获取记录ID
      *
@@ -287,5 +290,13 @@ public class XcAnnounCement {
      */
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getCreateUserName() {
+        return createUserName;
+    }
+
+    public void setCreateUserName(String createUserName) {
+        this.createUserName = createUserName;
     }
 }

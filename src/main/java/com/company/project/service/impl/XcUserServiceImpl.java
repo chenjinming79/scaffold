@@ -143,7 +143,7 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
      */
     public Result userLogin(LoginVo vo){
 
-        UserVo userVo = new UserVo();
+        SysUserVo sysUserVo = new SysUserVo();
 
         XcUser xcUser = xcUserMapper.findUserByPhone(vo.getPhone());
         if (null == xcUser){
@@ -170,20 +170,20 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
         token = TokenUtil.getToken();
 
         try {
-            userVo.setUserId(xcUser.getId());
-            userVo.setPhone(xcUser.getPhone());
-            userVo.setToken(token);
-            userVo.setExpireTime(2505600000L);
-            userVo.setChannel(vo.getChannel());
+            sysUserVo.setUserId(xcUser.getId());
+            sysUserVo.setPhone(xcUser.getPhone());
+            sysUserVo.setToken(token);
+            sysUserVo.setExpireTime(2505600000L);
+            sysUserVo.setChannel(vo.getChannel());
             //redisService.put(Constant.REDIS_KEY_LOGIN, token, new RedisModel(su.getId(), System.currentTimeMillis() + magConfig.getExpireTime()), magConfig.getExpireTime());
-            redisService.setWithExpire(Constant.REDIS_KEY_LOGIN + token, userVo , 2505600000L);
+            redisService.setWithExpire(Constant.REDIS_KEY_LOGIN + token, sysUserVo , 2505600000L);
             redisService.set(xcUser.getId()+"USERID",token);
         }catch (Exception e){
             e.printStackTrace();
             Logger.info(this,"登录token存入redis产生异常："+e.getMessage());
             throw new RuntimeException("存入redis异常");
         }
-        return ResultGenerator.genSuccessResult(userVo);
+        return ResultGenerator.genSuccessResult(sysUserVo);
     }
 
     /**
