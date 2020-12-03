@@ -18,4 +18,6 @@ public interface XcUserService extends Service<XcUser> {
     Result logout(Long userId);
 
     String getUserPhoneById(String createUserId);
+
+    Result list(Integer page, Integer size, XcUser xcUser);
 }

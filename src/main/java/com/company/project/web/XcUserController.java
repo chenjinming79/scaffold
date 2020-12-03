@@ -85,9 +85,6 @@ public class XcUserController {
     @ApiOperation(value = "分页模糊查询查询会员", notes = "分页模糊查询查询会员")
     @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
     public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcUser xcUser) {
-        PageHelper.startPage(page, size);
-        List<XcUser> list = xcUserService.findByModel(xcUser);
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return xcUserService.list(page,size,xcUser);
     }
 }

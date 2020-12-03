@@ -11,6 +11,8 @@ import com.company.project.model.XcUser;
 import com.company.project.service.XcUserService;
 import com.company.project.utils.*;
 import com.company.project.vo.*;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wf.captcha.GifCaptcha;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.StringUtils;
@@ -20,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -220,6 +223,14 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
     @Override
     public String getUserPhoneById(String createUserId) {
         return xcUserMapper.getUserPhoneById(createUserId);
+    }
+
+    @Override
+    public Result list(Integer page, Integer size, XcUser xcUser) {
+        PageHelper.startPage(page, size);
+        List<XcUser> list = xcUserMapper.list(xcUser);
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
     }
 
     /**

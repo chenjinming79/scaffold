@@ -24,6 +24,28 @@
         <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
     </resultMap>
 
+    <select id="list" resultType="com.company.project.model.XcUser">
+        select id as id,create_time as createTime,create_user_id as createUserId,
+                update_time as updateTime,update_user_id as updateUserId,user_name as userName,
+                status as status,
+                trade_password as tradePassword,
+                remark_name as remarkName,phone as phone,register_time as registerTime,register_ip as registerIp,
+                last_login_time as lastLoginTime,last_login_ip as lastLoginIp,
+                avatar as avatar,area_code as areaCode,nationality as nationality
+        from t_user
+        where
+        is_delete = 0
+        <if test="phone != null and phone != ''">
+            and phone LIKE concat(concat('%',#{phone}),'%')
+        </if>
+        <if test="remarkName != null and remarkName != ''">
+            and remark_name LIKE concat(concat('%',#{remarkName}),'%')
+        </if>
+        <if test="status != null and status != '' ">
+            and status = #{status}
+        </if>
+    </select>
+
     <select id="getUserPhoneById" resultType="java.lang.String">
         select phone
         from t_user
