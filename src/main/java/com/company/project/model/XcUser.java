@@ -1,6 +1,7 @@
 package com.company.project.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Table(name = "t_user")
@@ -120,6 +121,31 @@ public class XcUser {
      */
     @Column(name = "nationality")
     private String nationality;
+
+    /**
+     * ASC余额
+     */
+    @Transient
+    private BigDecimal ascBalance;
+
+    /**
+     * USDT余额
+     */
+    @Transient
+    private BigDecimal usdtBalance;
+
+    /**
+     * BTC余额
+     */
+    @Transient
+    private BigDecimal btcBalance;
+
+    /**
+     * ETH余额
+     */
+    @Transient
+    private BigDecimal ethBalance;
+
 
     /**
      * 获取记录ID
@@ -449,5 +475,37 @@ public class XcUser {
 
     public void setNationality(String nationality) {
         this.nationality = nationality;
+    }
+
+    public BigDecimal getAscBalance() {
+        return ascBalance;
+    }
+
+    public void setAscBalance(BigDecimal ascBalance) {
+        this.ascBalance = ascBalance;
+    }
+
+    public BigDecimal getUsdtBalance() {
+        return usdtBalance;
+    }
+
+    public void setUsdtBalance(BigDecimal usdtBalance) {
+        this.usdtBalance = usdtBalance;
+    }
+
+    public BigDecimal getBtcBalance() {
+        return btcBalance;
+    }
+
+    public void setBtcBalance(BigDecimal btcBalance) {
+        this.btcBalance = btcBalance;
+    }
+
+    public BigDecimal getEthBalance() {
+        return ethBalance;
+    }
+
+    public void setEthBalance(BigDecimal ethBalance) {
+        this.ethBalance = ethBalance;
     }
 }
