@@ -54,7 +54,7 @@ public class ${modelNameUpperCamel}Controller {
         return result;
     }
 
-    @ApiOperation(value = "获取详情", notes = "获取详情")
+    @ApiOperation(value = "获取单个详情", notes = "获取单个详情")
     @RequestMapping(value = "/detail", method = {RequestMethod.POST,RequestMethod.GET})
     public Result detail(@RequestParam Long id) {
         ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
