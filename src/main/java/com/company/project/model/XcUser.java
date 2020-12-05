@@ -82,6 +82,11 @@ public class XcUser {
     private String phone;
 
     /**
+     * 邮箱
+     */
+    private String email;
+
+    /**
      * 注册时间
      */
     @Column(name = "register_time")
@@ -361,6 +366,14 @@ public class XcUser {
      */
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**

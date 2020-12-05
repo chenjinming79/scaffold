@@ -17,6 +17,7 @@
         <result column="password" jdbcType="VARCHAR" property="password"/>
         <result column="remark_name" jdbcType="VARCHAR" property="remarkName"/>
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
         <result column="register_time" jdbcType="TIMESTAMP" property="registerTime"/>
         <result column="register_ip" jdbcType="VARCHAR" property="registerIp"/>
         <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime"/>

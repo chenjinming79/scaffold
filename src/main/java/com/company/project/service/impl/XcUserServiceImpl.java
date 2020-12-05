@@ -47,6 +47,10 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
     @Override
     public Result login(LoginVo vo) {
 
+        if (null == vo.getEmail() && null == vo.getPhone()){
+            return ResultGenerator.genFailResult(ResultCode.PARAM_ERROR,"手机号或者邮箱必须输入一个");
+        }
+
         readWriteLock.writeLock().lock();
 
         try {

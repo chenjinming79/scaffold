@@ -13,7 +13,9 @@ import javax.validation.constraints.NotNull;
  **/
 public class LoginVo {
 
-    @NotNull(message = "手机号不可为空")
+    @ApiModelProperty(value = "邮箱")
+    private String email;
+
     @ApiModelProperty(value = "手机号")
     private String phone;
 
@@ -32,6 +34,14 @@ public class LoginVo {
     @NotNull(message = "渠道号不可为空")
     @ApiModelProperty(value = "1代表用户登录2代表后台用户登录")
     private String channel;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getPhone() {
         return phone;
