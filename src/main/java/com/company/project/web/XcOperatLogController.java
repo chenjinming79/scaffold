@@ -4,15 +4,12 @@ import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcOperatLog;
 import com.company.project.service.XcOperatLogService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.List;
 
 /**
 * Created by CodeGenerator on 2020/12/05.
@@ -64,11 +61,9 @@ public class XcOperatLogController {
 
     @ApiOperation(value = "分页查询操作日志", notes = "分页查询操作日志")
     @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcOperatLog xcOperatLog) {
-        PageHelper.startPage(page, size);
-        xcOperatLog.setIsDelete(false);
-        List<XcOperatLog> list = xcOperatLogService.findByModel(xcOperatLog);
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,
+                       @RequestParam(defaultValue="20",required=false) Integer size,
+                       @RequestBody(required =false) XcOperatLog xcOperatLog) {
+        return xcOperatLogService.list(page,size,xcOperatLog);
     }
 }

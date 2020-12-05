@@ -58,6 +58,12 @@ public class XcOperatLog {
     private String ip;
 
     /**
+     * 手机号
+     */
+    @Transient
+    private String phone;
+
+    /**
      * 获取记录ID
      *
      * @return id - 记录ID
@@ -217,5 +223,13 @@ public class XcOperatLog {
      */
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
