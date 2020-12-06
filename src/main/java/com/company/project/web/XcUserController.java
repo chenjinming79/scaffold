@@ -1,6 +1,5 @@
 package com.company.project.web;
 
-import com.company.project.core.Page;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcUser;
@@ -8,8 +7,6 @@ import com.company.project.service.XcUserService;
 import com.company.project.utils.Logger;
 import com.company.project.utils.Md5Utils;
 import com.company.project.vo.LoginVo;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +15,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
-import java.util.List;
 
 @RestController
 @RequestMapping("/xc/user")
