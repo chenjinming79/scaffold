@@ -13,4 +13,6 @@ public interface XcUserMapper extends Mapper<XcUser> {
     String getUserPhoneById(String createUserId);
 
     List<XcUser> list(XcUser xcUser);
+
+    XcUser findUserByEmail(String email);
 }

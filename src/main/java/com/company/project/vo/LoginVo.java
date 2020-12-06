@@ -17,6 +17,7 @@ public class LoginVo {
     private String email;
 
     @ApiModelProperty(value = "手机号")
+    @NotNull(message = "手机号或者邮箱不可为空")
     private String phone;
 
     @NotNull(message = "密码不可为空")

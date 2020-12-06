@@ -47,10 +47,6 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
     @Override
     public Result login(LoginVo vo) {
 
-        if (null == vo.getEmail() && null == vo.getPhone()){
-            return ResultGenerator.genFailResult(ResultCode.PARAM_ERROR,"登录手机号或者登录邮箱必须输入一个");
-        }
-
         readWriteLock.writeLock().lock();
 
         try {
@@ -152,8 +148,17 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
     public Result userLogin(LoginVo vo){
 
         SysUserVo sysUserVo = new SysUserVo();
+        XcUser xcUser = new XcUser();
 
-        XcUser xcUser = xcUserMapper.findUserByPhone(vo.getPhone());
+        //手机号或者邮箱登录
+        if (vo.getPhone().contains("@")){
+            //邮箱登录
+            xcUser = xcUserMapper.findUserByEmail(vo.getPhone());
+        }else {
+            //手机号登录
+            xcUser = xcUserMapper.findUserByPhone(vo.getPhone());
+        }
+
         if (null == xcUser){
             return ResultGenerator.genFailResult(ResultCode.USER_NOT_EXIST,"用户信息不存在[账号可能被停用或删除]");
         }
@@ -180,6 +185,7 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
         try {
             sysUserVo.setUserId(xcUser.getId());
             sysUserVo.setPhone(xcUser.getPhone());
+            sysUserVo.setEmail(xcUser.getEmail());
             sysUserVo.setToken(token);
             sysUserVo.setExpireTime(2505600000L);
             sysUserVo.setChannel(vo.getChannel());
@@ -245,6 +251,7 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
     public Result captcha() {
         GifCaptcha specCaptcha = new GifCaptcha(130, 48, 5);
         String verCode = specCaptcha.text().toLowerCase();
+        System.out.print("登录验证码" + verCode);
         String verifyToken = TokenUtil.getToken();
         // 存入redis并设置过期时间为30秒
         redisService.setWithExpire(Constant.REDIS_KEY_VERFIY + verifyToken, new VerfiyCodeVo(verCode,System.currentTimeMillis() + Constant.verifyCodeForTempValidTime)  , Constant.verifyCodeForTempValidTime);

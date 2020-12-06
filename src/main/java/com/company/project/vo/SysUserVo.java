@@ -15,6 +15,8 @@ public class SysUserVo implements Serializable {
 
     private String phone;
 
+    private String email;
+
     private String token;
 
     private Long expireTime;
@@ -29,9 +31,10 @@ public class SysUserVo implements Serializable {
         super();
     }
 
-    public SysUserVo(Long userId, String phone, String token, Long expireTime, String roleId, String channel, String userName) {
+    public SysUserVo(Long userId, String phone, String email, String token, Long expireTime, String roleId, String channel, String userName) {
         this.userId = userId;
         this.phone = phone;
+        this.email = email;
         this.token = token;
         this.expireTime = expireTime;
         this.roleId = roleId;
@@ -53,6 +56,14 @@ public class SysUserVo implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getToken() {
