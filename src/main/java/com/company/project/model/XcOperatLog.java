@@ -53,9 +53,39 @@ public class XcOperatLog {
     private Integer status;
 
     /**
-     * 操作ip
+     * 操作用户名
      */
-    private String ip;
+    @Column(name = "operat_name")
+    private String operatName;
+    /**
+     * 操作功能
+     */
+    @Column(name = "operat_function")
+    private String operatFunction;
+
+    /**
+     * 操作模块
+     */
+    @Column(name = "operat_module")
+    private String operatModule;
+
+    /**
+     * 操作内容
+     */
+    @Column(name = "operat_content")
+    private String operatContent;
+
+    /**
+     * 操作状态
+     */
+    @Column(name = "operat_state")
+    private String operatState;
+
+    /**
+     * ip地址
+     */
+    @Column(name = "operat_ip")
+    private String operatIp;
 
     /**
      * 手机号
@@ -207,22 +237,52 @@ public class XcOperatLog {
         this.status = status;
     }
 
-    /**
-     * 获取操作ip
-     *
-     * @return ip - 操作ip
-     */
-    public String getIp() {
-        return ip;
+    public String getOperatName() {
+        return operatName;
     }
 
-    /**
-     * 设置操作ip
-     *
-     * @param ip 操作ip
-     */
-    public void setIp(String ip) {
-        this.ip = ip;
+    public void setOperatName(String operatName) {
+        this.operatName = operatName;
+    }
+
+    public String getOperatFunction() {
+        return operatFunction;
+    }
+
+    public void setOperatFunction(String operatFunction) {
+        this.operatFunction = operatFunction;
+    }
+
+    public String getOperatModule() {
+        return operatModule;
+    }
+
+    public void setOperatModule(String operatModule) {
+        this.operatModule = operatModule;
+    }
+
+    public String getOperatContent() {
+        return operatContent;
+    }
+
+    public void setOperatContent(String operatContent) {
+        this.operatContent = operatContent;
+    }
+
+    public String getOperatState() {
+        return operatState;
+    }
+
+    public void setOperatState(String operatState) {
+        this.operatState = operatState;
+    }
+
+    public String getOperatIp() {
+        return operatIp;
+    }
+
+    public void setOperatIp(String operatIp) {
+        this.operatIp = operatIp;
     }
 
     public String getPhone() {

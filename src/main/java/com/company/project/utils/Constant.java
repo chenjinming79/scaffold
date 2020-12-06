@@ -65,8 +65,8 @@ public final class Constant {
     //失败
     public static final String ERROR = "操作失败";
 
-    //文章管理模块
-    public static final String ARTICLE = "文章管理";
+    //提现管理模块
+    public static final String WITHDRAW = "提现管理";
 
     //商家管理模块
     public static final String MERCHANT = "商家管理";

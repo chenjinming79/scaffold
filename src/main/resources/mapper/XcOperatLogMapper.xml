@@ -13,7 +13,12 @@
     <result column="is_delete" jdbcType="BIT" property="isDelete" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="operat_name" property="operatName" jdbcType="VARCHAR"></result>
+    <result column="operat_function" property="operatFunction" jdbcType="VARCHAR" />
+    <result column="operat_module" property="operatModule" jdbcType="VARCHAR" />
+    <result column="operat_content" property="operatContent" jdbcType="VARCHAR" />
+    <result column="operat_state" property="operatState" jdbcType="VARCHAR" />
+    <result column="operat_ip" property="operatIp" jdbcType="VARCHAR" />
   </resultMap>
 
     <select id="list" resultType="com.company.project.model.XcOperatLog">

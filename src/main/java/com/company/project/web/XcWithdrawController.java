@@ -1,5 +1,6 @@
 package com.company.project.web;
 
+import com.company.project.aop.OperatLog;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcUser;
@@ -20,13 +21,14 @@ import java.util.List;
 */
 @RestController
 @RequestMapping("/xc/withdraw")
-@Api(tags = {"/xc/withdraw"}, description = "提现记录管理模块")
+@Api(tags = {"/xc/withdraw"}, description = "提现管理模块")
 public class XcWithdrawController {
     @Resource
     private XcWithdrawService xcWithdrawService;
 
     @ApiOperation(value = "新增提现申请", notes = "新增提现申请")
     @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
+    @OperatLog(function = "新增",module = "提现管理",content = "新增提现记录")
     public Result add(@RequestBody XcWithdraw xcWithdraw) {
         Date date=new Date();
         xcWithdraw.setCreateTime(date);
@@ -40,6 +42,7 @@ public class XcWithdrawController {
 
     @ApiOperation(value = "删除提现记录", notes = "删除提现记录")
     @RequestMapping(value = "/delete", method = {RequestMethod.POST,RequestMethod.GET})
+    @OperatLog(function = "删除",module = "提现管理",content = "逻辑删除提现记录")
     public Result delete(@RequestParam Long id) {
         XcWithdraw xcWithdraw=new XcWithdraw();
         xcWithdraw.setId(id);
@@ -50,6 +53,7 @@ public class XcWithdrawController {
 
     @ApiOperation(value = "审核提现", notes = "审核提现")
     @RequestMapping(value = "/update", method = {RequestMethod.POST,RequestMethod.GET})
+    @OperatLog(function = "修改",module = "提现管理",content = "修改提现记录")
     public Result update(@RequestBody XcWithdraw xcWithdraw) {
         xcWithdrawService.update(xcWithdraw);
         Result result=ResultGenerator.genSuccessResult();

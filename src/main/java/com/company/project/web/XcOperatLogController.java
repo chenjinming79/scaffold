@@ -24,12 +24,7 @@ public class XcOperatLogController {
     @ApiOperation(value = "新增操作日志", notes = "新增操作日志")
     @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
     public Result add(@RequestBody XcOperatLog xcOperatLog) {
-        xcOperatLog.setCreateTime(new Date());
-        xcOperatLog.setIsDelete(false);
-        xcOperatLogService.save(xcOperatLog);
-        Result result=ResultGenerator.genSuccessResult();
-        result.setData(xcOperatLog);
-        return result;
+        return xcOperatLogService.add(xcOperatLog);
     }
 
     @ApiOperation(value = "逻辑删除操作日志", notes = "逻辑删除操作日志")

@@ -10,4 +10,6 @@ import com.company.project.core.Service;
 public interface XcOperatLogService extends Service<XcOperatLog> {
 
     Result list(Integer page, Integer size, XcOperatLog xcOperatLog);
+
+    Result add(XcOperatLog xcOperatLog);
 }

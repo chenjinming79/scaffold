@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 
@@ -31,5 +32,15 @@ private XcOperatLogMapper xcOperatLogMapper;
         List<XcOperatLog> list = xcOperatLogMapper.list(xcOperatLog);
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    @Override
+    public Result add(XcOperatLog xcOperatLog) {
+        xcOperatLog.setCreateTime(new Date());
+        xcOperatLog.setIsDelete(false);
+        save(xcOperatLog);
+        Result result=ResultGenerator.genSuccessResult();
+        result.setData(xcOperatLog);
+        return result;
     }
 }
