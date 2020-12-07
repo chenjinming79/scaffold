@@ -3,18 +3,14 @@ package com.company.project.web;
 import com.company.project.aop.OperatLog;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
-import com.company.project.model.XcUser;
 import com.company.project.model.XcWithdraw;
 import com.company.project.service.XcWithdrawService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.List;
 
 /**
 * Created by CodeGenerator on 2020/11/22.

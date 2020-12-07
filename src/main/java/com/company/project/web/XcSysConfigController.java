@@ -1,4 +1,5 @@
 package com.company.project.web;
+import com.company.project.aop.OperatLog;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcSysConfig;
@@ -25,6 +26,7 @@ public class XcSysConfigController {
     private XcSysConfigService xcSysConfigService;
 
     @ApiOperation(value = "新增系统参数", notes = "新增系统参数")
+    @OperatLog(function = "新增",module = "系统参数管理",content = "新增系统参数")
     @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
     public Result add(@RequestBody XcSysConfig xcSysConfig) {
         xcSysConfig.setCreateTime(new Date());
@@ -36,6 +38,7 @@ public class XcSysConfigController {
     }
 
     @ApiOperation(value = "逻辑删除系统配置", notes = "逻辑删除系统配置")
+    @OperatLog(function = "删除",module = "系统参数管理",content = "删除系统参数")
     @RequestMapping(value = "/delete", method = {RequestMethod.POST,RequestMethod.GET})
     public Result delete(@RequestParam Long id) {
         XcSysConfig xcSysConfig=new XcSysConfig();
@@ -46,6 +49,7 @@ public class XcSysConfigController {
     }
 
     @ApiOperation(value = "修改系统配置", notes = "修改系统配置")
+    @OperatLog(function = "修改",module = "系统参数管理",content = "修改提现记录")
     @RequestMapping(value = "/update", method = {RequestMethod.POST,RequestMethod.GET})
     public Result update(@RequestBody XcSysConfig xcSysConfig) {
         xcSysConfig.setUpdateTime(new Date());

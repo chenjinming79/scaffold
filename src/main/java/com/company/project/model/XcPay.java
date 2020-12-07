@@ -100,6 +100,13 @@ public class XcPay {
     @Transient
     private String endTime;
 
+    public XcPay() {
+    }
+
+    public XcPay(Long id) {
+        this.id = id;
+    }
+
     /**
      * 获取记录ID
      *

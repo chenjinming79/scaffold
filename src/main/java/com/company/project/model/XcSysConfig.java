@@ -172,6 +172,13 @@ public class XcSysConfig {
     @Column(name = "five_spread_debris")
     private String fiveSpreadDebris;
 
+    public XcSysConfig() {
+    }
+
+    public XcSysConfig(Long id) {
+        this.id = id;
+    }
+
     /**
      * 获取记录ID
      *

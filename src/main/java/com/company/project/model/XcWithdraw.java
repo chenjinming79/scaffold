@@ -100,6 +100,13 @@ public class XcWithdraw {
     @Transient
     private String endTime;
 
+    public XcWithdraw() {
+    }
+
+    public XcWithdraw(Long id) {
+        this.id = id;
+    }
+
     /**
      * 获取记录ID
      *

@@ -68,35 +68,17 @@ public final class Constant {
     //提现管理模块
     public static final String WITHDRAW = "提现管理";
 
-    //商家管理模块
-    public static final String MERCHANT = "商家管理";
+    //系统配置管理模块
+    public static final String SYS_CONFIG = "系统配置管理";
 
-    //任务管理模块
-    public static final String TASK = "任务管理";
+    //充值管理模块
+    public static final String PAY = "充值管理";
 
-    //轮播图管理
-    public static final String SLIEDE_SHOW = "轮播图管理";
+    //星宠管理模块
+    public static final String PET_PARAMETER = "星宠管理";
 
-    //业务员管理
-    public static final String SALES_MAN = "业务员管理";
-
-    //商家类型管理
-    public static final String MERCHANT_TYPE = "商家类型管理";
-
-    //业务员类型管理
-    public static final String SALE_TYPE = "业务员类型管理";
-
-    //审核类型管理
-    public static final String AUDIT_TYPE= "审核类型管理";
-
-    //任务类型管理
-    public static final String MISSION_TYPE ="任务类型管理";
-
-    //审核管理
-    public static final String AUDIT = "审核管理";
-
-    //下载管理
-    public static final String  DOWNLOAD = "下载管理";
+    //会员管理模块
+    public static final String USER = "会员管理";
 
     //操作功能（删除）
     public static final String DELETE = "删除";

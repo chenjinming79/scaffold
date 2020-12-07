@@ -1,4 +1,5 @@
 package com.company.project.web;
+import com.company.project.aop.OperatLog;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcPay;
@@ -30,6 +31,7 @@ public class XcPayController {
     private XcUserService xcUserService;
 
     @ApiOperation(value = "新增充值记录", notes = "新增充值记录")
+    @OperatLog(function = "新增",module = "充值管理",content = "新增充值记录")
     @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
     public Result add(@RequestBody XcPay xcPay) {
         Date date=new Date();
@@ -42,7 +44,8 @@ public class XcPayController {
         return result;
     }
 
-    @ApiOperation(value = "逻辑删除充值记录", notes = "逻辑删除充值记录")
+    @ApiOperation(value = "删除充值记录", notes = "删除充值记录")
+    @OperatLog(function = "删除",module = "充值管理",content = "删除充值记录")
     @RequestMapping(value = "/delete", method = {RequestMethod.POST,RequestMethod.GET})
     public Result delete(@RequestParam Long id) {
         XcPay xcPay=new XcPay();
@@ -53,6 +56,7 @@ public class XcPayController {
     }
 
     @ApiOperation(value = "审批充值记录", notes = "审批充值记录")
+    @OperatLog(function = "修改",module = "充值管理",content = "审批充值记录")
     @RequestMapping(value = "/update", method = {RequestMethod.POST,RequestMethod.GET})
     public Result update(@RequestBody XcPay xcPay) {
         xcPayService.update(xcPay);

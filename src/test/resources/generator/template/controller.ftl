@@ -34,7 +34,7 @@ public class ${modelNameUpperCamel}Controller {
         return result;
     }
 
-    @ApiOperation(value = "逻辑删除", notes = "逻辑删除")
+    @ApiOperation(value = "删除", notes = "删除")
     @RequestMapping(value = "/delete", method = {RequestMethod.POST,RequestMethod.GET})
     public Result delete(@RequestParam Long id) {
         ${modelNameUpperCamel} ${modelNameLowerCamel}=new ${modelNameUpperCamel}();

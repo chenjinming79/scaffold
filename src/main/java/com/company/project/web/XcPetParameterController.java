@@ -1,4 +1,5 @@
 package com.company.project.web;
+import com.company.project.aop.OperatLog;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcPetParameter;
@@ -25,6 +26,7 @@ public class XcPetParameterController {
     private XcPetParameterService xcPetParameterService;
 
     @ApiOperation(value = "新增星宠参数", notes = "新增星宠参数")
+    @OperatLog(function = "新增",module = "星宠管理",content = "新增星宠参数")
     @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
     public Result add(@RequestBody XcPetParameter xcPetParameter) {
         xcPetParameter.setCreateTime(new Date());
@@ -35,7 +37,8 @@ public class XcPetParameterController {
         return result;
     }
 
-    @ApiOperation(value = "逻辑删除星宠参数", notes = "逻辑删除星宠参数")
+    @ApiOperation(value = "删除星宠参数", notes = "删除星宠参数")
+    @OperatLog(function = "删除",module = "星宠管理",content = "删除星宠参数")
     @RequestMapping(value = "/delete", method = {RequestMethod.POST,RequestMethod.GET})
     public Result delete(@RequestParam Long id) {
         XcPetParameter xcPetParameter=new XcPetParameter();
@@ -46,6 +49,7 @@ public class XcPetParameterController {
     }
 
     @ApiOperation(value = "修改星宠参数", notes = "修改星宠参数")
+    @OperatLog(function = "修改",module = "星宠管理",content = "修改星宠参数")
     @RequestMapping(value = "/update", method = {RequestMethod.POST,RequestMethod.GET})
     public Result update(@RequestBody XcPetParameter xcPetParameter) {
         xcPetParameter.setUpdateTime(new Date());
@@ -62,7 +66,7 @@ public class XcPetParameterController {
         return ResultGenerator.genSuccessResult(xcPetParameter);
     }
 
-    @ApiOperation(value = "分页模糊查询查询会员", notes = "分页模糊查询查询会员")
+    @ApiOperation(value = "分页模糊星宠参数", notes = "分页模糊星宠参数")
     @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
     public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcPetParameter xcPetParameter) {
         PageHelper.startPage(page, size);

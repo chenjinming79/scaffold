@@ -152,6 +152,13 @@ public class XcUser {
     private BigDecimal ethBalance;
 
 
+    public XcUser() {
+    }
+
+    public XcUser(Long id) {
+        this.id = id;
+    }
+
     /**
      * 获取记录ID
      *

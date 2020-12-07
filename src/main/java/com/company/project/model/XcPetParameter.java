@@ -116,6 +116,14 @@ public class XcPetParameter {
     @Column(name = "end_to_snap_up")
     private String endToSnapUp;
 
+    public XcPetParameter() {
+    }
+
+    public XcPetParameter(Long id) {
+        this.id = id;
+    }
+
+
     /**
      * 获取记录ID
      *
