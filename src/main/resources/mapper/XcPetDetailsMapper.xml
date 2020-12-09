@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.XcPetDetailsMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.XcPetDetails">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="pet_name" jdbcType="VARCHAR" property="petName" />
+    <result column="pet_img" jdbcType="VARCHAR" property="petImg" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="start_to_snap_up" jdbcType="VARCHAR" property="startToSnapUp" />
+    <result column="end_to_snap_up" jdbcType="VARCHAR" property="endToSnapUp" />
+    <result column="snap_up_quantity" jdbcType="VARCHAR" property="snapUpQuantity" />
+    <result column="buying_price" jdbcType="VARCHAR" property="buyingPrice" />
+    <result column="earnings" jdbcType="VARCHAR" property="earnings" />
+    <result column="hiring_cycle" jdbcType="VARCHAR" property="hiringCycle" />
+    <result column="curing_crystal" jdbcType="VARCHAR" property="curingCrystal" />
+    <result column="curing_debris" jdbcType="VARCHAR" property="curingDebris" />
+    <result column="continue" jdbcType="VARCHAR" property="continue" />
+    <result column="once" jdbcType="VARCHAR" property="once" />
+    <result column="curing_energy_stone" jdbcType="VARCHAR" property="curingEnergyStone" />
+    <result column="contract_revenue" jdbcType="VARCHAR" property="contractRevenue" />
+  </resultMap>
+</mapper>
