@@ -117,11 +117,6 @@ public class XcPetDetails {
     private String curingDebris;
 
     /**
-     * 持续
-     */
-    private String continue;
-
-    /**
      * 单次
      */
     private String once;
@@ -478,24 +473,6 @@ public class XcPetDetails {
      */
     public void setCuringDebris(String curingDebris) {
         this.curingDebris = curingDebris;
-    }
-
-    /**
-     * 获取持续
-     *
-     * @return continue - 持续
-     */
-    public String getContinue() {
-        return continue;
-    }
-
-    /**
-     * 设置持续
-     *
-     * @param continue 持续
-     */
-    public void setContinue(String continue) {
-        this.continue = continue;
     }
 
     /**
