@@ -29,4 +29,18 @@
     <result column="curing_energy_stone" jdbcType="VARCHAR" property="curingEnergyStone" />
     <result column="contract_revenue" jdbcType="VARCHAR" property="contractRevenue" />
   </resultMap>
+
+    <select id="getPetDetailsById" resultType="java.lang.Integer">
+        select count(1)
+        from t_pet_details
+        where is_delete = 0
+        and id = #{petId}
+    </select>
+
+    <update id="updateStatusById">
+        update t_pet_details
+        set status = 2
+        where id = #{petId}
+    </update>
+
 </mapper>

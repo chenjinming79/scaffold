@@ -3,10 +3,14 @@ package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcPetDetails;
+import com.company.project.param.PreorderPetParam;
+import com.company.project.service.XcPetDetailsService;
+import com.company.project.service.XcPetService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -24,23 +28,29 @@ import java.util.List;
 @Api(tags = {"/xc/pet"}, description = "星宠系统模块")
 public class XcPetController {
 
+    @Autowired
+    private XcPetDetailsService xcPetDetailsService;
+
+    @Autowired
+    private XcPetService xcPetService;
+
     @ApiOperation(value = "新增宠物详情", notes = "新增宠物详情")
     @RequestMapping(value = "/addPetDetails", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result addPetDetails(@RequestBody XcPetDetails xcPetDetails) {
-        Result result = ResultGenerator.genSuccessResult();
-        return result;
-    }
-
-    @ApiOperation(value = "用户取消预购宠物", notes = "用户取消预购宠物")
-    @RequestMapping(value = "/addCancelPreorderPet", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result addCancelPreorderPet(@RequestBody XcPetDetails xcPetDetails) {
-        Result result = ResultGenerator.genSuccessResult();
+    public Result addPetDetails(@RequestBody List<XcPetDetails> xcPetDetailsList) {
+        xcPetDetailsService.save(xcPetDetailsList);
+        Result result = ResultGenerator.genSuccessResult(xcPetDetailsList);
         return result;
     }
 
     @ApiOperation(value = "用户预购宠物", notes = "用户预购宠物")
     @RequestMapping(value = "/addPreorderPet", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result addPreorderPet(@RequestBody XcPetDetails xcPetDetails) {
+    public Result addPreorderPet(@RequestBody PreorderPetParam param) {
+        return xcPetService.addPreorderPet(param);
+    }
+
+    @ApiOperation(value = "用户取消预购宠物", notes = "用户取消预购宠物")
+    @RequestMapping(value = "/addCancelPreorderPet", method = {RequestMethod.POST,RequestMethod.GET})
+    public Result addCancelPreorderPet(@RequestBody XcPetDetails xcPetDetails) {
         Result result = ResultGenerator.genSuccessResult();
         return result;
     }
