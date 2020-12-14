@@ -2,6 +2,7 @@ package com.company.project.service;
 import com.company.project.core.Result;
 import com.company.project.model.XcConsumePetRecord;
 import com.company.project.core.Service;
+import com.company.project.param.PreorderPetParam;
 
 
 /**

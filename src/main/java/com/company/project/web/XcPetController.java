@@ -75,11 +75,7 @@ public class XcPetController {
 
     @ApiOperation(value = "养护宠物", notes = "养护宠物")
     @RequestMapping(value = "/addfeedPet", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result addfeedPet(@RequestBody XcPetDetails xcPetDetails) {
-        Result result = ResultGenerator.genSuccessResult();
-        return result;
+    public Result addfeedPet(@RequestBody PreorderPetParam param) {
+        return xcPetService.addfeedPet(param);
     }
-
-
-
 }

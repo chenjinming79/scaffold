@@ -10,7 +10,9 @@ public enum ResultCode {
     NOT_FOUND(404),//接口不存在
     INTERNAL_SERVER_ERROR(500),//服务器内部错误
 
-    PET_NULL_ERROR(800011),//宠物不存在，请重新预购
+
+    FEED_PET_NULL_ERROR(800012),//宠物不存在，请刷新后重试
+    PREORDER_PET_NULL_ERROR(800011),//宠物不存在，请重新预购
     PARAM_ERROR(800010),//手机号或者邮箱必须输入一个
     FILE_DOWNLOAD_ERROR(800009),//文件下载失败
     FILE_BULL_ERROR(800008),//文件不能为空

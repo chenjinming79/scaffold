@@ -8,4 +8,6 @@ public interface XcPetService {
     Result addPreorderPet(PreorderPetParam param);
 
     Result addPurchasePet(PreorderPetParam param);
+
+    Result addfeedPet(PreorderPetParam param);
 }
