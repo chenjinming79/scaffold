@@ -102,7 +102,7 @@ public class XcPetServiceImpl implements XcPetService {
         xcFeedPetRecord.setPetId(param.getPetId());
         xcFeedPetRecordService.save(xcFeedPetRecord);
 
-        //计算收益
+        //计算收益记录，需根据原型图或者字段
 
         Result result = ResultGenerator.genSuccessResult();
         return result;

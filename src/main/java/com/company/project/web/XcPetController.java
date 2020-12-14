@@ -54,6 +54,13 @@ public class XcPetController {
         return xcPetService.addPreorderPet(param);
     }
 
+    @ApiOperation(value = "分页查询宠物的预购排队列表", notes = "分页查询宠物的预购排队列表")
+    @RequestMapping(value = "/findPreorderPetByModal", method = {RequestMethod.POST,RequestMethod.GET})
+    public Result findPreorderPetByModal(@RequestParam(defaultValue="1",required=false) Integer page, @RequestParam(defaultValue="20",required=false) Integer size,
+                                         @RequestBody(required =false) XcConsumePetRecord xcConsumePetRecord) {
+        return xcConsumePetRecordService.list(page,size,xcConsumePetRecord);
+    }
+
     @ApiOperation(value = "用户购买宠物", notes = "用户购买宠物")
     @RequestMapping(value = "/addPurchasePet", method = {RequestMethod.POST,RequestMethod.GET})
     public Result addPurchasePet(@RequestBody PreorderPetParam param) {
