@@ -2,8 +2,10 @@ package com.company.project.web;
 
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
+import com.company.project.model.XcConsumePetRecord;
 import com.company.project.model.XcPetDetails;
 import com.company.project.param.PreorderPetParam;
+import com.company.project.service.XcConsumePetRecordService;
 import com.company.project.service.XcPetDetailsService;
 import com.company.project.service.XcPetService;
 import com.github.pagehelper.PageHelper;
@@ -13,6 +15,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +33,9 @@ public class XcPetController {
 
     @Autowired
     private XcPetDetailsService xcPetDetailsService;
+
+    @Autowired
+    private XcConsumePetRecordService xcConsumePetRecordService;
 
     @Autowired
     private XcPetService xcPetService;
@@ -54,24 +60,17 @@ public class XcPetController {
         return xcPetService.addPurchasePet(param);
     }
 
-    @ApiOperation(value = "分页查询我的预购排队列表", notes = "分页查询我的预购排队列表")
-    @RequestMapping(value = "/findPreorderPetByModal", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result findPreorderPetByModal(@RequestBody XcPetDetails xcPetDetails) {
-        Result result = ResultGenerator.genSuccessResult();
-        return result;
-    }
-
     @ApiOperation(value = "分页查询我的消费宠物记录", notes = "分页查询我的消费宠物记录")
     @RequestMapping(value = "/findPetConsumeRecordByModal", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result findPetConsumeRecordByModal(@RequestBody XcPetDetails xcPetDetails) {
-        Result result = ResultGenerator.genSuccessResult();
-        return result;
+    public Result findPetConsumeRecordByModal(Integer page, Integer size,@RequestBody XcConsumePetRecord xcConsumePetRecord) {
+        return xcConsumePetRecordService.list(page,size,xcConsumePetRecord);
     }
 
     @ApiOperation(value = "分页查询我的宠物列表", notes = "分页查询我的宠物列表")
     @RequestMapping(value = "/findPetByModal", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result findPetByModal(@RequestParam(defaultValue="1",required=false) Integer page, @RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcPetDetails xcPetDetails) {
-        return ResultGenerator.genSuccessResult();
+    public Result findPetByModal(@RequestParam(defaultValue="1",required=false) Integer page, @RequestParam(defaultValue="20",required=false) Integer size,
+                                 @RequestBody(required =false) XcConsumePetRecord xcConsumePetRecord) {
+        return xcConsumePetRecordService.list(page,size,xcConsumePetRecord);
     }
 
     @ApiOperation(value = "养护宠物", notes = "养护宠物")

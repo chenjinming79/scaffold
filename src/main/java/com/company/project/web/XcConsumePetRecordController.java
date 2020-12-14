@@ -1,17 +1,18 @@
 package com.company.project.web;
+
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcConsumePetRecord;
 import com.company.project.service.XcConsumePetRecordService;
-import com.company.project.core.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.web.bind.annotation.*;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 /**
 * Created by CodeGenerator on 2020/12/12.
@@ -63,11 +64,8 @@ public class XcConsumePetRecordController {
 
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) XcConsumePetRecord xcConsumePetRecord) {
-        PageHelper.startPage(page, size);
-        xcConsumePetRecord.setIsDelete(false);
-        List<XcConsumePetRecord> list = xcConsumePetRecordService.findByModel(xcConsumePetRecord);
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size,
+                       @RequestBody(required = false) XcConsumePetRecord xcConsumePetRecord) {
+        return xcConsumePetRecordService.list(page,size,xcConsumePetRecord);
     }
 }
