@@ -39,7 +39,7 @@
 
     <update id="updateStatusById">
         update t_pet_details
-        set status = 2
+        set status = #{status}
         where id = #{petId}
     </update>
 

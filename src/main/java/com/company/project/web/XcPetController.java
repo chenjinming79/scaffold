@@ -42,24 +42,16 @@ public class XcPetController {
         return result;
     }
 
-    @ApiOperation(value = "用户预购宠物", notes = "用户预购宠物")
+    @ApiOperation(value = "用户预购(取消)宠物", notes = "用户预购(取消)宠物")
     @RequestMapping(value = "/addPreorderPet", method = {RequestMethod.POST,RequestMethod.GET})
     public Result addPreorderPet(@RequestBody PreorderPetParam param) {
         return xcPetService.addPreorderPet(param);
     }
 
-    @ApiOperation(value = "用户取消预购宠物", notes = "用户取消预购宠物")
-    @RequestMapping(value = "/addCancelPreorderPet", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result addCancelPreorderPet(@RequestBody XcPetDetails xcPetDetails) {
-        Result result = ResultGenerator.genSuccessResult();
-        return result;
-    }
-
     @ApiOperation(value = "用户购买宠物", notes = "用户购买宠物")
     @RequestMapping(value = "/addPurchasePet", method = {RequestMethod.POST,RequestMethod.GET})
-    public Result addPurchasePet(@RequestBody XcPetDetails xcPetDetails) {
-        Result result = ResultGenerator.genSuccessResult();
-        return result;
+    public Result addPurchasePet(@RequestBody PreorderPetParam param) {
+        return xcPetService.addPurchasePet(param);
     }
 
     @ApiOperation(value = "分页查询我的预购排队列表", notes = "分页查询我的预购排队列表")

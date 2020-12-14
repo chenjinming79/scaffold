@@ -39,7 +39,18 @@ public class XcPetServiceImpl implements XcPetService {
         //1预购2取消预购
         if (1 == param.getStatus()){
             //修改宠物详情状态
-            xcPetDetailsMapper.updateStatusById(param.getPetId());
+            xcPetDetailsMapper.updateStatusById(param.getPetId(),1);
+
+            //增加预购详情记录
+            XcConsumePetRecord xcConsumePetRecord = new XcConsumePetRecord();
+            xcConsumePetRecord.setCreateTime(new Date());
+            xcConsumePetRecord.setCreateUserId(param.getUserId());
+            xcConsumePetRecord.setStatus(1);
+            xcConsumePetRecord.setPetId(param.getPetId());
+            xcConsumePetRecordService.save(xcConsumePetRecord);
+        }else if (2 == param.getStatus()){
+            //修改宠物详情状态
+            xcPetDetailsMapper.updateStatusById(param.getPetId(),2);
 
             //增加预购详情记录
             XcConsumePetRecord xcConsumePetRecord = new XcConsumePetRecord();
@@ -48,12 +59,24 @@ public class XcPetServiceImpl implements XcPetService {
             xcConsumePetRecord.setStatus(2);
             xcConsumePetRecord.setPetId(param.getPetId());
             xcConsumePetRecordService.save(xcConsumePetRecord);
-        }else if (2 == param.getStatus()){
-
-
-
         }
 
+        Result result = ResultGenerator.genSuccessResult();
+        return result;
+    }
+
+    @Override
+    public Result addPurchasePet(PreorderPetParam param) {
+        //修改宠物详情状态
+        xcPetDetailsMapper.updateStatusById(param.getPetId(),3);
+
+        //增加预购详情记录
+        XcConsumePetRecord xcConsumePetRecord = new XcConsumePetRecord();
+        xcConsumePetRecord.setCreateTime(new Date());
+        xcConsumePetRecord.setCreateUserId(param.getUserId());
+        xcConsumePetRecord.setStatus(3);
+        xcConsumePetRecord.setPetId(param.getPetId());
+        xcConsumePetRecordService.save(xcConsumePetRecord);
         Result result = ResultGenerator.genSuccessResult();
         return result;
     }
