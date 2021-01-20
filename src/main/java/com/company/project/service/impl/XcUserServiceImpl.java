@@ -4,9 +4,7 @@ import com.company.project.core.AbstractService;
 import com.company.project.core.Result;
 import com.company.project.core.ResultCode;
 import com.company.project.core.ResultGenerator;
-import com.company.project.dao.XcSysUserMapper;
 import com.company.project.dao.XcUserMapper;
-import com.company.project.model.XcSysUser;
 import com.company.project.model.XcUser;
 import com.company.project.service.XcUserService;
 import com.company.project.utils.*;
@@ -35,9 +33,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUserService {
     @Resource
     private XcUserMapper xcUserMapper;
-
-    @Resource
-    private XcSysUserMapper sysUserMapper;
 
     @Autowired
     private RedisService redisService;
@@ -72,9 +67,6 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
             if ("1".equals(vo.getChannel())){
                 //1代表用户登录
                 return userLogin(vo);
-            }else if ("2".equals(vo.getChannel())){
-                //2代表后台用户登录
-                return sysUserLogin(vo);
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -85,59 +77,6 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
             }
         }
         return ResultGenerator.genFailResult(ResultCode.USER_LOGIN_CHANNEL_ERROR,"登录渠道不存在，请重新登录");
-    }
-
-    /**
-     * 后台用户登录
-     * @param vo
-     * @return
-     */
-    public Result sysUserLogin(LoginVo vo){
-
-        SysUserVo sysUserVo = new SysUserVo();
-
-        XcSysUser xcSysUser = sysUserMapper.findSysUserByPhone(vo.getPhone());
-        if (null == xcSysUser){
-            return ResultGenerator.genFailResult(ResultCode.USER_NOT_EXIST,"用户信息不存在[账号可能被停用或删除]");
-        }
-
-        if(!Md5Utils.getMd5(vo.getPassword()).equals(xcSysUser.getPassword())){
-            return ResultGenerator.genFailResult(ResultCode.PASSWORD_ERROR,"密码输入错误，请重新输入");
-        }
-
-        //获取token
-        String token = (String) redisService.get(xcSysUser.getId() + vo.getChannel() + "USERID");
-
-        Boolean loginFlag = false;
-
-        if(StringUtils.isNotBlank(token)){
-            //说明已登陆，或直接断网
-            redisService.delete(Constant.REDIS_KEY_LOGIN + token);
-            redisService.delete(xcSysUser.getId() + vo.getChannel() + "USERID");
-        }else{
-            //true首次
-            loginFlag=true;
-        }
-        //创建token
-        token = TokenUtil.getToken();
-
-        try {
-            sysUserVo.setUserId(xcSysUser.getId());
-            sysUserVo.setPhone(xcSysUser.getPhone());
-            sysUserVo.setToken(token);
-            sysUserVo.setExpireTime(2505600000L);
-            sysUserVo.setRoleId(xcSysUser.getRoleId());
-            sysUserVo.setChannel(vo.getChannel());
-            sysUserVo.setUserName(xcSysUser.getUserName());
-            //redisService.put(Constant.REDIS_KEY_LOGIN, token, new RedisModel(su.getId(), System.currentTimeMillis() + magConfig.getExpireTime()), magConfig.getExpireTime());
-            redisService.setWithExpire(Constant.REDIS_KEY_LOGIN + token, sysUserVo , 2505600000L);
-            redisService.set(xcSysUser.getId() + vo.getChannel() + "USERID",token);
-        }catch (Exception e){
-            e.printStackTrace();
-            Logger.info(this,"登录token存入redis产生异常："+e.getMessage());
-            throw new RuntimeException("存入redis异常");
-        }
-        return ResultGenerator.genSuccessResult(sysUserVo);
     }
 
     /**

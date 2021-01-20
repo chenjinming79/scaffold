@@ -1,6 +1,5 @@
 package com.company.project.web;
 
-import com.company.project.aop.OperatLog;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.XcUser;
@@ -45,7 +44,6 @@ public class XcUserController {
     }
 
     @ApiOperation(value = "会员注册", notes = "会员注册")
-    @OperatLog(function = "新增",module = "会员管理",content = "新增会员")
     @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
     public Result add(@RequestBody XcUser xcUser) {
         xcUser.setCreateTime(new Date());
@@ -57,7 +55,6 @@ public class XcUserController {
     }
 
     @ApiOperation(value = "逻辑删除会员", notes = "逻辑删除会员")
-    @OperatLog(function = "删除",module = "会员管理",content = "删除会员")
     @RequestMapping(value = "/delete", method = {RequestMethod.POST,RequestMethod.GET})
     public Result delete(@RequestParam Long id) {
         XcUser xcUser = new XcUser();
@@ -69,7 +66,6 @@ public class XcUserController {
 
     @ApiOperation(value = "修改会员", notes = "修改会员")
     @RequestMapping(value = "/update", method = {RequestMethod.POST,RequestMethod.GET})
-    @OperatLog(function = "修改",module = "会员管理",content = "修改会员")
     public Result update(@RequestBody XcUser xcUser) {
         xcUserService.update(xcUser);
         return ResultGenerator.genSuccessResult(xcUser);
