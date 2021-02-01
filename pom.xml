@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.lihengming</groupId>
-    <artifactId>spring-boot-access</artifactId>
+    <artifactId>spring-boot-scaffold</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
