@@ -1,5 +1,6 @@
 package com.company.project.service.impl;
 
+import com.company.project.constants.Constant;
 import com.company.project.core.Result;
 import com.company.project.core.ResultCode;
 import com.company.project.core.ResultGenerator;
@@ -24,8 +25,10 @@ import java.util.UUID;
 @Service
 public class FileServiceImpl implements FileService {
 
-    @Value("${file.url}")
-    private String uploadDir;
+    /*@Value("${file.url}")
+    private String uploadDir;*/
+
+    private static String uploadDir = Constant.OS_PREFIX;
 
     /**
      * 文件上传

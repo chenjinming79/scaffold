@@ -18,7 +18,7 @@ import static com.company.project.core.ProjectConstant.*;
  */
 public class CodeGenerator {
     //JDBC配置，请修改为你项目的实际配置
-    private static final String JDBC_URL = "jdbc:mysql://47.100.17.12:3306/star_pet";
+    private static final String JDBC_URL = "jdbc:mysql://47.100.17.12:3306/ameal";
     private static final String JDBC_USERNAME = "root";
     private static final String JDBC_PASSWORD = "root";
     private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
@@ -37,7 +37,7 @@ public class CodeGenerator {
     private static final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());//@date
 
     public static void main(String[] args) {
-        //genCodeByCustomModelName("输入表名","输入自定义Model名称");
+        genCodeByCustomModelName("t_food","Food");
     }
 
     /**

@@ -3,7 +3,7 @@ import ${basePackage}.core.Result;
 import ${basePackage}.core.ResultGenerator;
 import ${basePackage}.model.${modelNameUpperCamel};
 import ${basePackage}.service.${modelNameUpperCamel}Service;
-import ${basePackage}.core.Page;
+import io.swagger.annotations.Api;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +24,9 @@ public class ${modelNameUpperCamel}Controller {
     private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
 
     @ApiOperation(value = "新增", notes = "新增")
-    @RequestMapping(value = "/add", method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/add", method = {RequestMethod.POST})
     public Result add(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
-        ${modelNameLowerCamel}.setCreateTime(new Date());
+        ${modelNameLowerCamel}.setCreatedAt(new Date());
         ${modelNameLowerCamel}.setIsDelete(false);
         ${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
         Result result=ResultGenerator.genSuccessResult();
@@ -35,7 +35,7 @@ public class ${modelNameUpperCamel}Controller {
     }
 
     @ApiOperation(value = "删除", notes = "删除")
-    @RequestMapping(value = "/delete", method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST})
     public Result delete(@RequestParam Long id) {
         ${modelNameUpperCamel} ${modelNameLowerCamel}=new ${modelNameUpperCamel}();
         ${modelNameLowerCamel}.setId(id);
@@ -45,9 +45,9 @@ public class ${modelNameUpperCamel}Controller {
     }
 
     @ApiOperation(value = "修改", notes = "修改")
-    @RequestMapping(value = "/update", method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/update", method = {RequestMethod.POST})
     public Result update(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
-        ${modelNameLowerCamel}.setUpdateTime(new Date());
+        ${modelNameLowerCamel}.setUpdatedAt(new Date());
         ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
         Result result=ResultGenerator.genSuccessResult();
         result.setData(${modelNameLowerCamel});
@@ -55,14 +55,14 @@ public class ${modelNameUpperCamel}Controller {
     }
 
     @ApiOperation(value = "获取单个详情", notes = "获取单个详情")
-    @RequestMapping(value = "/detail", method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/detail", method = {RequestMethod.POST})
     public Result detail(@RequestParam Long id) {
         ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
         return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
     }
 
     @ApiOperation(value = "分页查询", notes = "分页查询")
-    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/findByModal", method = {RequestMethod.POST})
     public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) ${modelNameUpperCamel} ${modelNameLowerCamel}) {
         PageHelper.startPage(page, size);
         ${modelNameLowerCamel}.setIsDelete(false);
