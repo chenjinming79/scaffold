@@ -55,7 +55,7 @@ public class FileServiceImpl implements FileService {
         }
         try {
             file.transferTo(dest);
-            return ResultGenerator.genSuccessResult(fileName);
+            return ResultGenerator.genSuccessResult(dest.getPath());
         } catch (IllegalStateException e) {
             e.printStackTrace();
         } catch (IOException e) {
