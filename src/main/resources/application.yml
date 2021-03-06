@@ -39,7 +39,7 @@ spring:
 
 # 文件地址
 file:
-  url: /home/java/file/
+  url: D:\\
 
 #解决缓存目录被系统清除的问题 稳定版暂未配置
 server:
