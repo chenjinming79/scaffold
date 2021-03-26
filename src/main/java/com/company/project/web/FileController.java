@@ -41,10 +41,4 @@ public class FileController {
         return fileService.uploadSingle(file);
     }
 
-    @ApiOperation(value = "显示单个图片", notes = "显示单个图片")
-    @RequestMapping(value = "/showPhoto", method = {RequestMethod.POST})
-    public Result showPhoto(@RequestParam String path, HttpServletResponse response) throws Exception{
-        return fileService.showPhoto(path,response);
-    }
-
 }

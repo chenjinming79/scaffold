@@ -58,6 +58,12 @@ public class FileServiceImpl implements FileService {
         }
         try {
             file.transferTo(dest);
+            String path;
+            /*if (){
+
+            }else if (){
+
+            }*/
             return ResultGenerator.genSuccessResult(dest.getPath());
         } catch (IllegalStateException e) {
             e.printStackTrace();
@@ -122,34 +128,5 @@ public class FileServiceImpl implements FileService {
             }
         }
         return ResultGenerator.genFailResult(ResultCode.FILE_DOWNLOAD_ERROR,"文件下载失败");
-    }
-
-    @Override
-    public Result showPhoto(String path, HttpServletResponse response) {
-        response.setDateHeader("Expires", 0);
-        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
-        response.addHeader("Cache-Control", "post-check=0, pre-check=0");
-        response.setHeader("Pragma", "no-cache");
-        response.setContentType("image/jpeg");
-
-        // 获得的系统的根目录
-        File fileParent = new File(File.separator);
-        //String photoName = (String) session.getAttribute("photoName");
-        //获取图片的目录
-        File file = new File(fileParent, path);
-
-        try {
-            BufferedImage bi = ImageIO.read(new FileInputStream(file));
-            ServletOutputStream out = response.getOutputStream();
-            ImageIO.write(bi, "jpg", out);
-            try {
-                out.flush();
-            } finally {
-                out.close();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
     }
 }

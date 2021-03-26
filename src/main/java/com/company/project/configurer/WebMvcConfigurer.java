@@ -203,6 +203,11 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        //场景：部署的Springboot项目，打成jar包，需要通过url直接访问jar外部路径的资源(相当于直接访问Linux文件夹的数据)
+        //http://121.4.242.133:7004/image/home.jpg(意思是说我只要访问image，就会去获取/home/java/file的文件)
+        //addResourceHandler是指你想在url请求的路径
+        //addResourceLocations是图片存放的真实路径
+        registry.addResourceHandler("/image/**").addResourceLocations("file:///home/java/file/");
         super.addResourceHandlers(registry);
     }
 }
