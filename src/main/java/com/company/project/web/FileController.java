@@ -41,10 +41,10 @@ public class FileController {
         return fileService.uploadSingle(file);
     }
 
-    /*@ApiOperation(value = "单个文件下载", notes = "单个文件下载")
-    @RequestMapping(value = "/downloadImage", method = {RequestMethod.POST})
-    public Result downloadImage(@RequestParam String imageName, HttpServletRequest request, HttpServletResponse response){
-        return fileService.downloadImage(imageName,request,response);
-    }*/
+    @ApiOperation(value = "显示单个图片", notes = "显示单个图片")
+    @RequestMapping(value = "/showPhoto", method = {RequestMethod.POST})
+    public Result showPhoto(@RequestParam String path, HttpServletResponse response) throws Exception{
+        return fileService.showPhoto(path,response);
+    }
 
 }

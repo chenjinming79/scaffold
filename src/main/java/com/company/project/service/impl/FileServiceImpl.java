@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.UUID;
 
@@ -25,10 +28,10 @@ import java.util.UUID;
 @Service
 public class FileServiceImpl implements FileService {
 
-    @Value("${file.url}")
-    private String uploadDir;
+    /*@Value("${file.url}")
+    private String uploadDir;*/
 
-    //private static String uploadDir = Constant.OS_PREFIX;
+    private static String uploadDir = Constant.OS_PREFIX;
 
     /**
      * 文件上传
@@ -119,5 +122,34 @@ public class FileServiceImpl implements FileService {
             }
         }
         return ResultGenerator.genFailResult(ResultCode.FILE_DOWNLOAD_ERROR,"文件下载失败");
+    }
+
+    @Override
+    public Result showPhoto(String path, HttpServletResponse response) {
+        response.setDateHeader("Expires", 0);
+        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+        response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+        response.setHeader("Pragma", "no-cache");
+        response.setContentType("image/jpeg");
+
+        // 获得的系统的根目录
+        File fileParent = new File(File.separator);
+        //String photoName = (String) session.getAttribute("photoName");
+        //获取图片的目录
+        File file = new File(fileParent, path);
+
+        try {
+            BufferedImage bi = ImageIO.read(new FileInputStream(file));
+            ServletOutputStream out = response.getOutputStream();
+            ImageIO.write(bi, "jpg", out);
+            try {
+                out.flush();
+            } finally {
+                out.close();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }
