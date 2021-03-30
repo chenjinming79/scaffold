@@ -41,4 +41,11 @@ public class FileController {
         return fileService.uploadSingle(file);
     }
 
+    @ApiOperation(value = "导出", notes = "导出")
+    @RequestMapping(value = "/export", method = {RequestMethod.GET})
+    //直接在浏览器访问就可实现导出
+    public void export(HttpServletRequest request, HttpServletResponse response) {
+        fileService.export(request,response);
+    }
+
 }

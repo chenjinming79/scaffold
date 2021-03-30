@@ -10,5 +10,5 @@ public interface FileService {
 
     Result uploadSingle(MultipartFile file);
 
-    Result downloadImage(String imageName, HttpServletRequest request, HttpServletResponse response);
+    void export(HttpServletRequest request, HttpServletResponse response);
 }
