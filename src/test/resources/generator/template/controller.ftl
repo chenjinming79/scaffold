@@ -63,8 +63,8 @@ public class ${modelNameUpperCamel}Controller {
 
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @RequestMapping(value = "/findByModal", method = {RequestMethod.POST})
-    public Result list(@RequestParam(defaultValue="1",required=false) Integer page,@RequestParam(defaultValue="20",required=false) Integer size, @RequestBody(required =false) ${modelNameUpperCamel} ${modelNameLowerCamel}) {
-        PageHelper.startPage(page, size);
+    public Result list(@RequestBody(required =false) ${modelNameUpperCamel} ${modelNameLowerCamel}) {
+        PageHelper.startPage(${modelNameLowerCamel}.getPage(), ${modelNameLowerCamel}.getLimit());
         ${modelNameLowerCamel}.setIsDelete(false);
         List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findByModel(${modelNameLowerCamel});
         PageInfo pageInfo = new PageInfo(list);
