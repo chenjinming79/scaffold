@@ -76,7 +76,7 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
                 readWriteLock.writeLock().unlock();
             }
         }
-        return ResultGenerator.genFailResult(ResultCode.USER_LOGIN_CHANNEL_ERROR,"登录渠道不存在，请重新登录");
+        return ResultGenerator.genFailResult(ResultCode.USER_LOGIN_ERROR,"登录错误，请联系管理员");
     }
 
     /**
