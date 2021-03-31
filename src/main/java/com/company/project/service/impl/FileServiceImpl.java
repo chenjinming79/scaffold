@@ -5,9 +5,9 @@ import com.company.project.core.Result;
 import com.company.project.core.ResultCode;
 import com.company.project.core.ResultGenerator;
 import com.company.project.service.FileService;
-import com.company.project.utils.ExportExcelUtil;
-import com.company.project.utils.Logger;
-import com.company.project.vo.ExportVo;
+import com.company.project.utils.Constants;
+import com.company.project.utils.RequestUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -30,6 +29,9 @@ public class FileServiceImpl implements FileService {
 
     /*@Value("${file.url}")
     private String uploadDir;*/
+
+    @Value("${server.port}")
+    private String port;
 
     private static String uploadDir = Constant.OS_PREFIX;
 
@@ -59,12 +61,15 @@ public class FileServiceImpl implements FileService {
         try {
             file.transferTo(dest);
             String path;
-            /*if (){
-
-            }else if (){
-
-            }*/
-            return ResultGenerator.genSuccessResult(dest.getPath());
+            //判断系统是否包含D，如果包含D的话，服务为Windows环境
+            if (uploadDir.contains("D")){
+                //访问本地图片 http://localhost:8066/file/a112d9f0-b3a4-4833-b4b6-d1e1171fc2ea.png
+                path = Constants.WINDOWS_FILE_USER + port + "/file/"  + dest.getName();
+            }else {
+                //Linux环境
+                path = Constants.LINUX_FILE_USER + port + "/file/" + dest.getName();
+            }
+            return ResultGenerator.genSuccessResult(path);
         } catch (IllegalStateException e) {
             e.printStackTrace();
         } catch (IOException e) {

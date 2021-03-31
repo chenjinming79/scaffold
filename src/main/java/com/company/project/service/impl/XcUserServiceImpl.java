@@ -12,16 +12,13 @@ import com.company.project.vo.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wf.captcha.GifCaptcha;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 
@@ -45,7 +42,7 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
         readWriteLock.writeLock().lock();
 
         try {
-            VerfiyCodeVo verfiyCodeVo = (VerfiyCodeVo) redisService.get(Constant.REDIS_KEY_VERFIY + vo.getVerifyKey());
+            VerfiyCodeVo verfiyCodeVo = (VerfiyCodeVo) redisService.get(Constants.REDIS_KEY_VERFIY + vo.getVerifyKey());
             if(null == verfiyCodeVo){
                 return ResultGenerator.genFailResult(ResultCode.VERFIY_TOKEN_ERROR,"图形验证码token不存在");
             }
@@ -113,7 +110,7 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
 
         if(StringUtils.isNotBlank(token)){
             //说明已登陆，或直接断网
-            redisService.delete(Constant.REDIS_KEY_LOGIN + token);
+            redisService.delete(Constants.REDIS_KEY_LOGIN + token);
             redisService.delete(xcUser.getId()+"USERID");
         }else{
             //true首次
@@ -130,7 +127,7 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
             sysUserVo.setChannel(vo.getChannel());
             sysUserVo.setUserName(xcUser.getUserName());
             //redisService.put(Constant.REDIS_KEY_LOGIN, token, new RedisModel(su.getId(), System.currentTimeMillis() + magConfig.getExpireTime()), magConfig.getExpireTime());
-            redisService.setWithExpire(Constant.REDIS_KEY_LOGIN + token, sysUserVo , 2505600000L);
+            redisService.setWithExpire(Constants.REDIS_KEY_LOGIN + token, sysUserVo , 2505600000L);
             redisService.set(xcUser.getId()+"USERID",token);
         }catch (Exception e){
             e.printStackTrace();
@@ -152,7 +149,7 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
         UserVo userVo = null;
         String token=(String)redisService.get(userId+"USERID");
         try {
-            userVo = (UserVo)redisService.get(Constant.REDIS_KEY_LOGIN + token);
+            userVo = (UserVo)redisService.get(Constants.REDIS_KEY_LOGIN + token);
         }catch (Exception e){
             e.printStackTrace();
             throw new RuntimeException("redis异常");
@@ -161,7 +158,7 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
         redisService.delete(userId+"USERID");
 
         if (userVo != null){
-            redisService.delete(Constant.REDIS_KEY_LOGIN + token);
+            redisService.delete(Constants.REDIS_KEY_LOGIN + token);
 
             return ResultGenerator.genSuccessResult();
         }
@@ -193,7 +190,7 @@ public class XcUserServiceImpl extends AbstractService<XcUser> implements XcUser
         System.out.print("登录验证码" + verCode);
         String verifyToken = TokenUtil.getToken();
         // 存入redis并设置过期时间为30秒
-        redisService.setWithExpire(Constant.REDIS_KEY_VERFIY + verifyToken, new VerfiyCodeVo(verCode,System.currentTimeMillis() + Constant.verifyCodeForTempValidTime)  , Constant.verifyCodeForTempValidTime);
+        redisService.setWithExpire(Constants.REDIS_KEY_VERFIY + verifyToken, new VerfiyCodeVo(verCode,System.currentTimeMillis() + Constants.verifyCodeForTempValidTime)  , Constants.verifyCodeForTempValidTime);
         CaptchaVo captchaVo = new CaptchaVo();
         captchaVo.setVerifyToken(verifyToken);
         captchaVo.setData(specCaptcha.toBase64());

@@ -16,6 +16,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 
+import com.company.project.constants.Constant;
 import com.company.project.core.Result;
 import com.company.project.core.ResultCode;
 import com.company.project.core.ServiceException;
@@ -47,6 +48,9 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     private final Logger logger = LoggerFactory.getLogger(WebMvcConfigurer.class);
     @Value("${spring.profiles.active}")
     private String env;//当前激活的配置文件
+
+    //获取服务属于什么操作系统
+    private static String uploadDir = Constant.OS_PREFIX;
 
     //使用阿里 FastJson 作为JSON MessageConverter
     @Override
@@ -207,7 +211,14 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         //http://121.4.242.133:7004/image/home.jpg(意思是说我只要访问image，就会去获取/home/java/file的文件)
         //addResourceHandler是指你想在url请求的路径
         //addResourceLocations是图片存放的真实路径
-        registry.addResourceHandler("/image/**").addResourceLocations("file:///home/java/file/");
+        //registry.addResourceHandler("/image/**").addResourceLocations("file:///home/java/");
+        //判断系统是否包含D，如果包含D的话，服务为Windows环境
+        if (uploadDir.contains("D")){
+            registry.addResourceHandler("/file/**").addResourceLocations("file:///D:/home/java/file/");
+        }else {
+            //Linux环境
+            registry.addResourceHandler("/file/**").addResourceLocations("file:///home/java/file/");
+        }
         super.addResourceHandlers(registry);
     }
 }

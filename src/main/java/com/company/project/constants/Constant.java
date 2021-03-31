@@ -9,7 +9,7 @@ public final class Constant {
 
     static {
         if (OSinfo.isWindows()) {
-            OS_PREFIX = "D:\\";
+            OS_PREFIX = "D:\\home\\java\\file\\";
         } else if (OSinfo.isLinux()) {
             OS_PREFIX = "/home/java/file/";
         } else if (OSinfo.isMacOS()) {
