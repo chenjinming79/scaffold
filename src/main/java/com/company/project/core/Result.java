@@ -9,6 +9,7 @@ public class Result<T> {
     private int code;
     private String message;
     private T data;
+    private Boolean status = true;
 
     public Result setCode(ResultCode resultCode) {
         this.code = resultCode.code();
@@ -35,6 +36,14 @@ public class Result<T> {
     public Result setData(T data) {
         this.data = data;
         return this;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     @Override
