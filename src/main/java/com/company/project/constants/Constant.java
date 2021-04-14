@@ -13,9 +13,9 @@ public final class Constant {
         } else if (OSinfo.isLinux()) {
             OS_PREFIX = "/home/java/file/";
         } else if (OSinfo.isMacOS()) {
-            OS_PREFIX = "/Users/cjm";
+            OS_PREFIX = "/Users/java/file";
         } else {
-            OS_PREFIX = "D:\\";
+            OS_PREFIX = "D:\\home\\java\\file\\";
         }
     }
 
