@@ -1,10 +1,14 @@
 package com.company.project.common;
 
 
+import javax.persistence.Transient;
+
 public class PageParam extends BaseParam{
+    @Transient
     private Integer page=1;
 
     // 分页参数
+    @Transient
     private Integer limit = 10 ;
 
     public Integer getPage() {
