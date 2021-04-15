@@ -53,25 +53,6 @@
             <artifactId>guava</artifactId>
             <version>23.0</version>
         </dependency>
-        <!--微信sdk-->
-        <dependency>
-            <groupId>com.github.binarywang</groupId>
-            <!--微信公众号sdk-->
-            <artifactId>weixin-java-mp</artifactId>
-            <version>${weixin-java-tools.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.binarywang</groupId>
-            <!--微信小程序sdk-->
-            <artifactId>weixin-java-miniapp</artifactId>
-            <version>${weixin-java-tools.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.binarywang</groupId>
-            <!--微信支付sdk-->
-            <artifactId>weixin-java-pay</artifactId>
-            <version>${weixin-java-tools.version}</version>
-        </dependency>
         <!--redis依赖-->
         <dependency>
             <groupId>org.springframework.data</groupId>

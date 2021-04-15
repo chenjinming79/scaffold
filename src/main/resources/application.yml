@@ -52,14 +52,6 @@ taskmagprops:
   filedir: api-mag/
   fileBasePath: upload/
 
-wx:
-  #微信小程序
-  miniapp:
-    configs:
-    - appid: wx75818434691f4bd9 #微信公众号或者小程序等的appid
-      secret: c1713ae64b8a76329aff3f7c4a6521d6
-      msgDataFormat: JSON
-
 logging:
   level:
     com:
