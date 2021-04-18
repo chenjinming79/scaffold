@@ -139,7 +139,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
             sysUserVo.setToken(token);
             sysUserVo.setExpireTime(2505600000L);
             sysUserVo.setUserName(user.getUserName());
-            //sysUserVo.setRoleId(user.getRole().toString());
+            sysUserVo.setRoleId(user.getRole().toString());
             //redisService.put(Constant.REDIS_KEY_LOGIN, token, new RedisModel(su.getId(), System.currentTimeMillis() + magConfig.getExpireTime()), magConfig.getExpireTime());
             redisService.setWithExpire(Constants.REDIS_KEY_LOGIN + token, sysUserVo , 2505600000L);
             redisService.set(user.getId()+"USERID",token);
