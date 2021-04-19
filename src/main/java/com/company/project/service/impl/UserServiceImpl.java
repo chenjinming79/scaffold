@@ -5,6 +5,7 @@ import com.company.project.core.ResultCode;
 import com.company.project.core.ResultGenerator;
 import com.company.project.dao.UserMapper;
 import com.company.project.model.User;
+import com.company.project.service.SysMenuService;
 import com.company.project.service.UserService;
 import com.company.project.core.AbstractService;
 import com.company.project.utils.Constants;
@@ -22,6 +23,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 
@@ -34,6 +37,9 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
     @Resource
     private UserMapper userMapper;
+
+    @Autowired
+    private SysMenuService sysMenuService;
 
     @Autowired
     private RedisService redisService;
@@ -117,6 +123,11 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
             return ResultGenerator.genFailResult(ResultCode.PASSWORD_ERROR,"密码输入错误，请重新输入");
         }
 
+        List<Object> sysMenuList = new ArrayList<Object>();
+        if (null != user.getRole()){
+            sysMenuList = sysMenuService.selectMenuByRoleId(user.getRole());
+        }
+
         //创建token
         String token= (String) redisService.get(user.getId() + "USERID");
 
@@ -139,6 +150,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
             sysUserVo.setToken(token);
             sysUserVo.setExpireTime(2505600000L);
             sysUserVo.setUserName(user.getUserName());
+            sysUserVo.setSysMenuList(sysMenuList);
             sysUserVo.setRoleId(user.getRole().toString());
             //redisService.put(Constant.REDIS_KEY_LOGIN, token, new RedisModel(su.getId(), System.currentTimeMillis() + magConfig.getExpireTime()), magConfig.getExpireTime());
             redisService.setWithExpire(Constants.REDIS_KEY_LOGIN + token, sysUserVo , 2505600000L);
