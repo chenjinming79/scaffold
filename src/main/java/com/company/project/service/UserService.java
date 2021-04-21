@@ -16,4 +16,5 @@ public interface UserService extends Service<User> {
 
     Result captcha();
 
+    Result add(User user);
 }

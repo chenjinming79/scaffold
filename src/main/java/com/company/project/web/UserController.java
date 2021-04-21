@@ -51,12 +51,7 @@ public class UserController {
     @ApiOperation(value = "新增用户", notes = "新增用户")
     @RequestMapping(value = "/add", method = {RequestMethod.POST})
     public Result add(@RequestBody User user) {
-        user.setCreatedAt(new Date());
-        user.setIsDelete(false);
-        userService.save(user);
-        Result result= ResultGenerator.genSuccessResult();
-        result.setData(user);
-        return result;
+        return userService.add(user);
     }
 
     @ApiOperation(value = "删除用户", notes = "删除用户")

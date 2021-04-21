@@ -10,6 +10,7 @@ public enum ResultCode {
     NOT_FOUND(404),//接口不存在
     INTERNAL_SERVER_ERROR(500),//服务器内部错误
 
+    USER_ALREADY_EXIST(800031),//用户名已存在，请登录
     USER_LOGIN_ERROR(800030),//登录错误，请联系管理员
     WX_USER_INFO_ERROR(800029),//user check failed
     WX_LOGIN_PARAM_ERROR(800028),//empty jscode

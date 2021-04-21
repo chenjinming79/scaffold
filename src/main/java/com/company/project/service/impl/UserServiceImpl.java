@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -101,6 +102,22 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         return ResultGenerator.genSuccessResult(captchaVo);
     }
 
+    @Override
+    public Result add(User user) {
+
+        user = userMapper.findUserByUserName(user.getUserName());
+
+        if (null != user){
+            return ResultGenerator.genFailResult(ResultCode.USER_ALREADY_EXIST,"用户名已存在，请登录");
+        }
+
+        user.setCreatedAt(new Date());
+        user.setIsDelete(false);
+        save(user);
+        Result result= ResultGenerator.genSuccessResult();
+        result.setData(user);
+        return result;
+    }
 
     /**
      * 用户登录
