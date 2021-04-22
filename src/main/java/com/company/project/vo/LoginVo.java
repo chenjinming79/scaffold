@@ -4,13 +4,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
 
-/**
- * @ClassName LoginVo
- * @Description //TODO
- * @Author cjm
- * @Date 2020/11/23 17:09
- * @Version 1.0
- **/
 public class LoginVo {
 
     @ApiModelProperty(value = "用户名称")

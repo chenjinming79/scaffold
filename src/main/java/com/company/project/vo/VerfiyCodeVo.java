@@ -2,13 +2,6 @@ package com.company.project.vo;
 
 import java.io.Serializable;
 
-/**
- * @ClassName VerfiyCodeVo
- * @Description //TODO
- * @Author cjm
- * @Date 2020/11/24 16:38
- * @Version 1.0
- **/
 public class VerfiyCodeVo implements Serializable {
 
     private static final long serialVersionUID = -10034668880034434L;

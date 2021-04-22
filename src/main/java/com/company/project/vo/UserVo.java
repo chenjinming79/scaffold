@@ -1,17 +1,7 @@
 package com.company.project.vo;
 
-import javax.persistence.Column;
-import javax.persistence.Transient;
 import java.io.Serializable;
-import java.util.Date;
 
-/**
- * @ClassName UserVo
- * @Description //TODO
- * @Author cjm
- * @Date 2020/11/24 15:30
- * @Version 1.0
- **/
 public class UserVo implements Serializable {
 
     private Long userId;

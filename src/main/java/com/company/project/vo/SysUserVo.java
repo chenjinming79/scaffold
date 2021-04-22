@@ -3,13 +3,6 @@ package com.company.project.vo;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @ClassName UserVo
- * @Description //TODO
- * @Author cjm
- * @Date 2020/11/24 15:30
- * @Version 1.0
- **/
 public class SysUserVo implements Serializable {
 
     private Long userId;

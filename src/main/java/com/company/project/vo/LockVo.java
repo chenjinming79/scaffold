@@ -1,11 +1,5 @@
 package com.company.project.vo;
 
-/**
- * @Author chenjinming
- * @ClassName LockVo
- * @Description TOOD
- * @Date 2019/9/18 14:56
- **/
 public class LockVo {
     private String name;
     private String value;
