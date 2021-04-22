@@ -2,11 +2,12 @@ package com.company.project.model;
 
 import com.company.project.common.PageParam;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "t_sys_menu")
-public class SysMenu extends PageParam {
+public class SysMenu extends PageParam implements Serializable {
     /**
      * 记录ID
      */
