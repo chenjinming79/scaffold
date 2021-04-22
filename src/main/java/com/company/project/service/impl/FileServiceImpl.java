@@ -64,7 +64,7 @@ public class FileServiceImpl implements FileService {
             //判断系统是否包含D，如果包含D的话，服务为Windows环境
             if (uploadDir.contains("D")){
                 //访问本地图片 http://localhost:8066/file/a112d9f0-b3a4-4833-b4b6-d1e1171fc2ea.png
-                path = Constants.WINDOWS_FILE_USER + port + "/file/"  + dest.getName();
+                path = Constants.WINDOWS_FILE_USER + "/file/"  + dest.getName();
             }else {
                 //Linux环境
                 path = Constants.LINUX_FILE_USER + port + "/file/" + dest.getName();
