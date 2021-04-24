@@ -42,7 +42,7 @@ public class FileServiceImpl implements FileService {
      */
     @Override
     public Result uploadSingle(MultipartFile file) {
-        if (file.isEmpty()) {
+        if (null == file) {
             return ResultGenerator.genFailResult(ResultCode.FILE_BULL_ERROR,"文件不能为空");
         }
         // 获取文件名
