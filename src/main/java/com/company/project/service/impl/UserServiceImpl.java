@@ -105,9 +105,9 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     @Override
     public Result add(User user) {
 
-        user = userMapper.findUserByUserName(user.getUserName());
+        User newUser = userMapper.findUserByUserName(user.getUserName());
 
-        if (null != user){
+        if (null != newUser){
             return ResultGenerator.genFailResult(ResultCode.USER_ALREADY_EXIST,"用户名已存在，请登录");
         }
 
