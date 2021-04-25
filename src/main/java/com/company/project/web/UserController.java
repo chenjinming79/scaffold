@@ -1,5 +1,6 @@
 package com.company.project.web;
 
+import com.company.project.common.BaseController;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.User;
@@ -24,7 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 @Api(tags = {"/user"}, description = "用户管理模块")
-public class UserController {
+public class UserController extends BaseController {
     @Resource
     private UserService userService;
 
@@ -83,9 +84,8 @@ public class UserController {
 
     @ApiOperation(value = "分页查询用户", notes = "分页查询用户")
     @RequestMapping(value = "/findByModal", method = {RequestMethod.POST})
-    public Result list(@RequestParam(defaultValue="1",required=false) Integer page, @RequestParam(defaultValue="20",required=false) Integer size,
-                       @RequestBody(required =false) User user) {
-        PageHelper.startPage(page, size);
+    public Result list(@RequestBody(required =false) User user) {
+        PageHelper.startPage(user.getPage(), user.getLimit());
         user.setIsDelete(false);
         List<User> list = userService.findByModel(user);
         PageInfo pageInfo = new PageInfo(list);
