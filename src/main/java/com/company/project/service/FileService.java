@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface FileService {
 
-    Result uploadSingle(MultipartFile file);
+    Result uploadSingle(HttpServletRequest request,MultipartFile file);
 
     void export(HttpServletRequest request, HttpServletResponse response);
 }

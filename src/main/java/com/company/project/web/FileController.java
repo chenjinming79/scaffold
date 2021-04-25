@@ -37,8 +37,8 @@ public class FileController {
 
     @ApiOperation(value = "上传单个文件", notes = "上传单个文件")
     @RequestMapping(value = "/uploadSingle", method = {RequestMethod.POST})
-    public Result uploadSingle(MultipartFile file){
-        return fileService.uploadSingle(file);
+    public Result uploadSingle(HttpServletRequest request,MultipartFile file){
+        return fileService.uploadSingle(request,file);
     }
 
     @ApiOperation(value = "导出", notes = "导出")

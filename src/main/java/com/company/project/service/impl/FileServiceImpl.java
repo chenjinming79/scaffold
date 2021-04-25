@@ -41,7 +41,7 @@ public class FileServiceImpl implements FileService {
      * @return
      */
     @Override
-    public Result uploadSingle(MultipartFile file) {
+    public Result uploadSingle(HttpServletRequest request,MultipartFile file) {
         if (null == file) {
             return ResultGenerator.genFailResult(ResultCode.FILE_BULL_ERROR,"文件不能为空");
         }
@@ -63,8 +63,7 @@ public class FileServiceImpl implements FileService {
             String path;
             //判断系统是否包含D，如果包含D的话，服务为Windows环境
             if (uploadDir.contains("D")){
-                //访问本地图片 http://localhost:8066/file/a112d9f0-b3a4-4833-b4b6-d1e1171fc2ea.png
-                path = Constants.WINDOWS_FILE_USER + "/file/"  + dest.getName();
+                path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/file/"  + dest.getName();
             }else {
                 //Linux环境
                 path = Constants.LINUX_FILE_USER + port + "/file/" + dest.getName();

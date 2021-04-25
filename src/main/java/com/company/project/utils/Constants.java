@@ -13,6 +13,9 @@ public final class Constants {
     //访问本地图片路径 http://localhost:8066/file/a112d9f0-b3a4-4833-b4b6-d1e1171fc2ea.png
     public static final String WINDOWS_FILE_USER = "http://352n16b397.wicp.vip:";
 
+    //访问本地图片路径 http://localhost:8066/file/a112d9f0-b3a4-4833-b4b6-d1e1171fc2ea.png
+    public static final String WINDOWS_FILE_URL = "http://localhost:";
+
     //访问线上图片路径 http://121.4.242.133:8066/file/a112d9f0-b3a4-4833-b4b6-d1e1171fc2ea.png
     public static final String LINUX_FILE_USER = "http://121.4.242.133:";
 
