@@ -33,7 +33,7 @@ public class MatchUrlUtils {
         if (null == urls) {
             return tag;
         }
-        List<String> urlsList = Arrays.asList(urls.split(";"));
+        List<String> urlsList = Arrays.asList(urls.split(","));
         urlsList.forEach(pathUrl -> {
             if (pathUrl.contentEquals(url)) {
                 tag= true;// 匹配成功

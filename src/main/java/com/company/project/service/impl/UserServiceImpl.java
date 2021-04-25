@@ -8,10 +8,7 @@ import com.company.project.model.User;
 import com.company.project.service.SysMenuService;
 import com.company.project.service.UserService;
 import com.company.project.core.AbstractService;
-import com.company.project.utils.Constants;
-import com.company.project.utils.Logger;
-import com.company.project.utils.RedisService;
-import com.company.project.utils.TokenUtil;
+import com.company.project.utils.*;
 import com.company.project.vo.CaptchaVo;
 import com.company.project.vo.LoginVo;
 import com.company.project.vo.SysUserVo;
@@ -44,6 +41,9 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
     @Autowired
     private RedisService redisService;
+
+    @Autowired
+    private MagConfig magConfig;
 
     private final ReentrantReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
@@ -165,7 +165,8 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
             sysUserVo.setPhone(user.getPhone());
             sysUserVo.setEmail(user.getEmail());
             sysUserVo.setToken(token);
-            sysUserVo.setExpireTime(2505600000L);
+            //设置该token的过期时间
+            sysUserVo.setTokenExpireTime(System.currentTimeMillis() + magConfig.getExpireTime());
             sysUserVo.setUserName(user.getUserName());
             sysUserVo.setSysMenuList(sysMenuList);
             sysUserVo.setRoleId(user.getRole().toString());

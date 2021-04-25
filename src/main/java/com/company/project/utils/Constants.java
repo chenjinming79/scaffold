@@ -16,4 +16,9 @@ public final class Constants {
     //访问线上图片路径 http://121.4.242.133:8066/file/a112d9f0-b3a4-4833-b4b6-d1e1171fc2ea.png
     public static final String LINUX_FILE_USER = "http://121.4.242.133:";
 
+    public static final String OPTIONS_METHOD = "OPTIONS";
+
+    public static final String DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
+
+    public static final String DATE_PATTERN_YMD = "yyyy-MM-dd";
 }

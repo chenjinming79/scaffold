@@ -13,30 +13,32 @@ public class SysUserVo implements Serializable {
 
     private String token;
 
-    private Long expireTime;
-
     private String roleId;
 
     private String channel;
 
     private String userName;
 
+    //token过期时间
+    private Long tokenExpireTime;
+
+    //权限集合
     private List<Object> sysMenuList;
 
     public SysUserVo() {
         super();
     }
 
-    public SysUserVo(Long userId, String phone, String email, String token,
-                     Long expireTime, String roleId, String channel, String userName,List<Object> sysMenuList) {
+    public SysUserVo(Long userId, String phone, String email, String token, String roleId,
+                     String channel, String userName,Long tokenExpireTime,List<Object> sysMenuList) {
         this.userId = userId;
         this.phone = phone;
         this.email = email;
         this.token = token;
-        this.expireTime = expireTime;
         this.roleId = roleId;
         this.channel = channel;
         this.userName = userName;
+        this.tokenExpireTime = tokenExpireTime;
         this.sysMenuList = sysMenuList;
     }
 
@@ -72,14 +74,6 @@ public class SysUserVo implements Serializable {
         this.token = token;
     }
 
-    public Long getExpireTime() {
-        return expireTime;
-    }
-
-    public void setExpireTime(Long expireTime) {
-        this.expireTime = expireTime;
-    }
-
     public String getRoleId() {
         return roleId;
     }
@@ -110,5 +104,13 @@ public class SysUserVo implements Serializable {
 
     public void setSysMenuList(List<Object> sysMenuList) {
         this.sysMenuList = sysMenuList;
+    }
+
+    public Long getTokenExpireTime() {
+        return tokenExpireTime;
+    }
+
+    public void setTokenExpireTime(Long tokenExpireTime) {
+        this.tokenExpireTime = tokenExpireTime;
     }
 }

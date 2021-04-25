@@ -48,7 +48,7 @@ public class UserController {
         return userService.captcha();
     }
 
-    @ApiOperation(value = "新增用户", notes = "新增用户")
+    @ApiOperation(value = "用户注册", notes = "用户注册")
     @RequestMapping(value = "/add", method = {RequestMethod.POST})
     public Result add(@RequestBody User user) {
         return userService.add(user);

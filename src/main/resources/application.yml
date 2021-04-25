@@ -16,7 +16,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root
-    url: jdbc:mysql://47.100.17.12:3306/natatorium?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://47.100.17.12:3306/course?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
   # REDIS (RedisProperties)
   redis:
     database: 0
@@ -48,7 +48,7 @@ server:
 ##自定义配置
 taskmagprops:
   expireTime: 18000000
-  checkLoginUrl: /jl/modal/add;/jl/modal/update;/jl/modal/delete;/jl/modal/list;/jl/user/getTokenUser
+  checkLoginUrl: /download.*,/swagger.*,/vueAdmin-template.*,/static.*,/a2billing.*,/favicon.*,/webjars/springfox-swagger-ui.*,/v2/api-docs.*,/user/add,/user/login,/user/logout
   filedir: api-mag/
   fileBasePath: upload/
 
