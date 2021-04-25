@@ -57,7 +57,13 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
         FastJsonConfig config = new FastJsonConfig();
-        config.setSerializerFeatures(SerializerFeature.WriteMapNullValue);//保留空的字段
+        //保留空的字段
+        config.setSerializerFeatures(SerializerFeature.WriteMapNullValue);
+        //禁止循环引用检测
+        // (在传输的数据中出现相同的对象时，fastjson默认开启引用检测将相同的对象写成引用的形式
+        // "$ref": "$.data.list[2].caseShowList[0]")
+        //但是如果禁用之后要小心出现内存内漏错误
+        config.setSerializerFeatures(SerializerFeature.DisableCircularReferenceDetect);
         //SerializerFeature.WriteNullStringAsEmpty,//String null -> ""
         //SerializerFeature.WriteNullNumberAsZero//Number null -> 0
         // 按需配置，更多参考FastJson文档哈
