@@ -63,6 +63,9 @@ public class FileServiceImpl implements FileService {
             String path;
             //判断系统是否包含D，如果包含D的话，服务为Windows环境
             if (uploadDir.contains("D")){
+                // request.getScheme() 获取请求的协议名称
+                // request.getServerName() 获取请求的域名
+                // request.getServerPort() 获取请求的端口号
                 path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/file/"  + dest.getName();
             }else {
                 //Linux环境
