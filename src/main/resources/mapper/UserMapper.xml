@@ -23,6 +23,10 @@
     <result column="role" jdbcType="INTEGER" property="role" />
     <result column="open_id" jdbcType="VARCHAR" property="openId" />
     <result column="session_key" jdbcType="VARCHAR" property="sessionKey" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="residential_address" jdbcType="VARCHAR" property="residentialAddress" />
   </resultMap>
 
     <select id="findUserByUserName" resultMap="BaseResultMap">

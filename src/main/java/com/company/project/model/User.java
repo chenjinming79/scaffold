@@ -106,6 +106,48 @@ public class User extends PageParam {
     @Column(name = "session_key")
     private String sessionKey;
 
+    @Column(name = "id_card")
+    private String idCard;
+
+    private Date birthday;
+
+    private Integer sex;
+
+    @Column(name = "residential_address")
+    private String residentialAddress;
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public String getResidentialAddress() {
+        return residentialAddress;
+    }
+
+    public void setResidentialAddress(String residentialAddress) {
+        this.residentialAddress = residentialAddress;
+    }
+
     /**
      * 获取记录ID
      *
