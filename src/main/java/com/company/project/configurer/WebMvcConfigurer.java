@@ -57,6 +57,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
         FastJsonConfig config = new FastJsonConfig();
+        //注：保留空的字段和禁止循环引用检测冲突
         //保留空的字段
         config.setSerializerFeatures(SerializerFeature.WriteMapNullValue);
         //禁止循环引用检测
