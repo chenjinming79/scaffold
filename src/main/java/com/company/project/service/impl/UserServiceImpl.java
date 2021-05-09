@@ -103,9 +103,27 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     }
 
     @Override
+    public Result updateUser(User user) {
+
+        //根据用户名查询是否存在
+        User newUser = userMapper.findUserByUserName(user.getUserName(),user.getId());
+
+        //用户名不可重复
+        if (null != newUser){
+            return ResultGenerator.genFailResult(ResultCode.USER_ALREADY_EXIST,"用户名已存在，请登录");
+        }
+
+        user.setUpdatedAt(new Date());
+        update(user);
+        Result result= ResultGenerator.genSuccessResult();
+        result.setData(user);
+        return result;
+    }
+
+    @Override
     public Result add(User user) {
 
-        User newUser = userMapper.findUserByUserName(user.getUserName());
+        User newUser = userMapper.findUserByUserName(user.getUserName(),null);
 
         if (null != newUser){
             return ResultGenerator.genFailResult(ResultCode.USER_ALREADY_EXIST,"用户名已存在，请登录");
@@ -130,7 +148,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
         User user = new User();
 
-        user = userMapper.findUserByUserName(vo.getUserName());
+        user = userMapper.findUserByUserName(vo.getUserName(),null);
 
         if (null == user){
             return ResultGenerator.genFailResult(ResultCode.USER_NOT_EXIST,"用户信息不存在[账号可能被停用或删除]");

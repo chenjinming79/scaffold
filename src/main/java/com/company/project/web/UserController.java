@@ -67,12 +67,8 @@ public class UserController extends BaseController {
 
     @ApiOperation(value = "修改用户", notes = "修改用户")
     @RequestMapping(value = "/update", method = {RequestMethod.POST})
-    public Result update(@RequestBody User user) {
-        user.setUpdatedAt(new Date());
-        userService.update(user);
-        Result result= ResultGenerator.genSuccessResult();
-        result.setData(user);
-        return result;
+    public Result updateUser(@RequestBody User user) {
+        return  userService.updateUser(user);
     }
 
     @ApiOperation(value = "获取用户单个详情", notes = "获取用户单个详情")

@@ -29,11 +29,16 @@
     <result column="residential_address" jdbcType="VARCHAR" property="residentialAddress" />
   </resultMap>
 
-    <select id="findUserByUserName" resultMap="BaseResultMap">
-        select *
-        from t_user
-        where is_delete = 0
-        and user_name = #{userName}
-    </select>
+  <select id="findUserByUserName" resultMap="BaseResultMap">
+      select *
+      from t_user
+      where is_delete = 0
+      and user_name = #{userName}
+      <if test="id != null">
+        <![CDATA[
+              and id<>#{id}
+          ]]>
+      </if>
+  </select>
 
 </mapper>
