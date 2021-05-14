@@ -48,7 +48,7 @@ server:
 ##自定义配置
 taskmagprops:
   expireTime: 18000000
-  checkLoginUrl: /download.*,/swagger.*,/vueAdmin-template.*,/static.*,/a2billing.*,/favicon.*,/webjars/springfox-swagger-ui.*,/v2/api-docs.*,/user/add,/user/login,/user/logout,/file/uploadSingle,/file.*
+  checkLoginUrl: /download.*,/swagger.*,/vueAdmin-template.*,/static.*,/a2billing.*,/favicon.*,/webjars/springfox-swagger-ui.*,/v2/api-docs.*,/user/add,/user/login,/user/logout,/file/uploadSingle,/file.*,/course/detail,/course/findByModal,/article/detail,/article/findByModal,/article/type/detail,/article/type/findByModal,/test/question/detail,/test/question/findByModal,/paper/detail,/paper/findByModal,/answer/add,/moment/like/addOrCancel,/cover/detail,/cover/findByModal
   filedir: api-mag/
   fileBasePath: upload/
 
