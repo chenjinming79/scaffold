@@ -21,6 +21,12 @@ import static com.company.project.core.ProjectConstant.*;
 @Configuration
 public class MybatisConfigurer {
 
+    /**
+     * Mybatis用来连接mysql的配置方法
+     * @param dataSource 数据源
+     * @return
+     * @throws Exception
+     */
     @Bean
     public SqlSessionFactory sqlSessionFactoryBean(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
