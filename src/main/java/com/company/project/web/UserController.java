@@ -58,9 +58,12 @@ public class UserController extends BaseController {
     @ApiOperation(value = "删除用户", notes = "删除用户")
     @RequestMapping(value = "/delete", method = {RequestMethod.POST})
     public Result delete(@RequestParam Long id) {
+        //声明用户对象
         User user=new User();
+        //根据id删除
         user.setId(id);
         user.setIsDelete(true);
+        //逻辑删除用户
         userService.update(user);
         return ResultGenerator.genSuccessResult();
     }
@@ -74,17 +77,23 @@ public class UserController extends BaseController {
     @ApiOperation(value = "获取用户单个详情", notes = "获取用户单个详情")
     @RequestMapping(value = "/detail", method = {RequestMethod.POST})
     public Result detail(@RequestParam Long id) {
+        //根据id查询用户详情
         User user = userService.findById(id);
+        //返回查询的单个详情
         return ResultGenerator.genSuccessResult(user);
     }
 
     @ApiOperation(value = "分页查询用户", notes = "分页查询用户")
     @RequestMapping(value = "/findByModal", method = {RequestMethod.POST})
     public Result list(@RequestBody(required =false) User user) {
+        //调用PageHelper公共方法实现分页
         PageHelper.startPage(user.getPage(), user.getLimit());
+        //查询没有逻辑删除
         user.setIsDelete(false);
+        //分页查询
         List<User> list = userService.findByModel(user);
         PageInfo pageInfo = new PageInfo(list);
+        //返回分页后的结果集
         return ResultGenerator.genSuccessResult(pageInfo);
     }
 }
