@@ -15,7 +15,7 @@ public class BaseController {
     @Autowired
     private RedisService redisService;
 
-    public Long getUserId() {
+    public String getUserId() {
         String token = request.getHeader(Constants.TOKEN_NAME);
         SysUserVo sysUserVo;
         try {
@@ -27,7 +27,7 @@ public class BaseController {
         if (null == sysUserVo) {
             return null;
         }
-        return sysUserVo.getUserId();
+        return String.valueOf(sysUserVo.getUserId());
     }
 
     public SysUserVo getUser() {
