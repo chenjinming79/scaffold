@@ -71,79 +71,10 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
     @Override
     public Result login(LoginVo vo) {
+
         readWriteLock.writeLock().lock();
 
-        try {
-            //用户登录
-            return userLogin(vo);
-        } catch (Exception e){
-            e.printStackTrace();
-            Logger.info(this,"登录错误：" + e.getMessage());
-        }finally {
-            if(readWriteLock.isWriteLocked()){
-                readWriteLock.writeLock().unlock();
-            }
-        }
-        return ResultGenerator.genFailResult(ResultCode.USER_LOGIN_ERROR,"登录错误，请联系管理员");
-    }
-
-    @Override
-    public Result captcha() {
-        GifCaptcha specCaptcha = new GifCaptcha(130, 48, 5);
-        String verCode = specCaptcha.text().toLowerCase();
-        System.out.print("登录验证码" + verCode);
-        String verifyToken = TokenUtil.getToken();
-        // 存入redis并设置过期时间为30秒
-        redisService.setWithExpire(Constants.REDIS_KEY_VERFIY + verifyToken, new VerfiyCodeVo(verCode,System.currentTimeMillis() + Constants.verifyCodeForTempValidTime)  , Constants.verifyCodeForTempValidTime);
-        CaptchaVo captchaVo = new CaptchaVo();
-        captchaVo.setVerifyToken(verifyToken);
-        captchaVo.setData(specCaptcha.toBase64());
-        // 将key和base64返回给前端
-        return ResultGenerator.genSuccessResult(captchaVo);
-    }
-
-    @Override
-    public Result updateUser(User user) {
-
-        //根据用户名查询是否存在
-        User newUser = userMapper.findUserByUserName(user.getUserName(),user.getId());
-
-        //用户名不可重复
-        if (null != newUser){
-            return ResultGenerator.genFailResult(ResultCode.USER_ALREADY_EXIST,"用户名已存在，请登录");
-        }
-
-        user.setUpdatedAt(new Date());
-        update(user);
-        Result result= ResultGenerator.genSuccessResult();
-        result.setData(user);
-        return result;
-    }
-
-    @Override
-    public Result add(User user) {
-
-        User newUser = userMapper.findUserByUserName(user.getUserName(),null);
-
-        if (null != newUser){
-            return ResultGenerator.genFailResult(ResultCode.USER_ALREADY_EXIST,"用户名已存在，请登录");
-        }
-
-        user.setCreatedAt(new Date());
-        user.setIsDelete(false);
-        save(user);
-        Result result= ResultGenerator.genSuccessResult();
-        result.setData(user);
-        return result;
-    }
-
-    /**
-     * 用户登录
-     * @param vo
-     * @return
-     */
-    public Result userLogin(LoginVo vo){
-
+        //用户登录
         SysUserVo sysUserVo = new SysUserVo();
 
         User user = new User();
@@ -195,8 +126,62 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
             e.printStackTrace();
             Logger.info(this,"登录token存入redis产生异常："+e.getMessage());
             throw new RuntimeException("存入redis异常");
+        }finally {
+            if(readWriteLock.isWriteLocked()){
+                readWriteLock.writeLock().unlock();
+            }
         }
         return ResultGenerator.genSuccessResult(sysUserVo);
+    }
+
+    @Override
+    public Result captcha() {
+        GifCaptcha specCaptcha = new GifCaptcha(130, 48, 5);
+        String verCode = specCaptcha.text().toLowerCase();
+        System.out.print("登录验证码" + verCode);
+        String verifyToken = TokenUtil.getToken();
+        // 存入redis并设置过期时间为30秒
+        redisService.setWithExpire(Constants.REDIS_KEY_VERFIY + verifyToken, new VerfiyCodeVo(verCode,System.currentTimeMillis() + Constants.verifyCodeForTempValidTime)  , Constants.verifyCodeForTempValidTime);
+        CaptchaVo captchaVo = new CaptchaVo();
+        captchaVo.setVerifyToken(verifyToken);
+        captchaVo.setData(specCaptcha.toBase64());
+        // 将key和base64返回给前端
+        return ResultGenerator.genSuccessResult(captchaVo);
+    }
+
+    @Override
+    public Result updateUser(User user) {
+
+        //根据用户名查询是否存在
+        User newUser = userMapper.findUserByUserName(user.getUserName(),user.getId());
+
+        //用户名不可重复
+        if (null != newUser){
+            return ResultGenerator.genFailResult(ResultCode.USER_ALREADY_EXIST,"用户名已存在，请登录");
+        }
+
+        user.setUpdatedAt(new Date());
+        update(user);
+        Result result= ResultGenerator.genSuccessResult();
+        result.setData(user);
+        return result;
+    }
+
+    @Override
+    public Result add(User user) {
+
+        User newUser = userMapper.findUserByUserName(user.getUserName(),null);
+
+        if (null != newUser){
+            return ResultGenerator.genFailResult(ResultCode.USER_ALREADY_EXIST,"用户名已存在，请登录");
+        }
+
+        user.setCreatedAt(new Date());
+        user.setIsDelete(false);
+        save(user);
+        Result result= ResultGenerator.genSuccessResult();
+        result.setData(user);
+        return result;
     }
 
 }
