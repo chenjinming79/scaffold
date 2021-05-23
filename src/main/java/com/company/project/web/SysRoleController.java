@@ -81,6 +81,7 @@ public class SysRoleController {
         sysRole.setIsDelete(false);
         //数据库查询
         List<SysRole> list = sysRoleService.findByModel(sysRole);
+        //调用PageHelper公共方法实现分页
         PageInfo pageInfo = new PageInfo(list);
         //返回分页后的结果集
         return ResultGenerator.genSuccessResult(pageInfo);
