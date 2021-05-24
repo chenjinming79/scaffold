@@ -79,7 +79,7 @@ public class SysRoleController {
         PageHelper.startPage(sysRole.getPage(), sysRole.getLimit());
         //查询没有逻辑删除的数据
         sysRole.setIsDelete(false);
-        //数据库查询
+        //数据库查询获取数据库返回结果
         List<SysRole> list = sysRoleService.findByModel(sysRole);
         //调用PageHelper公共方法实现分页
         PageInfo pageInfo = new PageInfo(list);

@@ -169,16 +169,20 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
     @Override
     public Result add(User user) {
-
+        //查询注册用户名不可重复错误
         User newUser = userMapper.findUserByUserName(user.getUserName(),null);
 
         if (null != newUser){
             return ResultGenerator.genFailResult(ResultCode.USER_ALREADY_EXIST,"用户名已存在，请登录");
         }
 
+        //获取当前时间为新增时间
         user.setCreatedAt(new Date());
+        //逻辑删除 false标识未删除
         user.setIsDelete(false);
+        //添加到数据库
         save(user);
+        //构造返回前端的数据
         Result result= ResultGenerator.genSuccessResult();
         result.setData(user);
         return result;
