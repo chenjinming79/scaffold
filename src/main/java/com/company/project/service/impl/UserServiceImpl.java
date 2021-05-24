@@ -72,13 +72,17 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     @Override
     public Result login(LoginVo vo) {
 
+        //读写锁
+        //只允许一个线程写入（其他线程既不能写入也不能读取）
+        //没有写入时，多个线程允许同时读（提高性能）
         readWriteLock.writeLock().lock();
 
-        //用户登录
+        //声明存储对象
         SysUserVo sysUserVo = new SysUserVo();
 
         User user = new User();
 
+        //根据用户名查询
         user = userMapper.findUserByUserName(vo.getUserName(),null);
 
         if (null == user){
@@ -89,6 +93,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
             return ResultGenerator.genFailResult(ResultCode.PASSWORD_ERROR,"密码输入错误，请重新输入");
         }
 
+        //获取对应的模块
         List<Object> sysMenuList = new ArrayList<Object>();
         if (null != user.getRole()){
             sysMenuList = sysMenuService.selectMenuByRoleId(user.getRole());
@@ -110,6 +115,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         token = TokenUtil.getToken();
 
         try {
+            //存入用户相关信息
             sysUserVo.setUserId(user.getId());
             sysUserVo.setPhone(user.getPhone());
             sysUserVo.setEmail(user.getEmail());
@@ -170,15 +176,20 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     @Override
     public Result add(User user) {
 
+        //根据用户名查询用户是否存在
         User newUser = userMapper.findUserByUserName(user.getUserName(),null);
 
         if (null != newUser){
             return ResultGenerator.genFailResult(ResultCode.USER_ALREADY_EXIST,"用户名已存在，请登录");
         }
 
+        //获取当前时间为新增时间
         user.setCreatedAt(new Date());
+        //逻辑删除 false标识未删除
         user.setIsDelete(false);
+        //添加到数据库
         save(user);
+        //构造返回前端的数据
         Result result= ResultGenerator.genSuccessResult();
         result.setData(user);
         return result;
