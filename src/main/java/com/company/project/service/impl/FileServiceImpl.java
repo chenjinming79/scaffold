@@ -30,9 +30,6 @@ public class FileServiceImpl implements FileService {
     /*@Value("${file.url}")
     private String uploadDir;*/
 
-    @Value("${server.port}")
-    private String port;
-
     private static String uploadDir = Constant.OS_PREFIX;
 
     /**
@@ -69,7 +66,7 @@ public class FileServiceImpl implements FileService {
                 path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/file/"  + dest.getName();
             }else {
                 //Linux环境
-                path = Constants.LINUX_FILE_USER + port + "/file/" + dest.getName();
+                path = Constants.LINUX_FILE_USER + request.getServerPort() + "/file/" + dest.getName();
             }
             return ResultGenerator.genSuccessResult(path);
         } catch (IllegalStateException e) {
